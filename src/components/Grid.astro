@@ -4,10 +4,11 @@
 interface Props {
   cols?: 1 | 2 | 3 | 4;
   align?: 'start' | 'center';
+  reveal?: 'fade' | 'left' | 'right' | 'top' | 'bottom' | 'flip'; // scroll-in animation
 }
-const { cols = 2, align = 'center' } = Astro.props;
+const { cols = 2, align = 'center', reveal } = Astro.props;
 ---
 
-<div class:list={['grid', `grid--${cols}`, `grid--${align}`]}>
+<div class:list={['grid', `grid--${cols}`, `grid--${align}`]} data-reveal={reveal}>
   <slot />
 </div>

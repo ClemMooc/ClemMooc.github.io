@@ -19,6 +19,7 @@ import Footer from '../components/Footer.astro';
 import BackToTop from '../components/BackToTop.astro';
 import Analytics from '../components/Analytics.astro';
 import Lightbox from '../components/Lightbox.astro';
+import Motion from '../components/Motion.astro';
 import patternDark from '../assets/bg-pattern.png';
 import patternLight from '../assets/bg-pattern-light.png';
 
@@ -67,6 +68,7 @@ const vars = `--pattern-dark:url(${dark.src});--pattern-light:url(${light.src});
     <Footer />
     <BackToTop />
     <Lightbox />
+    <Motion />
     <style is:global>
       .skip { position: absolute; left: -9999px; }
       .skip:focus { left: 16px; top: 16px; z-index: 100; background: #fff; color: #000; padding: 8px 12px; }

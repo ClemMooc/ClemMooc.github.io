@@ -1,0 +1,74 @@
+---
+// Scroll animations carried over from the old site:
+// - Every section fades in as it scrolls into view.
+// - Add reveal="left|right|top|bottom|flip|fade" to <Grid> or <Img> to make it
+//   slide in from that side (or flip in). Any <div data-reveal="left"> works too.
+// - <Img grey /> fades the image to black-and-white a second after it appears.
+// - The top nav slides away when scrolling down and comes back when scrolling up.
+// - The back-to-top button fades in once you've scrolled past the first screen.
+// Everything is skipped for visitors who've asked their device for reduced motion.
+---
+
+<script is:inline>
+  (() => {
+    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const root = document.documentElement;
+    root.classList.add('motion');
+
+    // Blocks that fade in automatically, without anything in the content files.
+    const auto = [
+      ['.section > .container', 'fade'],
+      ['.projects > .container', 'fade'],
+      ['.hero__title, .hero__intro', 'bottom'],
+    ];
+    for (const [sel, kind] of auto)
+      document.querySelectorAll(sel).forEach((el) => el.dataset.reveal ??= kind);
+
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+      }
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+
+    // Nav: hide on scroll down, show on scroll up.
+    const nav = document.querySelector('.nav');
+    const toTop = document.querySelector('.back-to-top');
+    const menu = document.getElementById('nav-toggle');
+    let lastY = scrollY;
+    const onScroll = () => {
+      const y = scrollY;
+      if (nav) nav.classList.toggle('nav--hidden', y > lastY && y > 150 && !(menu && menu.checked));
+      if (toTop) toTop.classList.toggle('is-visible', y > innerHeight * 0.6);
+      lastY = y;
+    };
+    onScroll();
+    addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>
+
+<style is:global>
+  .motion [data-reveal] {
+    transition: opacity 1s cubic-bezier(.25, 1, .5, 1), transform 1s cubic-bezier(.25, 1, .5, 1);
+  }
+  .motion [data-reveal]:not(.is-in) { opacity: 0; }
+  .motion [data-reveal='left']:not(.is-in) { transform: translateX(-100px); }
+  .motion [data-reveal='right']:not(.is-in) { transform: translateX(100px); }
+  .motion [data-reveal='top']:not(.is-in) { transform: translateY(-100px); }
+  .motion [data-reveal='bottom']:not(.is-in) { transform: translateY(100px); }
+  .motion [data-reveal='flip']:not(.is-in) { transform: perspective(800px) rotateY(-90deg); }
+
+  /* <Img grey />: turns black-and-white shortly after appearing */
+  .motion [data-grey] img { transition: filter .5s ease-in-out 1s, transform .35s ease, box-shadow .35s ease; }
+  .motion [data-grey].is-in img { filter: grayscale(1); }
+
+  /* Nav slides away on scroll down */
+  .nav { transition: transform .4s ease-in-out; }
+  .nav.nav--hidden { transform: translateY(-130%); }
+
+  /* Back-to-top button fades in after the first screen */
+  .motion .back-to-top { opacity: 0; pointer-events: none; transition: opacity .5s ease-in; }
+  .motion .back-to-top.is-visible { opacity: 1; pointer-events: auto; }
+</style>

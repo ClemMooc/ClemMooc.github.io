@@ -131,6 +131,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 400; lin
   transition: background-color .2s, color .2s, border-color .2s;
 }
 .button:hover { background: #fff; color: #000; border-color: var(--blue); }
+.button:active { border-color: var(--orange); color: #fff; }
 .button:active { border-color: var(--orange); background: #43464d; color: #fff; }
 .section--light .button { border-color: var(--ink); }
 
@@ -164,7 +165,14 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 400; lin
   font-family: var(--font-display); font-size: clamp(1.25rem, 3vw, 2rem);
 }
 .accordion summary::-webkit-details-marker { display: none; }
-.accordion__icon { transition: transform .2s; display: inline-block; }
+.accordion__icon { transition: transform .25s ease-in-out; display: inline-block; }
+/* Smooth open/close (browsers without support just open instantly) */
+.accordion { interpolate-size: allow-keywords; }
+.accordion::details-content {
+  block-size: 0; overflow: hidden;
+  transition: block-size .25s ease-in-out, content-visibility .25s allow-discrete;
+}
+.accordion[open]::details-content { block-size: auto; }
 .accordion[open] .accordion__icon { transform: rotate(180deg); }
 .accordion__body { border-top: 4px solid #000; padding: 10px 24px 20px; }
 .accordion__body figcaption { color: var(--ink); }

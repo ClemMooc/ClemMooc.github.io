@@ -23,7 +23,7 @@ export const site = {
   resume: 'shared/clem-mooc-resume-2024.pdf',
 
   links: {
-    linkedin: 'https://www.linkedin.com/in/clementmooc/',
+    linkedin: 'https://www.linkedin.com/in/clemwa/',
     fivehundredpx: 'https://500px.com/p/ClemMooc?view=photos',
     flickr: 'https://www.flickr.com/photos/187825676@N08/albums',
   },

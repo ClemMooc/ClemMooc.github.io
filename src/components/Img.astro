@@ -13,8 +13,10 @@ interface Props {
   eager?: boolean;
   class?: string;
   zoom?: boolean; // click to enlarge (default on)
+  reveal?: 'fade' | 'left' | 'right' | 'top' | 'bottom' | 'flip'; // scroll-in animation
+  grey?: boolean; // fade to black-and-white after appearing
 }
-const { src, alt = '', caption, inline = false, eager = false, class: className, zoom = true } = Astro.props;
+const { src, alt = '', caption, inline = false, eager = false, class: className, zoom = true, reveal, grey = false } = Astro.props;
 const url = media(src);
 const loading = eager ? 'eager' : 'lazy';
 ---
@@ -22,7 +24,8 @@ const loading = eager ? 'eager' : 'lazy';
 {inline ? (
   <img class:list={['img-inline', className]} src={url} alt={alt} loading={loading} />
 ) : (
-  <figure class:list={['img', { 'img--zoom': zoom }, className]} data-full={zoom ? url : undefined}>
+  <figure class:list={['img', { 'img--zoom': zoom }, className]} data-full={zoom ? url : undefined}
+    data-reveal={reveal ?? (grey ? 'fade' : undefined)} data-grey={grey || undefined}>
     {isPassthrough(src) ? (
       <img src={url} alt={alt} loading={loading} decoding="async" />
     ) : (
