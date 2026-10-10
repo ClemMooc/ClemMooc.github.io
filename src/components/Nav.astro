@@ -1,9 +1,11 @@
 ---
 import { site } from '../site.config';
+import { media } from '../lib/media';
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const items = [
-  { href: '/#projects', label: 'Projects' },
+  { href: '/#projects', label: 'Work', current: path === '/' || path.startsWith('/work') },
   { href: '/about', label: 'About', current: path === '/about' },
+  { href: media(site.resume), label: 'Resume', external: true },
   { href: site.links.linkedin, label: 'LinkedIn', external: true },
 ];
 ---
@@ -12,13 +14,11 @@ const items = [
     <img src="/brand/logo.png" alt="" width="104" height="70" />
     <img class="nav__logo-hover" src="/brand/logo-hover.png" alt="" width="104" height="70" />
   </a>
-  <button class="nav__burger" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="nav__burger" type="button" aria-expanded="false" aria-controls="nav-menu">Menu</button>
   <nav class="nav__menu" id="nav-menu" aria-label="Main">
     {items.map((i) => (
       <a href={i.href} class:list={['nav__link', { 'is-current': i.current }]}
-        aria-current={i.current ? 'page' : undefined}
+        aria-current={i.current && i.href === '/about' ? 'page' : undefined}
         {...(i.external ? { target: '_blank', rel: 'noopener' } : {})}>
         {i.label}{i.external && <><span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in a new tab)</span></>}
       </a>
@@ -34,7 +34,11 @@ const items = [
   const setOpen = (open: boolean) => {
     nav.classList.toggle('nav--open', open);
     burger.setAttribute('aria-expanded', String(open));
+    burger.textContent = open ? 'Close' : 'Menu';
   };
+  const onScroll = () => nav.classList.toggle('nav--scrolled', scrollY > 8);
+  onScroll();
+  addEventListener('scroll', onScroll, { passive: true });
   burger.addEventListener('click', () => setOpen(!nav.classList.contains('nav--open')));
   menu.addEventListener('click', (e) => { if ((e.target as Element).closest('a')) setOpen(false); });
   document.addEventListener('keydown', (e) => {
@@ -42,57 +46,48 @@ const items = [
   });
   matchMedia('(min-width: 768px)').addEventListener('change', () => setOpen(false));
 
-  // Solid background once the page has scrolled, so text doesn't show through behind the logo.
-  const onScroll = () => nav.classList.toggle('nav--scrolled', scrollY > 10);
-  onScroll();
-  addEventListener('scroll', onScroll, { passive: true });
 </script>
 
 <style>
   .nav {
     position: sticky; top: 0; z-index: 50;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 20px var(--gutter);
-    background: linear-gradient(#000 23%, #0000007d 75%, #0000 95%);
-    min-height: var(--nav-h);
-    transition: transform .4s ease-in-out, background-color .3s, padding .3s;
+    height: var(--nav-h); padding: 0 var(--gutter);
+    /* See-through at the top so the wave reads as part of the nav; a soft dark fade keeps links legible */
+    background: linear-gradient(rgb(20 18 17 / .85), rgb(20 18 17 / .35) 70%, rgb(20 18 17 / 0));
+    border-bottom: 1px solid transparent;
+    transition: transform .4s ease-in-out, background-color .3s, border-color .3s;
   }
-  .nav.nav--scrolled { background: rgb(3 3 3 / .94); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-  .nav__logo { position: relative; display: block; width: 104px; }
-  .nav__logo img { width: 104px; height: auto; transition: opacity .2s; }
+  /* Once scrolled, solid, so page text never shows through behind the links */
+  .nav.nav--scrolled, .nav.nav--open { background: var(--ink); border-bottom-color: var(--line-dark); }
+  .nav__logo { position: relative; display: block; width: 80px; }
+  .nav__logo img { width: 80px; height: auto; transition: opacity .2s; }
   .nav__logo-hover { position: absolute; inset: 0; opacity: 0; }
   .nav__logo:hover .nav__logo-hover { opacity: 1; }
   .nav__logo:hover img:first-child { opacity: 0; }
-  .nav__menu { display: flex; gap: 8px; }
+  .nav__menu { display: flex; gap: 4px; }
   .nav__link {
-    font-family: var(--font-display); font-size: 14px; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; text-decoration: none; color: var(--cream); padding: 10px 20px;
+    font-family: var(--font-display); font-size: 15px; font-weight: 600;
+    text-decoration: none; color: var(--on-ink); padding: 10px 16px; border-radius: 999px;
     transition: color .2s;
   }
-  .nav__link:hover, .nav__link.is-current { color: var(--orange); }
+  .nav__link:hover, .nav__link.is-current { color: var(--accent); }
   .nav__burger { display: none; }
 
   @media (max-width: 767px) {
     .nav__burger {
-      display: flex; flex-direction: column; justify-content: center; gap: 6px;
-      width: 48px; height: 48px; padding: 10px; margin-right: -10px;
-      background: none; border: 0; cursor: pointer;
+      display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; margin-right: -8px;
+      background: none; color: var(--on-ink); border: 1.5px solid var(--line-dark); border-radius: 999px;
+      font: 600 15px/1 var(--font-display); cursor: pointer;
     }
-    .nav__burger span {
-      width: 28px; height: 3px; background: var(--orange); border-radius: 2px;
-      transition: transform .25s, opacity .25s;
-    }
-    /* Burger turns into an × when open */
-    .nav--open .nav__burger span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-    .nav--open .nav__burger span:nth-child(2) { opacity: 0; }
-    .nav--open .nav__burger span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+    .nav--open .nav__burger { border-color: var(--accent); color: var(--accent); }
     .nav__menu {
       display: none; position: absolute; top: 100%; left: 0; right: 0;
-      flex-direction: column; background: rgb(3 3 3 / .97); padding: 12px var(--gutter) 20px;
-      border-bottom: 1px solid #ffffff1f;
+      flex-direction: column; gap: 0; background: var(--ink); padding: 8px var(--gutter) 20px;
+      border-bottom: 1px solid var(--line-dark);
     }
-    .nav--open { background: rgb(3 3 3 / .97); }
     .nav--open .nav__menu { display: flex; }
-    .nav__link { padding: 14px 0; font-size: 16px; }
+    .nav__link { padding: 14px 0; font-size: 17px; border-radius: 0; border-bottom: 1px solid var(--line-dark); }
+    .nav__link:last-child { border-bottom: 0; }
   }
 </style>

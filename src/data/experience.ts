@@ -13,7 +13,11 @@ export interface Role {
 
 export const experience: Role[] = [
   {
-    org: 'Meta', url: 'https://about.meta.com/realitylabs/', role: 'Research program manager', team: 'Reality Labs (AR/VR)',
+    org: 'Meta', url: 'https://about.meta.com/realitylabs/', role: 'Research Program Manager III (contract)', team: 'Reality Labs (AR/VR)',
+    highlights: [], notes: [],
+  },
+  {
+    org: 'Meta', url: 'https://about.meta.com/realitylabs/', role: 'Research Program Manager (contract)', team: 'Reality Labs (AR/VR)',
     // TODO(Clem): add 2–3 NDA-safe highlights, e.g. kinds of studies/programs run, team size, scale, outcomes.
     // This list is hidden on the site while it's empty.
     highlights: [],
@@ -40,7 +44,7 @@ export const experience: Role[] = [
 ];
 
 export const education = [
-  { title: 'UX Design Certificate', school: 'School of Visual Concepts' },
-  { title: 'Minor Degree: Informatics (UX/UI)', school: 'University of Washington - Information School (iSchool)' },
   { title: 'B.A. Business Administration (Information Systems, Marketing Analytics)', school: 'University of Washington - Foster School of Business' },
+  { title: 'Minor Degree: Informatics (UX/UI)', school: 'University of Washington - Information School (iSchool)' },
+  { title: 'UX Design Certificate', school: 'School of Visual Concepts' },
 ];

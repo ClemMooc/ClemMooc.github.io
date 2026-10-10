@@ -22,6 +22,7 @@ import { experience, education } from '../data/experience';
         <div class="about__buttons">
           <Button href={media(site.resume)}>Resume</Button>
           <Button href={site.links.linkedin} variant="ghost">LinkedIn</Button>
+          <Button href={site.links.github} variant="ghost">GitHub</Button>
           <a class="button button--ghost" href={`mailto:${site.email}`}>Email</a>
         </div>
       </div>
@@ -30,15 +31,13 @@ import { experience, education } from '../data/experience';
     <div class="about__cols">
       <section aria-labelledby="xp-title">
         <h2 class="about__h2" id="xp-title">Experience</h2>
+        {/* Just company + role; the details live in the résumé. */}
         {experience.map((e) => (
           <div class="entry">
             <h3>
               <a href={e.url} target="_blank" rel="noopener">{e.org}<span class="sr-only"> (opens in a new tab)</span></a>
               <span class="entry__role">{e.role}{e.team && ` · ${e.team}`}</span>
             </h3>
-            {[...e.highlights, ...e.notes].length > 0 && (
-              <ul>{[...e.highlights, ...e.notes].map((n) => <li>{n}</li>)}</ul>
-            )}
           </div>
         ))}
       </section>
@@ -66,15 +65,13 @@ import { experience, education } from '../data/experience';
 
   .about__cols { display: grid; grid-template-columns: 7fr 5fr; gap: 56px; margin-top: 80px; padding-top: 56px; border-top: 1px solid var(--line); }
   .about__h2 { font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 24px; }
-  .entry { padding: 0 0 24px; margin-bottom: 24px; border-bottom: 1px solid var(--line); }
+  .entry { padding: 0 0 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
   .entry:last-child { border-bottom: 0; }
-  .entry h3 { font-size: 1.15rem; margin: 0 0 .5em; display: flex; flex-wrap: wrap; gap: 0 .6em; align-items: baseline; }
+  .entry h3 { font-size: 1.15rem; margin: 0; display: flex; flex-wrap: wrap; gap: 0 .6em; align-items: baseline; }
   .entry h3 a { text-decoration: none; }
   .entry h3 a:hover { color: var(--orange); text-decoration: underline; text-underline-offset: 4px; }
   .entry__role { font-family: var(--font-body); font-weight: 400; font-size: 1rem; color: var(--muted); }
-  .entry ul { margin: 0; padding-left: 1.1em; color: var(--muted); font-size: 16px; }
-  .entry li { margin-bottom: .3em; }
-  .entry__school { color: var(--muted); font-size: 16px; margin: 0; }
+  .entry__school { color: var(--muted); font-size: 16px; margin: .3em 0 0; }
 
   @media (max-width: 767px) {
     .about__intro, .about__cols { grid-template-columns: 1fr; gap: 32px; }

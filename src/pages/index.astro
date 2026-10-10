@@ -35,8 +35,9 @@ import { media } from '../lib/media';
 </Base>
 
 <style>
-  .intro { position: relative; isolation: isolate; margin-top: calc(var(--nav-h) * -1); padding-top: var(--nav-h); }
-  .intro :global(.wave) { top: 0; z-index: 0; }
+  /* The intro starts under the see-through nav so the wave sits behind the nav links */
+  .intro { position: relative; isolation: isolate; overflow: hidden; margin-top: calc(var(--nav-h) * -1); padding-top: var(--nav-h); }
+  .intro :global(.wave) { top: 0; z-index: 0; } /* same starting spot as About: top of the page, behind the nav */
   .intro > .hero { position: relative; z-index: 1; }
   .hero { max-width: var(--max); margin: 0 auto; padding: clamp(40px, 7vw, 88px) var(--gutter) 72px; }
   .hero__title { font-size: clamp(2.2rem, 5.2vw, 4rem); line-height: 1.1; letter-spacing: -.025em; font-weight: 600; max-width: 18ch; margin: 0 0 1.5rem; }

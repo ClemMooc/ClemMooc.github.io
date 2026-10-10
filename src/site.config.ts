@@ -24,7 +24,9 @@ export const site = {
   resume: 'shared/clem-mooc-resume-2024.pdf',
 
   links: {
+    github: 'https://github.com/ClemMooc',
     linkedin: 'https://www.linkedin.com/in/clemwa/',
+    // Photography links: not shown on the site for now (Clem's call, Oct 2026). Kept here to bring back later.
     fivehundredpx: 'https://500px.com/p/ClemMooc?view=photos',
     flickr: 'https://www.flickr.com/photos/187825676@N08/albums',
   },

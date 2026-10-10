@@ -40,7 +40,7 @@
     const onScroll = () => {
       const y = scrollY;
       if (nav) nav.classList.toggle('nav--hidden', y > lastY && y > 150 && !nav.classList.contains('nav--open'));
-      if (toTop) toTop.classList.toggle('is-visible', y > innerHeight * 0.6);
+      if (toTop) toTop.classList.toggle('is-visible', y > innerHeight);
       lastY = y;
     };
     onScroll();
