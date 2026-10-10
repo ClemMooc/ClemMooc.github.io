@@ -9,4 +9,4 @@ const isKey = !/^(https?:|mailto:|tel:|\/|#)/.test(href);
 const url = isKey ? media(href) : href;
 const external = isKey || /^https?:\/\//.test(href);
 ---
-<a class="button" href={url} {...(external ? { target: '_blank', rel: 'noopener' } : {})}><slot />{external && ' ↗'}</a>
+<a class="button" href={url} {...(external ? { target: '_blank', rel: 'noopener' } : {})}><slot />{external && <Fragment set:html={`<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in a new tab)</span>`} />}</a>

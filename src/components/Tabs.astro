@@ -10,22 +10,20 @@ const { labels } = Astro.props;
 <div class="tabset" data-tabset>
   <div class="tabset__menu" role="tablist">
     {labels.map((l, i) => (
-      <button type="button" role="tab" class="tabset__tab" aria-selected={i === 0 ? 'true' : 'false'} data-index={i}>{l}</button>
+      <button type="button" class="tabset__tab" aria-selected={i === 0 ? 'true' : 'false'}>{l}</button>
     ))}
   </div>
   <div class="tabset__panes"><slot /></div>
 </div>
 
 <script>
-  document.querySelectorAll<HTMLElement>('[data-tabset]').forEach((set) => {
-    const tabs = [...set.querySelectorAll<HTMLButtonElement>('.tabset__tab')];
-    const panes = [...set.querySelector('.tabset__panes')!.children] as HTMLElement[];
-    const show = (n: number) => {
-      tabs.forEach((t, i) => t.setAttribute('aria-selected', String(i === n)));
-      panes.forEach((p, i) => (p.hidden = i !== n));
-    };
-    tabs.forEach((t, i) => t.addEventListener('click', () => show(i)));
-    show(0);
+  import { initTabs } from '../lib/tabs';
+  document.querySelectorAll<HTMLElement>('[data-tabset]').forEach((set, n) => {
+    initTabs(
+      [...set.querySelectorAll<HTMLElement>('.tabset__tab')],
+      [...set.querySelector('.tabset__panes')!.children] as HTMLElement[],
+      `tabset-${n}`,
+    );
   });
 </script>
 
@@ -34,8 +32,9 @@ const { labels } = Astro.props;
   .tabset__menu { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
   .tabset__tab {
     cursor: pointer; border: 4px solid #000; border-radius: 30px; padding: 8px 16px;
-    background: #ddd; color: #000; font: 500 12px/1.4 var(--font-display); letter-spacing: 1.5px; text-transform: uppercase;
+    background: #ddd; color: #000; font: 500 14px/1.4 var(--font-display); letter-spacing: 1.5px; text-transform: uppercase;
   }
   .tabset__tab:hover { background: #ce1d10; color: #fff; }
   .tabset__tab[aria-selected='true'] { background: var(--rust); color: #fff; border-color: var(--blue); }
+  .tabset__tab:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
 </style>

@@ -36,11 +36,10 @@
     // Nav: hide on scroll down, show on scroll up.
     const nav = document.querySelector('.nav');
     const toTop = document.querySelector('.back-to-top');
-    const menu = document.getElementById('nav-toggle');
     let lastY = scrollY;
     const onScroll = () => {
       const y = scrollY;
-      if (nav) nav.classList.toggle('nav--hidden', y > lastY && y > 150 && !(menu && menu.checked));
+      if (nav) nav.classList.toggle('nav--hidden', y > lastY && y > 150 && !nav.classList.contains('nav--open'));
       if (toTop) toTop.classList.toggle('is-visible', y > innerHeight * 0.6);
       lastY = y;
     };
@@ -65,10 +64,10 @@
   .motion [data-grey].is-in img { filter: grayscale(1); }
 
   /* Nav slides away on scroll down */
-  .nav { transition: transform .4s ease-in-out; }
   .nav.nav--hidden { transform: translateY(-130%); }
 
   /* Back-to-top button fades in after the first screen */
-  .motion .back-to-top { opacity: 0; pointer-events: none; transition: opacity .5s ease-in; }
-  .motion .back-to-top.is-visible { opacity: 1; pointer-events: auto; }
+  /* (hidden with visibility too, so keyboard users can't tab to an invisible button) */
+  .motion .back-to-top { opacity: 0; visibility: hidden; transition: opacity .5s ease-in, visibility .5s; }
+  .motion .back-to-top.is-visible { opacity: 1; visibility: visible; }
 </style>

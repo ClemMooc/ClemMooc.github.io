@@ -16,6 +16,9 @@
   --navy: #14233d;        /* project cards */
   --card-border: #c8c9d1;
   --peach: #ffb5a0;
+  /* Darker accents for light backgrounds (pass WCAG AA 4.5:1 on --slate and white) */
+  --orange-ink: #8f2900;
+  --teal-ink: #00574c;
 
   /* Fonts */
   --font-display: 'Sora', system-ui, sans-serif;
@@ -89,6 +92,10 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 400; lin
 .section--dark { background: var(--bg) var(--pattern-dark) top left / cover fixed; color: var(--cream); }
 .section--light { background: var(--slate) var(--pattern-light) top left / cover fixed; color: var(--ink); }
 .section--light figcaption { color: var(--ink); }
+.section--light .eyebrow, .section--light .hl--orange, .section--light .hl--rust,
+.accordion__body .hl--orange, .accordion__body .hl--rust { color: var(--orange-ink); }
+.section--light .hl--teal, .accordion__body .hl--teal { color: var(--teal-ink); }
+.section--light .prose a:not(.button):hover, .section--light a:not(.button):hover { color: var(--orange-ink); }
 
 .grid { display: grid; gap: 32px; margin: 2rem 0; }
 .grid--center { align-items: center; }
@@ -113,7 +120,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 400; lin
 .img { margin: 1.5rem 0; }
 .img img { width: 100%; height: auto; border-radius: 4px; }
 .img figcaption {
-  font-family: var(--font-body); font-size: 14px; font-style: italic; line-height: 1.8;
+  font-family: var(--font-body); font-size: 15px; font-style: italic; line-height: 1.8;
   text-align: center; margin-top: .5rem; opacity: .9;
 }
 .img-inline { display: inline-block; height: 1.2em; width: auto; vertical-align: middle; }
@@ -126,7 +133,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 400; lin
   border: 4px solid var(--cream);
   background: var(--rust); color: #fff;
   border-radius: 30px; padding: 12px 25px; margin: 0 12px 12px 0;
-  font-family: var(--font-display); font-size: 12px; font-weight: 500;
+  font-family: var(--font-display); font-size: 14px; font-weight: 500;
   letter-spacing: 2px; line-height: 20px; text-transform: uppercase; text-decoration: none;
   transition: background-color .2s, color .2s, border-color .2s;
 }
@@ -145,7 +152,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 400; lin
 }
 .callout p { font-family: inherit; line-height: inherit; margin: 0 0 .4em; }
 .callout p:last-child { margin: 0; }
-.callout cite { display: block; font-style: normal; font-family: var(--font-body); font-size: .85rem; letter-spacing: 2px; margin-top: .6em; }
+.callout cite { display: block; font-style: normal; font-family: var(--font-body); font-size: .85rem; letter-spacing: 2px; margin-top: .6em; font-size: 14px; }
 
 .testimonial { background: var(--bg) var(--pattern-dark) top left / cover fixed; text-align: center; padding: 40px 0; }
 .testimonial__img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 1rem; mix-blend-mode: luminosity; }
@@ -180,7 +187,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 400; lin
 /* ── Project meta (Focus / Client / Team / Duration) ─────── */
 .meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin: 2rem 0 1rem; }
 .meta dt { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; margin-bottom: .4em; text-transform: uppercase; }
-.meta dd { margin: 0; font-family: var(--font-body); font-size: 15px; line-height: 2; }
+.meta dd { margin: 0; font-family: var(--font-body); font-size: 16px; line-height: 2; }
 @media (max-width: 767px) { .meta { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* ── Video ────────────────────────────────────────────────── */
@@ -190,6 +197,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 400; lin
 .anchor { display: block; position: relative; top: calc(var(--nav-h) * -1); visibility: hidden; }
 
 /* ── Accessibility ────────────────────────────────────────── */
+/* Text read by screen readers but not shown on screen */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 :focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

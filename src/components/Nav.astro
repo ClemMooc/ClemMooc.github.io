@@ -4,23 +4,49 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const items = [
   { href: '/#projects', label: 'Projects' },
   { href: '/about', label: 'About', current: path === '/about' },
-  { href: site.links.linkedin, label: 'LinkedIn ↗', external: true },
+  { href: site.links.linkedin, label: 'LinkedIn', external: true },
 ];
 ---
 <header class="nav">
-  <a class="nav__logo" href="/" aria-label="Clem Mooc — home">
-    <img src="/brand/logo.png" alt="Clem Mooc" width="104" height="70" />
-    <img class="nav__logo-hover" src="/brand/logo-hover.png" alt="" width="104" height="70" aria-hidden="true" />
+  <a class="nav__logo" href="/" aria-label="Clem Mooc, home">
+    <img src="/brand/logo.png" alt="" width="104" height="70" />
+    <img class="nav__logo-hover" src="/brand/logo-hover.png" alt="" width="104" height="70" />
   </a>
-  <input type="checkbox" id="nav-toggle" class="nav__toggle" aria-label="Open menu" />
-  <label for="nav-toggle" class="nav__burger" aria-hidden="true"><span></span><span></span><span></span></label>
-  <nav class="nav__menu" aria-label="Main">
+  <button class="nav__burger" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav__menu" id="nav-menu" aria-label="Main">
     {items.map((i) => (
       <a href={i.href} class:list={['nav__link', { 'is-current': i.current }]}
-        {...(i.external ? { target: '_blank', rel: 'noopener' } : {})}>{i.label}</a>
+        aria-current={i.current ? 'page' : undefined}
+        {...(i.external ? { target: '_blank', rel: 'noopener' } : {})}>
+        {i.label}{i.external && <><span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in a new tab)</span></>}
+      </a>
     ))}
   </nav>
 </header>
+
+<script>
+  const nav = document.querySelector<HTMLElement>('.nav')!;
+  const burger = nav.querySelector<HTMLButtonElement>('.nav__burger')!;
+  const menu = nav.querySelector<HTMLElement>('.nav__menu')!;
+
+  const setOpen = (open: boolean) => {
+    nav.classList.toggle('nav--open', open);
+    burger.setAttribute('aria-expanded', String(open));
+  };
+  burger.addEventListener('click', () => setOpen(!nav.classList.contains('nav--open')));
+  menu.addEventListener('click', (e) => { if ((e.target as Element).closest('a')) setOpen(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('nav--open')) { setOpen(false); burger.focus(); }
+  });
+  matchMedia('(min-width: 768px)').addEventListener('change', () => setOpen(false));
+
+  // Solid background once the page has scrolled, so text doesn't show through behind the logo.
+  const onScroll = () => nav.classList.toggle('nav--scrolled', scrollY > 10);
+  onScroll();
+  addEventListener('scroll', onScroll, { passive: true });
+</script>
 
 <style>
   .nav {
@@ -29,7 +55,9 @@ const items = [
     padding: 20px var(--gutter);
     background: linear-gradient(#000 23%, #0000007d 75%, #0000 95%);
     min-height: var(--nav-h);
+    transition: transform .4s ease-in-out, background-color .3s, padding .3s;
   }
+  .nav.nav--scrolled { background: rgb(3 3 3 / .94); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
   .nav__logo { position: relative; display: block; width: 104px; }
   .nav__logo img { width: 104px; height: auto; transition: opacity .2s; }
   .nav__logo-hover { position: absolute; inset: 0; opacity: 0; }
@@ -42,14 +70,29 @@ const items = [
     transition: color .2s;
   }
   .nav__link:hover, .nav__link.is-current { color: var(--orange); }
-  .nav__toggle, .nav__burger { display: none; }
+  .nav__burger { display: none; }
+
   @media (max-width: 767px) {
-    .nav__burger { display: flex; flex-direction: column; gap: 6px; cursor: pointer; padding: 8px; }
-    .nav__burger span { width: 28px; height: 3px; background: var(--orange); border-radius: 2px; }
+    .nav__burger {
+      display: flex; flex-direction: column; justify-content: center; gap: 6px;
+      width: 48px; height: 48px; padding: 10px; margin-right: -10px;
+      background: none; border: 0; cursor: pointer;
+    }
+    .nav__burger span {
+      width: 28px; height: 3px; background: var(--orange); border-radius: 2px;
+      transition: transform .25s, opacity .25s;
+    }
+    /* Burger turns into an × when open */
+    .nav--open .nav__burger span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .nav--open .nav__burger span:nth-child(2) { opacity: 0; }
+    .nav--open .nav__burger span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
     .nav__menu {
       display: none; position: absolute; top: 100%; left: 0; right: 0;
-      flex-direction: column; background: #000; padding: 12px var(--gutter) 20px;
+      flex-direction: column; background: rgb(3 3 3 / .97); padding: 12px var(--gutter) 20px;
+      border-bottom: 1px solid #ffffff1f;
     }
-    .nav__toggle:checked ~ .nav__menu { display: flex; }
+    .nav--open { background: rgb(3 3 3 / .97); }
+    .nav--open .nav__menu { display: flex; }
+    .nav__link { padding: 14px 0; font-size: 16px; }
   }
 </style>

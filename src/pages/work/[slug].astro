@@ -17,7 +17,7 @@ const d = entry.data;
 <Base title={d.seoTitle ?? d.title} description={d.description} image={d.hero ?? d.cover}>
   {d.hero && (
     <div class="hero-banner">
-      <Img src={d.hero} alt={d.title} eager class="hero-banner__img" />
+      <Img src={d.hero} alt={d.title} eager zoom={false} class="hero-banner__img" />
     </div>
   )}
   <article class="prose case">

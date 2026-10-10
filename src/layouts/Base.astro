@@ -16,7 +16,6 @@ import { site } from '../site.config';
 import { media } from '../lib/media';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import BackToTop from '../components/BackToTop.astro';
 import Analytics from '../components/Analytics.astro';
 import Lightbox from '../components/Lightbox.astro';
 import Motion from '../components/Motion.astro';
@@ -66,7 +65,6 @@ const vars = `--pattern-dark:url(${dark.src});--pattern-light:url(${light.src});
       <slot />
     </main>
     <Footer />
-    <BackToTop />
     <Lightbox />
     <Motion />
     <style is:global>

@@ -1,0 +1,28 @@
+---
+// Full-width image that runs edge to edge across the screen (no page margins).
+// Use it on its own, between <Section>s — not inside one:
+// <Banner src="lunar-crafts/lcd-solution-1.png" alt="..." />
+// Click to enlarge, like <Img>.
+import { Image } from 'astro:assets';
+import { media, isPassthrough } from '../lib/media';
+
+interface Props { src: string; alt: string }
+const { src, alt } = Astro.props;
+const url = media(src);
+---
+
+<figure class="banner img--zoom" data-full={url}>
+  {isPassthrough(src) ? (
+    <img src={url} alt={alt} loading="lazy" decoding="async" />
+  ) : (
+    <Image src={url} alt={alt} inferSize widths={[800, 1280, 1920, 2560]} sizes="100vw" loading="lazy" />
+  )}
+</figure>
+
+<style>
+  .banner { margin: 0; overflow: hidden; background: var(--bg); }
+  .banner img { display: block; width: 100%; height: auto; border-radius: 0; }
+  /* No hover-grow on full-width images (it would spill off the screen) */
+  .banner.img--zoom:hover img, .banner.img--zoom:focus-visible img { transform: none; box-shadow: none; }
+  .banner.img--zoom:focus-visible { outline-offset: -6px; }
+</style>

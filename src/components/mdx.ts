@@ -1,5 +1,6 @@
 // Components available inside every case study .mdx file — no imports needed.
 import Img from './Img.astro';
+import Banner from './Banner.astro';
 import Section from './Section.astro';
 import Grid from './Grid.astro';
 import Eyebrow from './Eyebrow.astro';
@@ -17,5 +18,5 @@ import Spacer from './Spacer.astro';
 import Tabs from './Tabs.astro';
 
 export const mdxComponents = {
-  Img, Section, Grid, Eyebrow, Rule, Hl, Tag, Button, Callout, Labeled, Accordion, Meta, Testimonial, Video, Spacer, Tabs,
+  Img, Banner, Section, Grid, Eyebrow, Rule, Hl, Tag, Button, Callout, Labeled, Accordion, Meta, Testimonial, Video, Spacer, Tabs,
 };

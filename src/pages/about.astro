@@ -48,7 +48,7 @@ const education = [
       <div>
         {experience.map((e) => (
           <div class="entry">
-            <h2><a href={e.url} target="_blank" rel="noopener"><strong>{e.org}</strong></a> / {e.role}</h2>
+            <h2><a href={e.url} target="_blank" rel="noopener"><strong>{e.org}</strong><span class="sr-only"> (opens in a new tab)</span></a> / {e.role}</h2>
             {e.notes.map((n) => <p>{n}</p>)}
           </div>
         ))}
@@ -74,5 +74,5 @@ const education = [
   .entry { margin-bottom: 2rem; }
   .entry h2 { font-size: 1.4rem; line-height: 1.5; margin: 0 0 .4em; }
   .entry h2 a { color: var(--orange); text-decoration: underline; }
-  .entry p { font-family: var(--font-body); font-size: 15px; line-height: 1.9; margin: 0; }
+  .entry p { font-family: var(--font-body); font-size: 16px; line-height: 1.9; margin: 0; }
 </style>

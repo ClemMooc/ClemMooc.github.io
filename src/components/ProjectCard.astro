@@ -8,7 +8,7 @@ const lines = title.split(' / ');
 <a class="card" href={href} {...(external ? { target: '_blank', rel: 'noopener' } : {})}>
   <div class="card__frame">
     <Image src={media(cover)} alt="" inferSize widths={[480, 800, 1200]} sizes="(max-width: 767px) 92vw, 46vw" class="card__img" />
-    <h3 class="card__title">{lines.map((l, i) => <>{l}{i < lines.length - 1 && <br />}</>)}{external && ' ↗'}</h3>
+    <h3 class="card__title">{lines.map((l, i) => <>{l}{i < lines.length - 1 && <br />}</>)}{external && <><span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in a new tab)</span></>}</h3>
   </div>
 </a>
 
