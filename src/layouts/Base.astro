@@ -1,0 +1,75 @@
+---
+// Fonts are bundled with the site (no Google Fonts request).
+import '@fontsource/sora/300.css';
+import '@fontsource/sora/400.css';
+import '@fontsource/sora/500.css';
+import '@fontsource/sora/700.css';
+import '@fontsource/sora/800.css';
+import '@fontsource/noto-sans/400.css';
+import '@fontsource/noto-sans/400-italic.css';
+import '@fontsource/noto-sans/700.css';
+import '@fontsource/montserrat/400.css';
+import '@fontsource/fraunces/400-italic.css';
+import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import { site } from '../site.config';
+import { media } from '../lib/media';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import BackToTop from '../components/BackToTop.astro';
+import Analytics from '../components/Analytics.astro';
+import Lightbox from '../components/Lightbox.astro';
+import patternDark from '../assets/bg-pattern.png';
+import patternLight from '../assets/bg-pattern-light.png';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string; // R2 key or absolute URL for the social preview image
+}
+const { title, description = site.description, image } = Astro.props;
+const pageTitle = title ? `${title} | ${site.name}` : site.title;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = image ? media(image) : new URL('/og-image.jpg', Astro.site).href;
+
+// Background textures: compressed to WebP at build time.
+const dark = await getImage({ src: patternDark, format: 'webp', width: 1920, quality: 70 });
+const light = await getImage({ src: patternLight, format: 'webp', width: 1920, quality: 70 });
+const vars = `--pattern-dark:url(${dark.src});--pattern-light:url(${light.src});`;
+---
+
+<!doctype html>
+<html lang="en" style={vars}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <Analytics />
+  </head>
+  <body id="top">
+    <a class="skip" href="#main">Skip to content</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <BackToTop />
+    <Lightbox />
+    <style is:global>
+      .skip { position: absolute; left: -9999px; }
+      .skip:focus { left: 16px; top: 16px; z-index: 100; background: #fff; color: #000; padding: 8px 12px; }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+---
+// Anchor target for in-page links, e.g. <Spacer id="Solution" /> + <Button href="#Solution">
+interface Props { id: string }
+const { id } = Astro.props;
+---
+<span id={id} class="anchor"></span>

@@ -1,0 +1,46 @@
+---
+// Home page project grid with category tabs (works without JavaScript).
+import { getCollection } from 'astro:content';
+import { site } from '../site.config';
+import ProjectCard from './ProjectCard.astro';
+
+interface Props { id?: string }
+const { id = 'projects' } = Astro.props;
+const work = (await getCollection('work', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
+const cats = site.categories.filter((c) => work.some((w) => w.data.category === c.key));
+---
+<div class="tabs">
+  {cats.map((c, i) => (
+    <input type="radio" name={`${id}-tab`} id={`${id}-${c.key}`} class="tabs__radio" checked={i === 0} />
+  ))}
+  <div class="tabs__menu" role="tablist">
+    {cats.map((c) => (
+      <label for={`${id}-${c.key}`} class={`tabs__tab tabs__tab--${c.key}`}>{c.label}</label>
+    ))}
+  </div>
+  {cats.map((c) => (
+    <div class={`tabs__pane tabs__pane--${c.key}`}>
+      {work.filter((w) => w.data.category === c.key).map((w) => (
+        <ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} />
+      ))}
+    </div>
+  ))}
+</div>
+
+<style>
+  .tabs__radio { position: absolute; opacity: 0; pointer-events: none; }
+  .tabs__menu { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin: 0 0 40px; }
+  .tabs__tab {
+    cursor: pointer; border: 4px solid #000; border-radius: 30px; padding: 12px 20px;
+    background: #ddd; color: #000;
+    font-family: var(--font-display); font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+    transition: background-color .2s, color .2s;
+  }
+  .tabs__tab:hover { background: #ce1d10; color: #fff; }
+  .tabs__pane { display: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+  @media (max-width: 767px) { .tabs__pane { grid-template-columns: 1fr; } }
+</style>
+<Fragment set:html={`<style>${cats.map((c) => `
+  #${id}-${c.key}:checked ~ .tabs__pane--${c.key} { display: grid; }
+  #${id}-${c.key}:checked ~ .tabs__menu .tabs__tab--${c.key} { background: var(--rust); color: #fff; border-color: var(--blue); outline: 4px solid #000; }
+  #${id}-${c.key}:focus-visible ~ .tabs__menu .tabs__tab--${c.key} { outline: 3px solid var(--teal); }`).join('')}</style>`} />

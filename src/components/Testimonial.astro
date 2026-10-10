@@ -1,0 +1,14 @@
+---
+// Full-width quote with a headshot.
+import { media } from '../lib/media';
+interface Props { img?: string; by: string; role?: string }
+const { img, by, role } = Astro.props;
+---
+<section class="testimonial">
+  <div class="container container--narrow">
+    {img && <img class="testimonial__img" src={media(img)} alt={by} loading="lazy" width="80" height="80" />}
+    <blockquote class="testimonial__quote"><slot /></blockquote>
+    <p class="testimonial__by">{by}</p>
+    {role && <p class="testimonial__role">{role}</p>}
+  </div>
+</section>

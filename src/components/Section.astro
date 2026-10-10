@@ -1,0 +1,15 @@
+---
+// A full-width band. tone="dark" (black, patterned) or tone="light" (blue-grey).
+interface Props {
+  tone?: 'dark' | 'light';
+  id?: string;
+  narrow?: boolean;
+}
+const { tone = 'dark', id, narrow = false } = Astro.props;
+---
+
+<section class:list={['section', `section--${tone}`]} id={id}>
+  <div class:list={['container', { 'container--narrow': narrow }]}>
+    <slot />
+  </div>
+</section>

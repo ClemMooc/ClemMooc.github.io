@@ -1,0 +1,13 @@
+---
+// Side-by-side columns. Each direct child <div> is one column.
+// Collapses to a single column on phones.
+interface Props {
+  cols?: 1 | 2 | 3 | 4;
+  align?: 'start' | 'center';
+}
+const { cols = 2, align = 'center' } = Astro.props;
+---
+
+<div class:list={['grid', `grid--${cols}`, `grid--${align}`]}>
+  <slot />
+</div>

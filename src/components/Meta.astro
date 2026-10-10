@@ -1,0 +1,13 @@
+---
+// Project summary row: Focus / Client / Team / Duration.
+interface Props { items: { label: string; values: string[] }[] }
+const { items } = Astro.props;
+---
+<dl class="meta">
+  {items.map((it) => (
+    <div class="meta__item">
+      <dt>{it.label}</dt>
+      {it.values.map((v) => <dd>{v}</dd>)}
+    </div>
+  ))}
+</dl>

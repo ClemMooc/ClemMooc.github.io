@@ -1,0 +1,12 @@
+---
+// Pill button. `href` can be a page link (/about, #section), a full URL,
+// mailto:, or an R2 key like "shared/clem-mooc-resume-2024.pdf".
+// External links open in a new tab and get a ↗.
+import { media } from '../lib/media';
+interface Props { href: string }
+const { href } = Astro.props;
+const isKey = !/^(https?:|mailto:|tel:|\/|#)/.test(href);
+const url = isKey ? media(href) : href;
+const external = isKey || /^https?:\/\//.test(href);
+---
+<a class="button" href={url} {...(external ? { target: '_blank', rel: 'noopener' } : {})}><slot />{external && ' ↗'}</a>

@@ -1,0 +1,55 @@
+---
+import { site } from '../site.config';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const items = [
+  { href: '/#projects', label: 'Projects' },
+  { href: '/about', label: 'About', current: path === '/about' },
+  { href: site.links.linkedin, label: 'LinkedIn ↗', external: true },
+];
+---
+<header class="nav">
+  <a class="nav__logo" href="/" aria-label="Clem Mooc — home">
+    <img src="/brand/logo.png" alt="Clem Mooc" width="104" height="70" />
+    <img class="nav__logo-hover" src="/brand/logo-hover.png" alt="" width="104" height="70" aria-hidden="true" />
+  </a>
+  <input type="checkbox" id="nav-toggle" class="nav__toggle" aria-label="Open menu" />
+  <label for="nav-toggle" class="nav__burger" aria-hidden="true"><span></span><span></span><span></span></label>
+  <nav class="nav__menu" aria-label="Main">
+    {items.map((i) => (
+      <a href={i.href} class:list={['nav__link', { 'is-current': i.current }]}
+        {...(i.external ? { target: '_blank', rel: 'noopener' } : {})}>{i.label}</a>
+    ))}
+  </nav>
+</header>
+
+<style>
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px var(--gutter);
+    background: linear-gradient(#000 23%, #0000007d 75%, #0000 95%);
+    min-height: var(--nav-h);
+  }
+  .nav__logo { position: relative; display: block; width: 104px; }
+  .nav__logo img { width: 104px; height: auto; transition: opacity .2s; }
+  .nav__logo-hover { position: absolute; inset: 0; opacity: 0; }
+  .nav__logo:hover .nav__logo-hover { opacity: 1; }
+  .nav__logo:hover img:first-child { opacity: 0; }
+  .nav__menu { display: flex; gap: 8px; }
+  .nav__link {
+    font-family: var(--font-display); font-size: 14px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; text-decoration: none; color: var(--cream); padding: 10px 20px;
+    transition: color .2s;
+  }
+  .nav__link:hover, .nav__link.is-current { color: var(--orange); }
+  .nav__toggle, .nav__burger { display: none; }
+  @media (max-width: 767px) {
+    .nav__burger { display: flex; flex-direction: column; gap: 6px; cursor: pointer; padding: 8px; }
+    .nav__burger span { width: 28px; height: 3px; background: var(--orange); border-radius: 2px; }
+    .nav__menu {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; background: #000; padding: 12px var(--gutter) 20px;
+    }
+    .nav__toggle:checked ~ .nav__menu { display: flex; }
+  }
+</style>

@@ -1,0 +1,17 @@
+---
+// Google Analytics 4. Only loads on the live (production) build.
+import { site } from '../site.config';
+const id = site.gaId;
+const enabled = Boolean(id) && import.meta.env.PROD;
+---
+{enabled && (
+  <>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${id}`}></script>
+    <script is:inline define:vars={{ id }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', id);
+    </script>
+  </>
+)}

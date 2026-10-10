@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import Lottie from '../components/Lottie.astro';
+import Button from '../components/Button.astro';
+import Img from '../components/Img.astro';
+import { site } from '../site.config';
+import { media } from '../lib/media';
+
+// Edit your experience & education here.
+const experience = [
+  { org: 'Meta', url: 'https://about.meta.com/realitylabs/', role: 'Research program manager',
+    notes: ['Meta Reality Labs (AR/VR)'] },
+  { org: 'Yext', url: 'https://www.yext.com/', role: 'UX digital project manager',
+    notes: ['Learned to interpret the objectives and needs of the client.', 'Learned to leverage agile project management.', 'Learned to take excellent notes.'] },
+  { org: 'Redfin', url: 'https://www.redfin.com/', role: 'Quantitative user researcher',
+    notes: ['Learned to interpret the behaviors and needs of real estate buyers/sellers.', 'Learned to influence design decisions with product team.', 'Learned to illustrate thousands of data points into data-driven stories.'] },
+  { org: 'Invent.us', url: 'https://invent.us/', role: 'Product manager intern',
+    notes: ['Learned to usability test digital wireframes.', 'Learned to wear multiple hats in a fast-paced fintech startup environment.'] },
+  { org: 'PSB Insights', url: 'https://www.psbinsights.com/', role: 'Market research analyst',
+    notes: ['Learned to program advanced surveys for large B2C clients.', 'Learned to leverage data visualization techniques.'] },
+];
+const education = [
+  { title: 'UX Design Certificate', school: 'School of Visual Concepts' },
+  { title: 'Minor Degree: Informatics (UX/UI)', school: 'University of Washington - Information School (iSchool)' },
+  { title: 'B.A. Business Administration (Information Systems, Marketing Analytics)', school: 'University of Washington - Foster School of Business' },
+];
+---
+<Base title="About" description="Clem Mooc — an interpreter at heart: user research, project management, and product design.">
+  <Lottie name="background" class="wave" />
+  <div class="container about">
+    <div class="grid grid--2 grid--center">
+      <div><Img src="about/portfolio-images.png" alt="Portrait collage of Clem" eager /></div>
+      <div class="about__story">
+        <p>As a kid born to Vietnam war refugee parents, I lived in a household that <span class="hl hl--teal">spoke 5 languages</span>, but was weakest in English. So, <span class="hl hl--orange">I have always been an interpreter for my family</span> growing up in America.</p>
+        <p><span class="hl hl--orange">I continued to look for ways to be this interpreter</span> as I graduated with a business degree.</p>
+        <p>I translated complicated human problems in tech, real estate, and startups as a <span class="hl hl--teal">user researcher</span>, <span class="hl hl--teal">project manager</span>, and <span class="hl hl--teal">product manager</span>.</p>
+        <p><span class="hl hl--orange">As a product designer, I’m still that interpreter at heart</span>. My affinity to <span class="hl hl--teal">translate complex problems</span>, and <span class="hl hl--teal">lead agile design processes</span>, allow me to uniquely advocate for users even further.</p>
+      </div>
+    </div>
+
+    <h1 class="about__cta">Let's work together.</h1>
+    <Button href={media(site.resume)}>Resume</Button>
+    <Button href={site.links.linkedin}>LinkedIn</Button>
+    <a class="button" href={`mailto:${site.email}`}>Email ↗</a>
+    <hr class="rule" />
+
+    <div class="grid grid--2 grid--start">
+      <div>
+        {experience.map((e) => (
+          <div class="entry">
+            <h2><a href={e.url} target="_blank" rel="noopener"><strong>{e.org}</strong></a> / {e.role}</h2>
+            {e.notes.map((n) => <p>{n}</p>)}
+          </div>
+        ))}
+      </div>
+      <div>
+        {education.map((e) => (
+          <div class="entry">
+            <h2><strong>{e.title}</strong></h2>
+            <p><em>{e.school}</em></p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Base>
+
+<style>
+  :global(.wave) { width: 100%; aspect-ratio: 375 / 70; margin-top: calc(var(--nav-h) * -1 - 60px); opacity: .69; pointer-events: none; }
+  .about { font-family: var(--font-display); }
+  .about__story p { font-weight: 300; line-height: 1.9; }
+  .about__cta { font-size: clamp(2.4rem, 6vw, 4.75rem); line-height: 1.2; margin: 1.2em 0 .6em; }
+  .rule { margin-top: 2rem; }
+  .entry { margin-bottom: 2rem; }
+  .entry h2 { font-size: 1.4rem; line-height: 1.5; margin: 0 0 .4em; }
+  .entry h2 a { color: var(--orange); text-decoration: underline; }
+  .entry p { font-family: var(--font-body); font-size: 15px; line-height: 1.9; margin: 0; }
+</style>

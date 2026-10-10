@@ -1,0 +1,6 @@
+---
+// Teal quote box: <Callout by="Interview Participant">“Quote…”</Callout>
+interface Props { by?: string }
+const { by } = Astro.props;
+---
+<blockquote class="callout"><slot />{by && <cite>— {by}</cite>}</blockquote>

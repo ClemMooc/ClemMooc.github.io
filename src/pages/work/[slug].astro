@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Img from '../../components/Img.astro';
+import MoreProjects from '../../components/MoreProjects.astro';
+import { mdxComponents } from '../../components/mdx';
+
+export async function getStaticPaths() {
+  const work = await getCollection('work', ({ data }) => !data.draft);
+  return work.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+<Base title={d.seoTitle ?? d.title} description={d.description} image={d.hero ?? d.cover}>
+  {d.hero && (
+    <div class="hero-banner">
+      <Img src={d.hero} alt={d.title} eager class="hero-banner__img" />
+    </div>
+  )}
+  <article class="prose case">
+    <Content components={mdxComponents} />
+  </article>
+  <MoreProjects />
+</Base>
+
+<style>
+  .hero-banner { margin-top: calc(var(--nav-h) * -1); }
+  .hero-banner :global(.img) { margin: 0; }
+  .hero-banner :global(img) { border-radius: 0; }
+</style>

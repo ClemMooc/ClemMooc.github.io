@@ -1,0 +1,9 @@
+---
+// Two-column block with a small label on the left: <Labeled label="User problem"> ... </Labeled>
+interface Props { label: string }
+const { label } = Astro.props;
+---
+<div class="labeled">
+  <p class="labeled__label">{label}</p>
+  <div class="labeled__body"><slot /></div>
+</div>

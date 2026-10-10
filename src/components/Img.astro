@@ -1,0 +1,33 @@
+---
+// <Img src="caravel/hero.png" alt="..." caption="..." />
+// `src` is an R2 key (folder/file) or a full URL.
+// Photos/screens are resized + compressed at build time; GIFs and SVGs are served as-is.
+import { Image } from 'astro:assets';
+import { media, isPassthrough } from '../lib/media';
+
+interface Props {
+  src: string;
+  alt?: string;
+  caption?: string;
+  inline?: boolean;
+  eager?: boolean;
+  class?: string;
+  zoom?: boolean; // click to enlarge (default on)
+}
+const { src, alt = '', caption, inline = false, eager = false, class: className, zoom = true } = Astro.props;
+const url = media(src);
+const loading = eager ? 'eager' : 'lazy';
+---
+
+{inline ? (
+  <img class:list={['img-inline', className]} src={url} alt={alt} loading={loading} />
+) : (
+  <figure class:list={['img', { 'img--zoom': zoom }, className]} data-full={zoom ? url : undefined}>
+    {isPassthrough(src) ? (
+      <img src={url} alt={alt} loading={loading} decoding="async" />
+    ) : (
+      <Image src={url} alt={alt} inferSize loading={loading} />
+    )}
+    {caption && <figcaption>{caption}</figcaption>}
+  </figure>
+)}

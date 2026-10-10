@@ -1,0 +1,24 @@
+---
+// Plays a Lottie animation from /public/lottie/<name>.json
+interface Props { name: string; class?: string; loop?: boolean; label?: string }
+const { name, class: className, loop = true, label } = Astro.props;
+---
+<div class:list={['lottie', className]} data-lottie={`/lottie/${name}.json`} data-loop={String(loop)}
+  role={label ? 'img' : undefined} aria-label={label} aria-hidden={label ? undefined : 'true'}></div>
+
+<script>
+  import lottie from 'lottie-web/build/player/lottie_light';
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('[data-lottie]').forEach((el) => {
+    if (el.dataset.ready) return;
+    el.dataset.ready = '1';
+    lottie.loadAnimation({
+      container: el,
+      renderer: 'svg',
+      loop: el.dataset.loop === 'true',
+      autoplay: !reduce,
+      path: el.dataset.lottie!,
+      rendererSettings: { preserveAspectRatio: 'xMidYMid slice' },
+    });
+  });
+</script>
