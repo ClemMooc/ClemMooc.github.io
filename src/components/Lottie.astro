@@ -1,6 +1,6 @@
 ---
 // Plays a Lottie animation from /public/lottie/<name>.json
-// Looping animations play for 4 seconds, then ease to a stop by 5 seconds (accessibility requirement).
+// Looping animations play for 2 seconds, then glide smoothly to a stop by 5 seconds (accessibility requirement).
 interface Props { name: string; class?: string; loop?: boolean; label?: string }
 const { name, class: className, loop = true, label } = Astro.props;
 ---
@@ -22,20 +22,23 @@ const { name, class: className, loop = true, label } = Astro.props;
       rendererSettings: { preserveAspectRatio: 'xMidYMid slice' },
     });
     // Accessibility (WCAG 2.2.2): looping motion stops within 5 seconds.
-    // Plays normally for 4 seconds, then eases to a gentle stop over the last second.
+    // Plays normally for 2 seconds, then glides to a stop over the next 3 (still at rest by 5 s).
+    // Speed follows a cosine curve: it starts slowing imperceptibly and settles softly, with no jolt at either end.
+    const EASE_START = 2000, EASE_LENGTH = 3000;
     if (el.dataset.loop === 'true' && !reduce) {
+      anim.setSubframe(true); // smooth in-between frames at very low speeds
       anim.addEventListener('DOMLoaded', () => {
         setTimeout(() => {
           const t0 = performance.now();
           const slow = (now: number) => {
-            const p = Math.min((now - t0) / 1000, 1);
-            const speed = (1 - p) ** 2; // ease-out: slows quickly at first, then glides to zero
-            if (p >= 1 || speed < 0.01) { anim.pause(); return; }
+            const p = Math.min((now - t0) / EASE_LENGTH, 1);
+            const speed = (1 + Math.cos(Math.PI * p)) / 2;
+            if (p >= 1) { anim.pause(); return; }
             anim.setSpeed(speed);
             requestAnimationFrame(slow);
           };
           requestAnimationFrame(slow);
-        }, 4000);
+        }, EASE_START);
       });
     }
   });
