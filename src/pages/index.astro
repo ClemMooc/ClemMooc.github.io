@@ -7,6 +7,7 @@ import { site } from '../site.config';
 import { media } from '../lib/media';
 ---
 <Base>
+  <div class="intro">
   <Lottie name="background" class="wave" />
 
   <section class="hero" aria-labelledby="hero-title">
@@ -22,6 +23,7 @@ import { media } from '../lib/media';
       <a class="button button--ghost" href={`mailto:${site.email}`}>Email</a>
     </div>
   </section>
+  </div>
 
   <section class="block" id="projects" aria-labelledby="work-title">
     <div class="block__inner">
@@ -33,6 +35,9 @@ import { media } from '../lib/media';
 </Base>
 
 <style>
+  .intro { position: relative; isolation: isolate; margin-top: calc(var(--nav-h) * -1); padding-top: var(--nav-h); }
+  .intro :global(.wave) { top: 0; z-index: 0; }
+  .intro > .hero { position: relative; z-index: 1; }
   .hero { max-width: var(--max); margin: 0 auto; padding: clamp(40px, 7vw, 88px) var(--gutter) 72px; }
   .hero__title { font-size: clamp(2.2rem, 5.2vw, 4rem); line-height: 1.1; letter-spacing: -.025em; font-weight: 600; max-width: 18ch; margin: 0 0 1.5rem; }
   .hero__accent { color: var(--orange); }

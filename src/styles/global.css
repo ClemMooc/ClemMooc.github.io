@@ -1,43 +1,58 @@
 /* ─────────────────────────────────────────────────────────────
    Clem Mooc — global styles
    Colours and fonts are defined once here as CSS variables.
-   Palette: near-black + warm off-white, with orange as the only accent.
+   Palette (design brief): black + warm linen, with orange as the only accent.
    Every text/background pair below passes WCAG 2.2 AA contrast.
    ───────────────────────────────────────────────────────────── */
 
 :root {
-  /* Colours */
-  --bg: #0b0b0c;          /* page background (dark sections) */
-  --surface: #151517;     /* cards, panels on dark */
-  --line: #2a2a2e;        /* borders and dividers on dark */
-  --cream: #f4efe8;       /* main text on dark */
-  --muted: #a8a29a;       /* secondary text on dark */
-  --ink: #161616;         /* main text on light */
-  --ink-muted: #57534e;   /* secondary text on light */
-  --paper: #f4efe8;       /* light section background */
-  --paper-2: #ebe5dc;     /* cards and panels on light */
-  --orange: #f14300;      /* the accent: use sparingly */
-  --orange-ink: #8f2900;  /* accent for text on light backgrounds */
+  /* Colours — names from the design brief */
+  --ink: #141211;          /* dark sections, nav, footer */
+  --ink-2: #1f1c1a;        /* raised surfaces on dark */
+  --linen: #efe7da;        /* main reading background */
+  --paper-card: #fbf8f3;   /* cards, callouts, accordions on linen */
+  --text: #2b2520;         /* body text and headings on linen/paper */
+  --text-muted: #5e554b;   /* captions, labels on linen/paper */
+  --on-ink: #efe7da;       /* text on dark */
+  --on-ink-muted: #b5aca0; /* secondary text on dark */
+  --accent: #ff5a1f;       /* orange on DARK backgrounds only */
+  --accent-deep: #a62d00;  /* orange on LIGHT backgrounds only */
+  --line-light: #d9ccb6;   /* hairlines on light (decorative only) */
+  --line-dark: #3a3532;    /* hairlines on dark */
+
+  /* Names used by the site's components (mapped to the brief) */
+  --bg: var(--ink);
+  --surface: var(--ink-2);
+  --line: var(--line-dark);
+  --cream: var(--on-ink);
+  --muted: var(--on-ink-muted);
+  --paper: var(--linen);
+  --paper-2: var(--paper-card);
+  --ink-muted: var(--text-muted);
+  --orange: var(--accent);
+  --orange-ink: var(--accent-deep);
+  /* (--ink is now the dark background; dark text on light uses --text) */
 
   /* Older names, kept so existing pages keep working */
-  --rust: var(--orange);
-  --teal: var(--orange);
-  --teal-ink: var(--orange-ink);
-  --blue: var(--orange);
-  --slate: var(--paper);
-  --navy: var(--surface);
-  --card-border: var(--line);
+  --rust: var(--accent);
+  --teal: var(--accent);
+  --teal-ink: var(--accent-deep);
+  --blue: var(--accent);
+  --slate: var(--linen);
+  --navy: var(--ink-2);
+  --card-border: var(--line-dark);
 
   /* Fonts (two families only) */
   --font-display: 'Sora', system-ui, sans-serif;
-  --font-body: 'Noto Sans', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
   --font-quote: var(--font-body);
 
   /* Layout */
   --max: 1140px;
+  --measure: 720px;        /* max width of reading text */
   --gutter: clamp(16px, 6vw, 100px);
   --nav-h: 96px;
-  --radius: 14px;
+  --radius: 12px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -48,7 +63,7 @@ body {
   color: var(--cream);
   font-family: var(--font-body);
   font-size: 17px;
-  line-height: 1.7;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; height: auto; display: block; }
@@ -57,16 +72,16 @@ p { margin: 0 0 1em; }
 
 /* ── Typography ───────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 600; line-height: 1.25; letter-spacing: -.01em; margin: 0 0 .5em; }
-.prose h1 { font-size: clamp(2.4rem, 5vw, 3.75rem); line-height: 1.1; letter-spacing: -.02em; margin: .2em 0 .4em; }
-.prose h2 { font-size: clamp(1.6rem, 3vw, 2.25rem); margin-top: 1.4em; }
-.prose h3 { font-size: clamp(1.25rem, 2.2vw, 1.6rem); margin-top: 1.4em; }
+.prose h1 { font-size: clamp(2.25rem, 4.5vw, 3.25rem); font-weight: 400; line-height: 1.2; letter-spacing: -.02em; margin: .2em 0 .4em; }
+.prose h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin-top: 1.4em; }
+.prose h3 { font-size: 1.33rem; line-height: 1.35; margin-top: 1.4em; }
 .prose h4 { font-size: 1.2rem; margin-top: 1.2em; }
 .prose h5 { font-size: 1.05rem; }
-.prose p, .prose li { font-family: var(--font-body); line-height: 1.75; }
+.prose p, .prose li { font-family: var(--font-body); line-height: 1.65; }
 .prose ul, .prose ol { padding-left: 1.4em; }
 .prose a:not(.button) { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .prose a:not(.button):hover { color: var(--orange); }
-.prose strong { font-weight: 700; }
+.prose strong { font-weight: 600; }
 
 /* Small orange section label ("Background", "Problem"…) */
 .eyebrow {
@@ -83,7 +98,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 600; lin
 }
 .eyebrow--statement strong { color: var(--orange); font-weight: 600; }
 .section--light .eyebrow { color: var(--orange-ink); }
-.section--light .eyebrow--statement { color: var(--ink); }
+.section--light .eyebrow--statement { color: var(--text); }
 .section--light .eyebrow--statement strong { color: var(--orange-ink); }
 
 .rule { border: 0; height: 1px; background: currentColor; opacity: .2; margin: 0 0 2rem; }
@@ -97,7 +112,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 600; lin
   font-family: var(--font-display); font-weight: 600; font-size: 1.25rem;
   text-align: center; border-radius: var(--radius); padding: 1.25rem; margin: 0;
 }
-.section--light .tag { background: #fff; color: var(--ink); border-color: #0000001a; }
+.section--light .tag { background: #fff; color: var(--text); border-color: #0000001a; }
 
 /* ── Layout ───────────────────────────────────────────────── */
 main { position: relative; }
@@ -112,7 +127,7 @@ main { position: relative; }
 
 .section { position: relative; }
 .section--dark { background: var(--bg); color: var(--cream); }
-.section--light { background: var(--paper); color: var(--ink); }
+.section--light { background: var(--paper); color: var(--text); }
 .section--light figcaption, .section--light .img figcaption { color: var(--ink-muted); }
 .section--light a:not(.button):hover { color: var(--orange-ink); }
 
@@ -159,7 +174,7 @@ main { position: relative; }
 .button:active { background: #c93800; border-color: #c93800; }
 .button--ghost { background: transparent; color: var(--cream); border-color: #f4efe866; }
 .button--ghost:hover { background: transparent; color: var(--orange); border-color: var(--orange); }
-.section--light .button { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.section--light .button { background: var(--text); color: var(--paper); border-color: var(--text); }
 .section--light .button:hover { background: var(--orange-ink); border-color: var(--orange-ink); color: #fff; }
 
 /* ── Callouts & quotes ────────────────────────────────────── */
@@ -169,7 +184,7 @@ main { position: relative; }
   margin: 2.5rem auto; padding: 22px 28px; max-width: 900px; text-align: left;
   font-family: var(--font-body); font-style: italic; font-size: 1.15rem; line-height: 1.7;
 }
-.section--light .callout { background: #fff; color: var(--ink); border-left-color: var(--orange-ink); }
+.section--light .callout { background: #fff; color: var(--text); border-left-color: var(--orange-ink); }
 .callout p { font-family: inherit; line-height: inherit; margin: 0 0 .4em; }
 .callout p:last-child { margin: 0; }
 .callout cite { display: block; font-style: normal; font-family: var(--font-display); font-size: 14px; letter-spacing: .04em; margin-top: .8em; color: var(--muted); }
