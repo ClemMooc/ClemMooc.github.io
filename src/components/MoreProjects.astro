@@ -1,11 +1,17 @@
 ---
-import Section from './Section.astro';
-import ProjectTabs from './ProjectTabs.astro';
+// Bottom of each case study: the other projects (skips the one you're on).
+import ProjectList from './ProjectList.astro';
+interface Props { current: string }
+const { current } = Astro.props;
 ---
-<Section tone="dark">
-  <h3 class="more__title">Thanks for checking that out.<br />View more of my projects below:</h3>
-  <ProjectTabs id="more" />
-</Section>
+<section class="more" aria-labelledby="more-title">
+  <div class="more__inner">
+    <h2 class="more__title" id="more-title">More work</h2>
+    <ProjectList exclude={current} headingLevel={3} />
+  </div>
+</section>
 <style>
-  .more__title { text-align: center; font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2.44rem); margin: 1em 0 1.2em; color: var(--cream); }
+  .more { border-top: 1px solid var(--line); padding: 64px 0 80px; }
+  .more__inner { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+  .more__title { font-size: clamp(1.6rem, 3vw, 2.25rem); margin: 0 0 32px; }
 </style>

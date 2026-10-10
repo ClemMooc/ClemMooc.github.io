@@ -2,47 +2,84 @@
 import Base from '../layouts/Base.astro';
 import Lottie from '../components/Lottie.astro';
 import Button from '../components/Button.astro';
-import ProjectTabs from '../components/ProjectTabs.astro';
+import ProjectList from '../components/ProjectList.astro';
 import { site } from '../site.config';
 import { media } from '../lib/media';
+import { experience } from '../data/experience';
+
+const recent = experience.slice(0, 3);
 ---
 <Base>
   <Lottie name="background" class="wave" />
 
-  <section class="hero">
-    <h1 class="hero__title">
-      I'm committed to interpreting <span class="hl hl--orange">complicated human problems</span> into <span class="hl hl--teal">simple digital experiences</span>.
+  <section class="hero" aria-labelledby="hero-title">
+    <p class="hero__kicker">Clem Mooc · Research program manager · {site.location}</p>
+    <h1 class="hero__title" id="hero-title">
+      I run research programs that turn complicated human problems into <span class="hero__accent">clear product decisions</span>.
     </h1>
-    <div class="hero__intro">
-      <p>Hi there, my name is <span class="hl hl--orange">Clem</span>.</p>
-      <p>I'm a product designer with a background in <span class="hl hl--teal">quantitative user research</span> and <span class="hl hl--teal">agile project management</span>.</p>
-      <p>📍 {site.location}</p>
-      <div class="hero__buttons">
-        <Button href={media(site.resume)}>Resume</Button>
-        <Button href={site.links.linkedin}>LinkedIn</Button>
-        <a class="button" href={`mailto:${site.email}`}>Email ↗</a>
-      </div>
+    <p class="hero__intro">
+      Research program manager at Meta Reality Labs. Previously UX project management at Yext and quantitative research at Redfin.
+    </p>
+    <div class="hero__buttons">
+      <Button href={media(site.resume)}>Resume</Button>
+      <Button href={site.links.linkedin} variant="ghost">LinkedIn</Button>
+      <a class="button button--ghost" href={`mailto:${site.email}`}>Email</a>
     </div>
-    <a href="#projects" class="hero__scroll" aria-label="Scroll to projects"><Lottie name="scroll-down" /></a>
   </section>
 
-  <section class="projects" id="projects">
-    <div class="container">
-      <h2 class="eyebrow">Projects</h2>
-      <ProjectTabs />
+  <section class="block" id="projects" aria-labelledby="work-title">
+    <div class="block__inner">
+      <h2 class="block__title" id="work-title">Selected work</h2>
+      <ProjectList headingLevel={3} />
+    </div>
+  </section>
+
+  <section class="block block--line" aria-labelledby="exp-title">
+    <div class="block__inner">
+      <h2 class="block__title" id="exp-title">Experience</h2>
+      <ol class="xp">
+        {recent.map((e) => (
+          <li class="xp__row">
+            <p class="xp__org">{e.org}</p>
+            <div>
+              <p class="xp__role">{e.role}{e.team && <span class="xp__team"> · {e.team}</span>}</p>
+              {e.highlights.length > 0 && (
+                <ul class="xp__hl">{e.highlights.map((h) => <li>{h}</li>)}</ul>
+              )}
+            </div>
+          </li>
+        ))}
+      </ol>
+      <a class="xp__more" href="/about">Full background and education →</a>
     </div>
   </section>
 </Base>
 
 <style>
-  :global(.wave) { width: 100%; aspect-ratio: 375 / 70; margin-top: calc(var(--nav-h) * -1 - 60px); opacity: .69; pointer-events: none; position: relative; z-index: 0; }
-  .hero { max-width: var(--max); margin: 0 auto; padding: 40px var(--gutter) 20px; font-family: var(--font-display); }
-  .hero__title { font-size: clamp(2rem, 4.2vw, 2.75rem); line-height: 1.4; font-weight: 400; margin: 0 0 1.2em; }
-  .hero__title .hl { font-weight: 700; }
-  .hero__intro p { font-family: var(--font-display); font-weight: 300; margin: 0 0 1.2em; }
-  .hero__buttons { margin-top: 1.5em; }
-  .hero__scroll { display: block; width: 100px; margin: 40px auto 0; transition: transform .2s; }
-  .hero__scroll:hover { transform: scale(1.3); }
-  .projects .eyebrow { margin-top: 0; }
-  @media (max-width: 767px) { .hero { text-align: center; } .hero__title { font-size: 2rem; } }
+  .hero { max-width: var(--max); margin: 0 auto; padding: 24px var(--gutter) 72px; }
+  .hero__kicker { font-family: var(--font-display); font-size: 14px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 1.25rem; }
+  .hero__title { font-size: clamp(2.2rem, 5.2vw, 4rem); line-height: 1.1; letter-spacing: -.025em; font-weight: 600; max-width: 18ch; margin: 0 0 1.5rem; }
+  .hero__accent { color: var(--orange); }
+  .hero__intro { font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--muted); max-width: 46ch; margin: 0 0 2rem; }
+  .hero__buttons { display: flex; flex-wrap: wrap; }
+
+  .block { padding: 24px 0 72px; }
+  .block--line { border-top: 1px solid var(--line); padding-top: 64px; }
+  .block__inner { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+  .block__title { font-size: clamp(1.6rem, 3vw, 2.25rem); margin: 0 0 32px; }
+
+  .xp { list-style: none; margin: 0 0 24px; padding: 0; }
+  .xp__row { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid var(--line); }
+  .xp__row:last-child { border-bottom: 1px solid var(--line); }
+  .xp__org { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; margin: 0; }
+  .xp__role { font-size: 1.05rem; margin: 0; }
+  .xp__team { color: var(--muted); }
+  .xp__hl { margin: 8px 0 0; padding-left: 1.1em; color: var(--muted); font-size: 16px; }
+  .xp__more { font-family: var(--font-display); font-weight: 600; color: var(--orange); text-decoration: none; }
+  .xp__more:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  @media (max-width: 767px) {
+    .hero { padding-bottom: 48px; }
+    .xp__row { grid-template-columns: 1fr; gap: 4px; }
+  }
 </style>

@@ -5,74 +5,80 @@ import Button from '../components/Button.astro';
 import Img from '../components/Img.astro';
 import { site } from '../site.config';
 import { media } from '../lib/media';
-
-// Edit your experience & education here.
-const experience = [
-  { org: 'Meta', url: 'https://about.meta.com/realitylabs/', role: 'Research program manager',
-    notes: ['Meta Reality Labs (AR/VR)'] },
-  { org: 'Yext', url: 'https://www.yext.com/', role: 'UX digital project manager',
-    notes: ['Learned to interpret the objectives and needs of the client.', 'Learned to leverage agile project management.', 'Learned to take excellent notes.'] },
-  { org: 'Redfin', url: 'https://www.redfin.com/', role: 'Quantitative user researcher',
-    notes: ['Learned to interpret the behaviors and needs of real estate buyers/sellers.', 'Learned to influence design decisions with product team.', 'Learned to illustrate thousands of data points into data-driven stories.'] },
-  { org: 'Invent.us', url: 'https://invent.us/', role: 'Product manager intern',
-    notes: ['Learned to usability test digital wireframes.', 'Learned to wear multiple hats in a fast-paced fintech startup environment.'] },
-  { org: 'PSB Insights', url: 'https://www.psbinsights.com/', role: 'Market research analyst',
-    notes: ['Learned to program advanced surveys for large B2C clients.', 'Learned to leverage data visualization techniques.'] },
-];
-const education = [
-  { title: 'UX Design Certificate', school: 'School of Visual Concepts' },
-  { title: 'Minor Degree: Informatics (UX/UI)', school: 'University of Washington - Information School (iSchool)' },
-  { title: 'B.A. Business Administration (Information Systems, Marketing Analytics)', school: 'University of Washington - Foster School of Business' },
-];
+// Experience & education live in src/data/experience.ts (shared with the home page).
+import { experience, education } from '../data/experience';
 ---
-<Base title="About" description="Clem Mooc — an interpreter at heart: user research, project management, and product design.">
+
+<Base title="About" description="Clem Mooc: research program manager, and an interpreter at heart.">
   <Lottie name="background" class="wave" />
-  <div class="container about">
-    <div class="grid grid--2 grid--center">
-      <div><Img src="about/portfolio-images.png" alt="Portrait collage of Clem" eager /></div>
+  <div class="about">
+    <div class="about__intro">
+      <div class="about__photo"><Img src="about/portfolio-images.png" alt="Portrait of Clem" eager zoom={false} /></div>
       <div class="about__story">
-        <p>As a kid born to Vietnam war refugee parents, I lived in a household that <span class="hl hl--teal">spoke 5 languages</span>, but was weakest in English. So, <span class="hl hl--orange">I have always been an interpreter for my family</span> growing up in America.</p>
-        <p><span class="hl hl--orange">I continued to look for ways to be this interpreter</span> as I graduated with a business degree.</p>
-        <p>I translated complicated human problems in tech, real estate, and startups as a <span class="hl hl--teal">user researcher</span>, <span class="hl hl--teal">project manager</span>, and <span class="hl hl--teal">product manager</span>.</p>
-        <p><span class="hl hl--orange">As a product designer, I’m still that interpreter at heart</span>. My affinity to <span class="hl hl--teal">translate complex problems</span>, and <span class="hl hl--teal">lead agile design processes</span>, allow me to uniquely advocate for users even further.</p>
+        <h1 class="about__title">An interpreter at heart.</h1>
+        <p>My parents came to America as Vietnam War refugees. Our household spoke five languages, and English was the weakest of them, so from a young age I was the family's interpreter.</p>
+        <p>That role followed me into my career. After a business degree at the University of Washington, I kept translating complicated human problems into something teams could act on: as a quantitative user researcher at Redfin, a UX project manager at Yext, and a product manager intern at a fintech startup.</p>
+        <p><strong>Today I'm a research program manager at Meta Reality Labs.</strong> I help users and product teams understand each other, turn research into decisions, and keep the work moving.</p>
+        <div class="about__buttons">
+          <Button href={media(site.resume)}>Resume</Button>
+          <Button href={site.links.linkedin} variant="ghost">LinkedIn</Button>
+          <a class="button button--ghost" href={`mailto:${site.email}`}>Email</a>
+        </div>
       </div>
     </div>
 
-    <h1 class="about__cta">Let's work together.</h1>
-    <Button href={media(site.resume)}>Resume</Button>
-    <Button href={site.links.linkedin}>LinkedIn</Button>
-    <a class="button" href={`mailto:${site.email}`}>Email ↗</a>
-    <hr class="rule" />
-
-    <div class="grid grid--2 grid--start">
-      <div>
+    <div class="about__cols">
+      <section aria-labelledby="xp-title">
+        <h2 class="about__h2" id="xp-title">Experience</h2>
         {experience.map((e) => (
           <div class="entry">
-            <h2><a href={e.url} target="_blank" rel="noopener"><strong>{e.org}</strong><span class="sr-only"> (opens in a new tab)</span></a> / {e.role}</h2>
-            {e.notes.map((n) => <p>{n}</p>)}
+            <h3>
+              <a href={e.url} target="_blank" rel="noopener">{e.org}<span class="sr-only"> (opens in a new tab)</span></a>
+              <span class="entry__role">{e.role}{e.team && ` · ${e.team}`}</span>
+            </h3>
+            {[...e.highlights, ...e.notes].length > 0 && (
+              <ul>{[...e.highlights, ...e.notes].map((n) => <li>{n}</li>)}</ul>
+            )}
           </div>
         ))}
-      </div>
-      <div>
+      </section>
+      <section aria-labelledby="edu-title">
+        <h2 class="about__h2" id="edu-title">Education</h2>
         {education.map((e) => (
           <div class="entry">
-            <h2><strong>{e.title}</strong></h2>
-            <p><em>{e.school}</em></p>
+            <h3>{e.title}</h3>
+            <p class="entry__school">{e.school}</p>
           </div>
         ))}
-      </div>
+      </section>
     </div>
   </div>
 </Base>
 
 <style>
-  :global(.wave) { width: 100%; aspect-ratio: 375 / 70; margin-top: calc(var(--nav-h) * -1 - 60px); opacity: .69; pointer-events: none; }
-  .about { font-family: var(--font-display); }
-  .about__story p { font-weight: 300; line-height: 1.9; }
-  .about__cta { font-size: clamp(2.4rem, 6vw, 4.75rem); line-height: 1.2; margin: 1.2em 0 .6em; }
-  .rule { margin-top: 2rem; }
-  .entry { margin-bottom: 2rem; }
-  .entry h2 { font-size: 1.4rem; line-height: 1.5; margin: 0 0 .4em; }
-  .entry h2 a { color: var(--orange); text-decoration: underline; }
-  .entry p { font-family: var(--font-body); font-size: 16px; line-height: 1.9; margin: 0; }
+  .about { max-width: var(--max); margin: 0 auto; padding: 24px var(--gutter) 80px; }
+  .about__intro { display: grid; grid-template-columns: 5fr 7fr; gap: 56px; align-items: center; }
+  .about__photo :global(.img) { margin: 0; }
+  .about__title { font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.1; letter-spacing: -.025em; margin: 0 0 1.25rem; }
+  .about__story p { font-size: 1.1rem; color: var(--muted); max-width: 56ch; }
+  .about__story strong { color: var(--cream); font-weight: 600; }
+  .about__buttons { margin-top: 1.75rem; display: flex; flex-wrap: wrap; }
+
+  .about__cols { display: grid; grid-template-columns: 7fr 5fr; gap: 56px; margin-top: 80px; padding-top: 56px; border-top: 1px solid var(--line); }
+  .about__h2 { font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 24px; }
+  .entry { padding: 0 0 24px; margin-bottom: 24px; border-bottom: 1px solid var(--line); }
+  .entry:last-child { border-bottom: 0; }
+  .entry h3 { font-size: 1.15rem; margin: 0 0 .5em; display: flex; flex-wrap: wrap; gap: 0 .6em; align-items: baseline; }
+  .entry h3 a { text-decoration: none; }
+  .entry h3 a:hover { color: var(--orange); text-decoration: underline; text-underline-offset: 4px; }
+  .entry__role { font-family: var(--font-body); font-weight: 400; font-size: 1rem; color: var(--muted); }
+  .entry ul { margin: 0; padding-left: 1.1em; color: var(--muted); font-size: 16px; }
+  .entry li { margin-bottom: .3em; }
+  .entry__school { color: var(--muted); font-size: 16px; margin: 0; }
+
+  @media (max-width: 767px) {
+    .about__intro, .about__cols { grid-template-columns: 1fr; gap: 32px; }
+    .about__photo { max-width: 320px; }
+    .about__cols { margin-top: 56px; padding-top: 40px; }
+  }
 </style>

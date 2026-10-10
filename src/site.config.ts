@@ -4,9 +4,9 @@
 
 export const site = {
   name: 'Clem Mooc',
-  title: 'Clem Mooc | Product Designer',
+  title: 'Clem Mooc | Research Program Manager',
   description:
-    "I'm committed to interpreting complicated human problems into simple digital experiences.",
+    'Research program manager in Seattle. I run research programs that turn complicated human problems into clear product decisions.',
   location: 'Seattle, WA',
   email: 'clementmooc@gmail.com',
 

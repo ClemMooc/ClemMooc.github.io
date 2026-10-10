@@ -1,4 +1,7 @@
 ---
-// Small orange section label, e.g. "Background", "Problem", "Solution".
+// Section label, e.g. <Eyebrow>Problem</Eyebrow> → small orange caps.
+// Long ones (like "How might we…") automatically become a large statement instead.
+const html = await Astro.slots.render('default');
+const long = html.replace(/<[^>]+>/g, '').trim().length > 60;
 ---
-<p class="eyebrow"><slot /></p>
+<p class:list={['eyebrow', { 'eyebrow--statement': long }]} set:html={html} />

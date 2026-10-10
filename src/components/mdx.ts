@@ -15,8 +15,9 @@ import Meta from './Meta.astro';
 import Testimonial from './Testimonial.astro';
 import Video from './Video.astro';
 import Spacer from './Spacer.astro';
+import Summary from './Summary.astro';
 import Tabs from './Tabs.astro';
 
 export const mdxComponents = {
-  Img, Banner, Section, Grid, Eyebrow, Rule, Hl, Tag, Button, Callout, Labeled, Accordion, Meta, Testimonial, Video, Spacer, Tabs,
+  Img, Banner, Section, Grid, Eyebrow, Rule, Hl, Tag, Button, Callout, Labeled, Accordion, Meta, Testimonial, Video, Spacer, Tabs, Summary,
 };

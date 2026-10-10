@@ -1,0 +1,46 @@
+---
+// Featured projects (big cards) followed by an "Other work" row (small cards).
+// Which project goes where is set by `featured: true` in each case study's frontmatter.
+// `exclude` hides one project (used at the bottom of a case study to skip the current one).
+import { getCollection } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+
+interface Props { exclude?: string; headingLevel?: 2 | 3 }
+const { exclude, headingLevel = 2 } = Astro.props;
+const work = (await getCollection('work', ({ data, id }) => !data.draft && id !== exclude))
+  .sort((a, b) => a.data.order - b.data.order);
+const featured = work.filter((w) => w.data.featured);
+const other = work.filter((w) => !w.data.featured);
+const H = `h${headingLevel}` as 'h2' | 'h3';
+---
+{featured.length > 0 && (
+  <div class="projects-grid projects-grid--featured">
+    {featured.map((w) => (
+      <ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} result={w.data.result} />
+    ))}
+  </div>
+)}
+{other.length > 0 && (
+  <>
+    <H class="projects-sub">Other work</H>
+    <div class="projects-grid projects-grid--other">
+      {other.map((w) => (
+        <ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} size="small" />
+      ))}
+    </div>
+  </>
+)}
+
+<style>
+  .projects-grid { display: grid; gap: 28px; }
+  .projects-grid--featured { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .projects-grid--other { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .projects-sub {
+    font-family: var(--font-display); font-size: 14px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); margin: 56px 0 20px;
+  }
+  @media (max-width: 900px) { .projects-grid--other { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 767px) {
+    .projects-grid--featured, .projects-grid--other { grid-template-columns: 1fr; }
+  }
+</style>

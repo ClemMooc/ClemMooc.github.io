@@ -8,10 +8,7 @@ import '@fontsource/sora/800.css';
 import '@fontsource/noto-sans/400.css';
 import '@fontsource/noto-sans/400-italic.css';
 import '@fontsource/noto-sans/700.css';
-import '@fontsource/montserrat/400.css';
-import '@fontsource/fraunces/400-italic.css';
 import '../styles/global.css';
-import { getImage } from 'astro:assets';
 import { site } from '../site.config';
 import { media } from '../lib/media';
 import Nav from '../components/Nav.astro';
@@ -19,8 +16,6 @@ import Footer from '../components/Footer.astro';
 import Analytics from '../components/Analytics.astro';
 import Lightbox from '../components/Lightbox.astro';
 import Motion from '../components/Motion.astro';
-import patternDark from '../assets/bg-pattern.png';
-import patternLight from '../assets/bg-pattern-light.png';
 
 interface Props {
   title?: string;
@@ -31,15 +26,10 @@ const { title, description = site.description, image } = Astro.props;
 const pageTitle = title ? `${title} | ${site.name}` : site.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = image ? media(image) : new URL('/og-image.jpg', Astro.site).href;
-
-// Background textures: compressed to WebP at build time.
-const dark = await getImage({ src: patternDark, format: 'webp', width: 1920, quality: 70 });
-const light = await getImage({ src: patternLight, format: 'webp', width: 1920, quality: 70 });
-const vars = `--pattern-dark:url(${dark.src});--pattern-light:url(${light.src});`;
 ---
 
 <!doctype html>
-<html lang="en" style={vars}>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
