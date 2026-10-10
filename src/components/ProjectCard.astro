@@ -1,13 +1,13 @@
 ---
 // Project card. size="large" for featured work, "small" for the "Other work" row.
-// Shows the cover image, title, and (if set in the case study) role and result.
+// Shows the cover image, title, and (if set in the case study) role.
 import { Image } from 'astro:assets';
 import { media } from '../lib/media';
 interface Props {
   href: string; cover: string; title: string;
-  role?: string; result?: string; size?: 'large' | 'small'; external?: boolean;
+  role?: string; size?: 'large' | 'small'; external?: boolean;
 }
-const { href, cover, title, role, result, size = 'large', external = false } = Astro.props;
+const { href, cover, title, role, size = 'large', external = false } = Astro.props;
 const name = title.replace(' / ', ' ').replace(/:\s*$/, '');
 ---
 <a class:list={['card', `card--${size}`]} href={href} {...(external ? { target: '_blank', rel: 'noopener' } : {})}>
@@ -18,8 +18,6 @@ const name = title.replace(' / ', ' ').replace(/:\s*$/, '');
   <div class="card__body">
     <h3 class="card__title">{name}{external && <><span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in a new tab)</span></>}</h3>
     {role && <p class="card__role">{role}</p>}
-    {result && size === 'large' && <p class="card__result">{result}</p>}
-    {size === 'large' && <span class="card__cta" aria-hidden="true">Read case study →</span>}
   </div>
 </a>
 
@@ -38,8 +36,6 @@ const name = title.replace(' / ', ' ').replace(/:\s*$/, '');
   .card__body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
   .card__title { font-family: var(--font-display); font-weight: 600; font-size: 1.35rem; line-height: 1.3; margin: 0; }
   .card__role { font-size: 15px; color: var(--muted); margin: 0; }
-  .card__result { font-size: 16px; line-height: 1.6; margin: 4px 0 0; padding-left: 12px; border-left: 2px solid var(--orange); }
-  .card__cta { margin-top: auto; padding-top: 12px; font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--orange); }
   .card--small .card__body { padding: 16px 18px 20px; }
   .card--small .card__title { font-size: 1.1rem; }
   .card--small .card__role { font-size: 14px; }

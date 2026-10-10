@@ -16,7 +16,7 @@ const H = `h${headingLevel}` as 'h2' | 'h3';
 {featured.length > 0 && (
   <div class="projects-grid projects-grid--featured">
     {featured.map((w) => (
-      <ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} result={w.data.result} />
+      <ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} />
     ))}
   </div>
 )}

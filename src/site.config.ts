@@ -6,7 +6,7 @@ export const site = {
   name: 'Clem Mooc',
   title: 'Clem Mooc | Research Program Manager',
   description:
-    'Research program manager in Seattle. I run research programs that turn complicated human problems into clear product decisions.',
+    'Research program manager in Seattle. I help teams understand people, and act on what they learn.',
   location: 'Seattle, WA',
   email: 'clementmooc@gmail.com',
 
@@ -20,6 +20,7 @@ export const site = {
   gaId: 'G-0M6FGQRXWJ',
 
   // R2 key of the resume PDF (see media/shared/).
+  // TODO(Clem): replace with the Google Docs link to the current resume (sharing: "Anyone with the link can view").
   resume: 'shared/clem-mooc-resume-2024.pdf',
 
   links: {
