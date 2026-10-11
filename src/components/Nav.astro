@@ -34,7 +34,8 @@ const items = [
   .nav {
     position: sticky; top: 0; z-index: 50;
     display: flex; align-items: center; justify-content: space-between;
-    height: var(--nav-h); padding: 0 var(--gutter);
+    /* Same side spacing as the page content column, so the logo and links line up with the content edges */
+    height: var(--nav-h); padding: 0 calc(max(0px, (100% - var(--max)) / 2) + var(--gutter));
     /* See-through at the top so the wave reads as part of the nav; a soft dark fade keeps links legible */
     background: linear-gradient(rgb(20 18 17 / .85), rgb(20 18 17 / .35) 70%, rgb(20 18 17 / 0));
     transition: transform .4s ease-in-out, background-color .3s, box-shadow .3s;
