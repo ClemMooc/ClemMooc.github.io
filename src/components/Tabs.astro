@@ -28,16 +28,26 @@ const { labels } = Astro.props;
 </script>
 
 <style>
+  /* Underline tabs (design brief): muted labels, active one underlined in orange */
   .tabset { margin: 1rem 0; }
-  .tabset__menu { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .tabset__menu { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-bottom: 16px; border-bottom: 1px solid var(--line-dark); }
+  :global(.section--light) .tabset__menu { border-bottom-color: var(--line-light); }
   .tabset__tab {
-    cursor: pointer; border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px;
-    background: transparent; color: inherit; font: 600 14px/1.4 var(--font-display);
-    transition: background-color .2s, color .2s, border-color .2s;
+    cursor: pointer; background: none; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px;
+    padding: 10px 2px; color: var(--on-ink-muted); font: 500 15px/1.4 var(--font-body);
+    transition: color .2s, border-color .2s;
   }
-  :global(.section--light) .tabset__tab { border-color: #00000026; }
-  .tabset__tab:hover { border-color: var(--orange); }
-  .tabset__tab[aria-selected='true'] { background: var(--cream); color: var(--bg); border-color: var(--cream); }
-  :global(.section--light) .tabset__tab[aria-selected='true'] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-  .tabset__tab:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+  :global(.section--light) .tabset__tab { color: var(--text-muted); }
+  .tabset__tab:hover { color: var(--on-ink); }
+  :global(.section--light) .tabset__tab:hover { color: var(--text); }
+  .tabset__tab[aria-selected='true'] { color: var(--on-ink); border-bottom-color: var(--accent); }
+  :global(.section--light) .tabset__tab[aria-selected='true'] { color: var(--text); border-bottom-color: var(--accent-deep); }
+  .tabset__tab:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  /* No layout shift when switching tabs: every panel sits in the same grid cell, so the
+     tab set is always as tall as its tallest panel. Hidden panels are invisible (and
+     skipped by screen readers and the keyboard) but still hold their space. */
+  .tabset__panes { display: grid; }
+  .tabset__panes > :global(*) { grid-area: 1 / 1; }
+  .tabset__panes > :global([hidden]) { display: block; visibility: hidden; }
 </style>

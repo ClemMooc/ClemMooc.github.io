@@ -86,10 +86,20 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 600; lin
 /* Small orange section label ("Background", "Problem"…) */
 .eyebrow {
   font-family: var(--font-display); color: var(--orange);
-  font-size: 14px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
   line-height: 1.4; margin: 2.5em 0 .75em;
 }
 .eyebrow strong { color: inherit; }
+/* Section labels (option C): a label that introduces a section heading is centered, with a short
+   orange bar above it, and the heading below is centered too. Body text stays left-aligned.
+   (The small label above a case study's main title is left alone.) */
+.eyebrow:has(+ h2) { text-align: center; margin-top: 1em; }
+.eyebrow:has(+ h2)::before {
+  content: ''; display: block; width: 28px; height: 2px; margin: 0 auto 12px;
+  background: currentColor;
+}
+.prose .eyebrow + h2, .eyebrow + h2 { text-align: center; max-width: 24ch; margin: .2em auto .9em; text-wrap: balance; }
+@media (max-width: 767px) { .eyebrow + h2 { max-width: none; } }
 /* Long eyebrows ("How might we…") become a large statement instead */
 .eyebrow--statement {
   color: var(--cream); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 400;
@@ -101,18 +111,18 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 600; lin
 .section--light .eyebrow--statement { color: var(--text); }
 .section--light .eyebrow--statement strong { color: var(--orange-ink); }
 
-.rule { border: 0; height: 1px; background: currentColor; opacity: .2; margin: 0 0 2rem; }
+.rule { border: 0; height: 1px; background: var(--line-dark); margin: 0 0 2rem; }
+.section--light .rule { background: var(--line-light); }
 
 .hl { font-weight: 600; }
 .hl--orange { color: var(--orange); }
 .section--light .hl--orange { color: var(--orange-ink); }
 
 .tag {
-  background: var(--surface); color: var(--cream); border: 1px solid var(--line);
-  font-family: var(--font-display); font-weight: 600; font-size: 1.25rem;
-  text-align: center; border-radius: var(--radius); padding: 1.25rem; margin: 0;
+  font-family: var(--font-display); font-weight: 600; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent); margin: 0 0 .5em;
 }
-.section--light .tag { background: #fff; color: var(--text); border-color: #0000001a; }
+.section--light .tag { color: var(--accent-deep); }
 
 /* ── Layout ───────────────────────────────────────────────── */
 main { position: relative; }
@@ -122,7 +132,8 @@ main { position: relative; }
   width: 100%; aspect-ratio: 375 / 70; opacity: .5; pointer-events: none;
 }
 .wave ~ * { position: relative; z-index: 1; }
-.container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 48px var(--gutter); }
+.container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 72px var(--gutter); }
+@media (max-width: 767px) { .container { padding-block: 48px; } }
 .container--narrow { max-width: 900px; }
 
 .section { position: relative; }
@@ -181,33 +192,33 @@ main { position: relative; }
 
 /* ── Callouts & quotes ────────────────────────────────────── */
 .callout {
-  background: var(--surface); color: var(--cream);
-  border: 0; border-left: 3px solid var(--orange); border-radius: 0 var(--radius) var(--radius) 0;
-  margin: 2.5rem auto; padding: 22px 28px; max-width: 900px; text-align: left;
-  font-family: var(--font-body); font-style: italic; font-size: 1.15rem; line-height: 1.7;
+  background: var(--ink-2); color: var(--on-ink);
+  border: 0; border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 2.5rem 0; padding: 22px 28px; max-width: var(--measure); text-align: left;
+  font-family: var(--font-body); font-style: italic; font-size: 1.25rem; line-height: 1.5;
 }
-.section--light .callout { background: #fff; color: var(--text); border-left-color: var(--orange-ink); }
+.section--light .callout { background: var(--paper-card); color: var(--text); border-left-color: var(--accent-deep); }
 .callout p { font-family: inherit; line-height: inherit; margin: 0 0 .4em; }
 .callout p:last-child { margin: 0; }
 .callout cite { display: block; font-style: normal; font-family: var(--font-display); font-size: 14px; letter-spacing: .04em; margin-top: .8em; color: var(--muted); }
 .section--light .callout cite { color: var(--ink-muted); }
 
-.testimonial { background: var(--surface); text-align: center; padding: 56px 0; border-block: 1px solid var(--line); }
-.testimonial__img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; margin: 0 auto 1.25rem; filter: grayscale(1); }
-.testimonial__quote { border: 0; margin: 0 auto 1.25rem; padding: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.4; letter-spacing: -.01em; color: var(--cream); }
+.testimonial { background: var(--ink); text-align: center; padding: 72px 0; border-block: 1px solid var(--line-dark); }
+.testimonial__img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; margin: 0 auto 1.25rem; }
+.testimonial__quote { border: 0; margin: 0 auto 1.25rem; padding: 0; font-family: var(--font-body); font-style: italic; font-weight: 400; font-size: clamp(1.25rem, 2.6vw, 1.6rem); line-height: 1.5; color: var(--on-ink); max-width: 34ch; }
 .testimonial__quote p { margin: 0; }
 .testimonial__quote a, .testimonial__quote u { text-decoration: underline; }
 .testimonial__by { font-family: var(--font-display); font-weight: 600; margin: 0; }
 .testimonial__role { font-family: var(--font-body); font-size: 15px; color: var(--muted); margin: 0; }
 
 /* ── Accordion (click-to-expand) ──────────────────────────── */
-.accordion { margin: 1.25rem 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
-.section--light .accordion { border-color: #0000001f; background: #fff; }
+.accordion { margin: 1.25rem 0; border: 1px solid var(--line-dark); border-radius: var(--radius); overflow: hidden; background: var(--ink-2); }
+.section--light .accordion { border-color: var(--line-light); background: var(--paper-card); }
 .accordion summary {
   list-style: none; cursor: pointer;
   display: flex; align-items: center; gap: 14px;
   padding: 18px 22px;
-  font-family: var(--font-display); font-weight: 600; font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-family: var(--font-display); font-weight: 600; font-size: 1.1rem;
 }
 .accordion summary:hover { color: var(--orange); }
 .section--light .accordion summary:hover { color: var(--orange-ink); }
@@ -221,8 +232,8 @@ main { position: relative; }
 }
 .accordion[open]::details-content { block-size: auto; }
 .accordion[open] .accordion__icon { transform: rotate(180deg); }
-.accordion__body { border-top: 1px solid var(--line); padding: 8px 22px 22px; }
-.section--light .accordion__body { border-top-color: #0000001f; }
+.accordion__body { border-top: 1px solid var(--line-dark); padding: 8px 22px 22px; }
+.section--light .accordion__body { border-top-color: var(--line-light); }
 
 /* ── Project meta (Focus / Client / Team / Duration) ─────── */
 /* Summary card at the top of a case study: 2 columns (Problem | My role / Team | Timeline) */
