@@ -50,13 +50,13 @@
 
 <style is:global>
   .motion [data-reveal] {
-    transition: opacity 1s cubic-bezier(.25, 1, .5, 1), transform 1s cubic-bezier(.25, 1, .5, 1);
+    transition: opacity .6s cubic-bezier(.25, 1, .5, 1), transform .6s cubic-bezier(.25, 1, .5, 1);
   }
   .motion [data-reveal]:not(.is-in) { opacity: 0; }
-  .motion [data-reveal='left']:not(.is-in) { transform: translateX(-100px); }
-  .motion [data-reveal='right']:not(.is-in) { transform: translateX(100px); }
-  .motion [data-reveal='top']:not(.is-in) { transform: translateY(-100px); }
-  .motion [data-reveal='bottom']:not(.is-in) { transform: translateY(100px); }
+  .motion [data-reveal='left']:not(.is-in) { transform: translateX(-50px); }
+  .motion [data-reveal='right']:not(.is-in) { transform: translateX(50px); }
+  .motion [data-reveal='top']:not(.is-in) { transform: translateY(-50px); }
+  .motion [data-reveal='bottom']:not(.is-in) { transform: translateY(50px); }
   .motion [data-reveal='flip']:not(.is-in) { transform: perspective(800px) rotateY(-90deg); }
 
   /* <Img grey />: turns black-and-white shortly after appearing */

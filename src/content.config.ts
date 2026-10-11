@@ -15,6 +15,7 @@ const work = defineCollection({
     order: z.number().default(99), // Lower numbers show first on the home page
     cover: z.string(), // R2 key for the home page card image
     hero: z.string().optional(), // R2 key for the full-width banner at the top
+    eyebrow: z.string().optional(), // small label on the card, e.g. "CISCO WEBEX · CLIENT CAPSTONE"
     featured: z.boolean().default(false), // true = big card at the top of the home page
     role: z.string().optional(), // One line under the card title, e.g. "Research lead · 10 weeks · team of 3"
     result: z.string().optional(), // One-line outcome on the card. Only real, confirmed results.

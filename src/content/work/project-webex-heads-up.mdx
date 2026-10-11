@@ -1,442 +1,185 @@
 ---
 title: "Cisco Webex: Heads Up"
-cardTitle: "Cisco Webex: / Heads Up Prototype"
-seoTitle: "Project: Webex 'Heads Up'"
+cardTitle: "Cisco Webex: / Heads Up"
+seoTitle: "Webex Heads Up · Case study"
 category: "ux"
 order: 1
-featured: true
-role: "UX research & project management · Cisco Webex capstone · 10 weeks"
-result: "Every usability tester said they'd use it. A Webex senior product designer: “I want this in our product right now.”"
 cover: "shared/hero.png"
-description: "'Heads Up' is a meeting app feature designed for Webex to discreetly alert meeting disruptors and reduce meeting fatigue."
 hero: "webex-heads-up/hero-2.png"
+description: "Researched, designed and tested 'Heads Up', a discreet way to alert meeting disruptors in Webex, with Cisco's design team over 10 weeks."
+eyebrow: "CISCO WEBEX · CLIENT CAPSTONE"
+result: "Researched, designed and tested a meeting-disruption alert; every usability tester said they'd want it, and Cisco's design director called it \"phenomenal.\""
+role: "Research lead & project manager · 3-person team · 10 weeks"
+featured: true
 ---
 
-<Section tone="light">
+<Section tone="dark">
 
-# Cisco Webex: Heads Up
+<Eyebrow>Cisco Webex · Client capstone</Eyebrow>
 
-## Summary
+# Heads Up: resolving meeting disruptions quietly
 
-‘Heads Up’ is a meeting app feature we designed for Webex as an intensive capstone project for the School of Visual Concepts.
+A 10-week capstone with Webex's design team. We designed a low-effort, anonymous way to tell someone their mic is hot or they're sharing the wrong screen, without derailing the meeting. Every usability tester and peer reviewer said they'd want it, and Webex's design team took it as something to consider in their next feature review.
 
-With the support of two designers, I worked with Webex’s design team to unpack Webex’s business problem and created ‘Heads Up’: a low-effort Webex feature to alert disruptors during real-time meetings, and reduce meeting fatigue.
-
-<Summary
-  problem="Meeting disruptions like hot mics and wrong-screen sharing feed meeting fatigue, but most participants won't call out the person causing them."
-  role="UX research and project management: secondary research, interviews, synthesis and usability testing, plus keeping the project on track."
-  methods="Webex's past studies, competitive analysis, in-depth interviews, empathy and affinity mapping, usability testing"
-  team="3 of us (me, a content designer and a UX designer), with Cisco Webex's design team"
-  timeline="10 weeks"
-  shipped="A tested prototype of Heads Up: anonymous, one-click alerts for common disruptions, plus notifications for meeting hosts."
-  impact="Every usability tester and peer reviewer said they'd love a tool like Heads Up, and it gave Webex's design team something to consider for their next feature review."
-/>
+<Meta items={[
+  {"label":"Problem","values":["Disruptions like hot mics and wrong screen shares fuel meeting fatigue, and most people won't speak up to fix them."]},
+  {"label":"My role","values":["Research lead and project manager: planned and synthesized the research, sketched the chosen concept, led the A/B usability test plan."]},
+  {"label":"Team","values":["Clem M. (UX design)","Jacob F. (content design)","Andrew F. (UX design)"]},
+  {"label":"Timeline","values":["10 weeks"]}
+]} />
 
 </Section>
 
-<Testimonial img="webex-heads-up/1644001287834.jpeg" by="Keri Brady" role="Senior Product Designer, Cisco Webex">
+<Testimonial img="webex-heads-up/cheryl-couris.jpeg" by="Cheryl Couris" role="Director of Design, Cisco Webex">
 
-“I want this in our product right now. <br />It’s something I would absolutely use.”
+"Phenomenal job. I gave [you all] tons of feedback… and you nailed almost every point. I love to see this kind of fast iteration. I could tell you guys are working as a unit."
 
 </Testimonial>
-
-<Section tone="dark">
-
-<Grid cols={4}>
-
-<div>
-
-<Img src="webex-heads-up/cal1.png" alt="" reveal="flip" />
-
-<Img src="webex-heads-up/1.png" alt="" reveal="left" grey />
-
-</div>
-
-<div>
-
-<Img src="webex-heads-up/cal2.png" alt="" reveal="flip" />
-
-<Img src="webex-heads-up/2.png" alt="" reveal="top" grey />
-
-</div>
-
-<div>
-
-<Img src="webex-heads-up/cal3.png" alt="" reveal="flip" />
-
-<Img src="webex-heads-up/3.png" alt="" reveal="bottom" grey />
-
-</div>
-
-<div>
-
-<Img src="webex-heads-up/cal4.png" alt="" reveal="flip" />
-
-<Img src="webex-heads-up/4.png" alt="" reveal="right" grey />
-
-</div>
-
-</Grid>
-
-</Section>
-
-<Section tone="dark">
-
-<Eyebrow>Background</Eyebrow>
-
-## Turning on our cameras. Shutting us down.
-
-<Rule />
-
-It’s a fact. We’ve become more digitally connected, and remote work is becoming an integral part of life.
-
-We’ve seen the rise of hundreds of millions of daily video meetings, and intensified our reliance on these video meeting apps. Sounds promising, right?
-
-But despite the freedom to meet wherever and whenever, and promises of increased productivity, **we’re feeling trapped and disengaged in the form of ‘meeting fatigue’.** Why is that?
-
-<Button href="#Solution">JUMP TO SOLUTION</Button>
-
-<Accordion title="About Webex">
-
-
-
-<Grid cols={2}>
-
-<div>
-
-<Img src="webex-heads-up/frame-1591.png" alt="Webex by Cisco logo." />
-
-</div>
-
-<div>
-
-**Webex** is a video meeting software that competes with platforms like Zoom and Teams.
-
-Webex is a subsidiary of **Cisco**, the telecommunications hardware leader, and is a key piece in Cisco's foray to **complement Cisco’s hardware capabilities with Webex’s cutting-edge software innovations.**
-
-Webex is at the forefront of revolutionizing telecommunications in software, including addressing real-time meeting fatigue to enhance the productivity of video meetings.
-
-</div>
-
-</Grid>
-
-</Accordion>
-
-</Section>
 
 <Section tone="light">
 
 <Eyebrow>Problem</Eyebrow>
 
-## Too many meetings + disruptions = <Hl c="orange">Meeting fatigue</Hl>.
+## Meetings get derailed by small, awkward disruptions
 
-<Rule />
+Someone shares the wrong screen. A forgotten mic broadcasts background noise to everyone. These moments are usually accidental, always awkward, and they add up to **meeting fatigue**: people mute, turn their cameras off and mentally check out.
 
-When people just want to get work done, meeting disruptions are the last thing they want in the way of it.
+The catch: most participants are passive bystanders. They notice the problem but don't want to be the one who interrupts to fix it.
 
-<Img src="webex-heads-up/frame-1546.png" alt="Two common meeting disruptions: a presenter sharing an Airbnb cabin listing instead of their slides, and a participant with a rogue hot mic." caption="Since when did lecture slides look like Airbnb cabins?" />
+<Img src="webex-heads-up/frame-1546.png" alt="Two common disruptions: a presenter sharing the wrong screen and a participant with a noisy hot mic" caption="Two of the most common disruptions: the wrong screen share and the rogue hot mic." />
 
-Like when the presenter accidentally shares the wrong screen, or when a rogue mic’s background noise disrupts the conversation for everyone.
+**How might we** help people resolve disruptions in real time, discreetly and with almost no effort, so meetings stay productive?
 
-Those are a few of the many meeting disruptions people experience, compounded by the millions of daily video meetings. **They are usually accidental, but always annoying or embarrassing,** and ultimately derail meetings from becoming productive.
+<Accordion title="Why it matters to Webex: the business problem">
 
-<Accordion title="The user and business problem, in detail">
-
-<Labeled label="User problem">
-
-### What is<Hl c="orange">meeting fatigue</Hl>?
-
-<Img src="webex-heads-up/frame-1563.png" alt="Three faces of meeting fatigue: physically exhausted, mentally clocked-out and scrolling social media, and the bystander effect, where everyone assumes someone else will speak up." caption={"Meeting Fatigue = \"Not my problem\""} />
-
-Meeting participants are worn from back-to-back meetings and have mentally clocked-out. <br /><br />You’re physically exhausted, with mics muted and cameras off. You’re mentally clocked out and distracted from the meeting. Lastly, you’re also apathetic to others via the Bystander effect, where you’re less likely to engage or help alert a disruptor in the presence of other people.
-
-</Labeled>
-
-<Labeled label="Business problem">
-
-### <Hl c="orange">Meeting fatigue</Hl> = Diminished employee productivity.
-
-And here’s the kicker, when meeting participants, like employees, are meeting fatigued, they cost companies money.
-
-Companies lose on productivity, employee disengagement, and weaken customer relationships.
+Meeting fatigue costs companies productivity, engagement and customer relationships. For Webex, competing with Zoom and Teams, making meetings feel more productive is a direct differentiator.
 
 <Img src="webex-heads-up/3-item-module.png" alt="Three statistics: $3–5 million in productivity lost each year to technology issues; $544 billion lost each year to employee disengagement; 26% of inefficient meetings weaken customer relationships." caption="Source: Webex (2023)" />
 
-</Labeled>
+<Img src="webex-heads-up/frame-1563.png" alt="Three faces of meeting fatigue: physically exhausted, mentally clocked-out and scrolling social media, and the bystander effect, where everyone assumes someone else will speak up." caption="Meeting fatigue: physically tired, mentally checked out, and nobody wants to be the one to speak up." />
 
 </Accordion>
-
-</Section>
-
-<Section tone="dark">
-
-With user disengagement and reduced productivity being top of mind, my team and I pondered the problem:
-
-<Eyebrow>How might we **decrease meeting fatigue** in real-time meetings so that meetings can be **more productive**?</Eyebrow>
 
 </Section>
 
 <Section tone="light">
 
-<Eyebrow>User Research</Eyebrow>
+<Eyebrow>What I did</Eyebrow>
 
-## Putting myself in their shoes (or_slippers_).
+## Research first, then one small idea, then tested it hard
 
-<Rule />
+**1. Research.** I started with what already existed: Webex's internal research reports, a competitive review of video-meeting apps and academic work on meeting fatigue. I used that to write our interview plan, and the team interviewed **6 people aged 21–55** who use video meetings for work. I led the synthesis.
 
-<Accordion title="How I researched it: Webex's past studies, competitive analysis and interviews">
+Three insights shaped everything:
 
-<Labeled label="Secondary Research">
+- **People hate disruptions,** like hot mics, choppy connections and buggy screen shares.
+- **But they don't want to disrupt the disruptor.** Most participants are passive and won't unmute to say something.
+- **Non-verbal tools work.** Chat, reactions and raise-hand are low-effort, and interviewees preferred them to speaking up.
 
-### Like having 8 researchers on payroll.
+<Callout by="Interview participant">
 
-Having worked in user research, I knew the first step to approach our problem was to **start leveraging what's already there**. I gained valuable foundational knowledge of Webex, our user, and the problem, all for $0.
-
-<Grid cols={2}>
-
-<div>
-
-<Img src="webex-heads-up/frame-1549.png" alt="Internal research sources: previous Webex UX research studies, the Momentum design system libraries, and a video Q&A with the Webex product design team." caption="What's already been done internally?" />
-
-</div>
-
-<div>
-
-To set the context for our user’s problem, I pulled valuable insights from Webex’s past research reports.
-
-</div>
-
-</Grid>
-
-<Grid cols={2}>
-
-<div>
-
-I also led external research, like conducting a competitive analysis of video meeting apps, and reviewing meeting fatigue academic journals.
-
-</div>
-
-<div>
-
-<Img src="webex-heads-up/frame-1550.png" alt="External research: a Stanford News article on four causes of 'Zoom fatigue', and logos of the video meeting apps in the competitive analysis, including Google Meet, Microsoft Teams, Zoom and Skype." caption="What's already been done... externally?" />
-
-</div>
-
-</Grid>
-
-</Labeled>
-
-<Labeled label="In-depth Interviews">
-
-### Asking deeper questions.
-
-<Button href="https://docs.google.com/document/d/1ZriYDOhHnzsVTZ0c0xsNifiZ9MByYqwmT8CfzLbkpVM/edit?usp=sharing">VIEW QUALITATIVE INTERVIEW PLAN</Button>
-
-From my external research, I narrowed our list of ‘what we don’t know’ questions and used these questions as the basis of our own qualitative interviews.<br /><br />I designed the research plan and interview guide, and as a team we **interviewed six users from ages 21 to 55 and have used video meetings for work.** <br /><br />I then led the analysis and synthesized key insights:
-
-</Labeled>
-
-</Accordion>
-
-### Thousands of data points lead to 3 key insights:
-
-<Grid cols={2} reveal="left">
-
-<div>
-
-<Img src="webex-heads-up/frame-1508.png" alt="Pie chart: 94% agree productivity would improve with an automatic noise removal feature." caption="Source: Dimensional Research (n=2366)" />
-
-</div>
-
-<div>
-
-### 01.<br />❌ Users really don’t like meeting disruptions...
-
-Real-time disruptions (_think:_ **_hot mics, choppy connections, buggy screen shares,_** _to name a few..._) lead to significant meeting fatigue.
-
-</div>
-
-</Grid>
-
-<Callout by="Interview Participant">
-
-“I don’t want to worry about audio feedback if someone’s forgotten to turn off their mic... **interrupting the flow.**”
+"I don't want to worry about audio feedback if someone's forgotten to turn off their mic… interrupting the flow."
 
 </Callout>
 
-<Grid cols={2} reveal="right">
+<Accordion title="Research detail: secondary research, interview plan and supporting data">
+
+<Button href="https://docs.google.com/document/d/1ZriYDOhHnzsVTZ0c0xsNifiZ9MByYqwmT8CfzLbkpVM/edit?usp=sharing">Qualitative interview plan</Button>
+
+<Grid cols={2}>
 
 <div>
 
-### 02.<br />❌ …but users don’t like disrupting the disruptor, either.
-
-**This is because a majority of meeting participants are bystanders, or ‘passive users’,**<br /><br />They prefer to gather information and remain silent or multi-task throughout the meeting.
+<Img src="webex-heads-up/frame-1549.png" alt="Internal research sources: previous Webex UX research studies, the Momentum design system libraries, and a video Q&A with the Webex product design team." caption="Internal: insights pulled from Webex's past research reports." />
 
 </div>
 
 <div>
 
-<Img src="webex-heads-up/frame-1496.png" alt="Podium chart of the most common meeting archetypes: 40% are 'Lurkers' and 27% are 'Ghosts'." caption="Source: mmhmm (n=1000)" />
-
-</div>
-
-</Grid>
-
-<Grid cols={2} reveal="left">
-
-<div>
-
-<Img src="webex-heads-up/frame-1536.png" alt="Pie chart: 95% agree non-verbal tools like chat, raise hand and clapping would increase productivity, as low-effort, high-engagement actions." caption="Source: Dimensional Research (n=2366)" />
-
-</div>
-
-<div>
-
-### 03.<br />🌟 Non-verbal tools engage the disengaged.
-
-Interviewees resoundingly prefer expressing engagement through non-verbal tools than by unmuting. <br /><br />**Non-verbal tools are like chat and reactions – low effort, low barriers to entry tools that offer very high engagement during meetings.**<br /><br />Not only do users prefer this, but an overwhelming majority believe it will increase productivity. <br /><br />Non-verbal tools are a key opportunity to actively combat real-time meeting passivity and elevate the user experience.
+<Img src="webex-heads-up/frame-1550.png" alt="External research: a Stanford News article on four causes of 'Zoom fatigue', and logos of the video meeting apps in the competitive analysis, including Google Meet, Microsoft Teams, Zoom and Skype." caption="External: competitive analysis and academic research on meeting fatigue." />
 
 </div>
 
 </Grid>
 
-<Callout by="Interview Participant">
+<Grid cols={3}>
 
-“I enjoyed using tools like chat, raise hand, and clapping to **stay engaged**.”
+<div>
+
+<Img src="webex-heads-up/frame-1508.png" alt="Pie chart: 94% agree productivity would improve with an automatic noise removal feature." caption="Source: Dimensional Research (n=2,366)" />
+
+</div>
+
+<div>
+
+<Img src="webex-heads-up/frame-1496.png" alt="Podium chart of the most common meeting archetypes: 40% are 'Lurkers' and 27% are 'Ghosts'." caption="Source: mmhmm (n=1,000)" />
+
+</div>
+
+<div>
+
+<Img src="webex-heads-up/frame-1536.png" alt="Pie chart: 95% agree non-verbal tools like chat, raise hand and clapping would increase productivity, as low-effort, high-engagement actions." caption="Source: Dimensional Research (n=2,366)" />
+
+</div>
+
+</Grid>
+
+<Callout by="Interview participant">
+
+"I enjoyed using tools like chat, raise hand, and clapping to stay engaged."
 
 </Callout>
 
-</Section>
+</Accordion>
 
-<Section tone="dark">
+**2. Define.** I turned the interviews into empathy and affinity maps, and worked with our content designer, Jacob, on personas and scenarios. We plotted ideas on an effort/value matrix and dot-voted. The winner was my sketch of a small pop-up "radial" alert tool. We validated the direction with Webex's product leads before designing.
 
-<Eyebrow>Define</Eyebrow>
+- **User goal:** resolve disruptions in a low-effort, discreet way.
+- **Webex goal:** improve real-time engagement to raise meeting productivity.
 
-## What are our user goals to help achieve Webex's goals?
-
-<Rule />
-
-I organized my user research into an Empathy and Affinity map to create a shared understanding of our target user. <br /><br />I then collaborated with our content designer, Jacob, to flesh out our personas and user scenarios. 
-
-<Accordion title="Identifying key themes">
+<Accordion title="Define detail: empathy map, affinity map, brainstorm and user flow">
 
 <Grid cols={2}>
 
 <div>
 
-<Img src="webex-heads-up/group-1337.png" alt="Empathy map for the 'Productivity Guardian' persona, with sticky notes sorted into Says, Thinks, Does and Feels." caption="Empathy Mapping: I painted a clear picture of our target user." />
+<Img src="webex-heads-up/group-1337.png" alt="Empathy map for the 'Productivity Guardian' persona, with sticky notes sorted into Says, Thinks, Does and Feels." caption="Empathy map" />
 
 </div>
 
 <div>
 
-<Img src="webex-heads-up/group-1316.png" alt="Affinity map grouping interview notes into themes: fatigue, meeting pain points, passive participants, non-verbal information, participants, in-person vs virtual communication, video, and sync vs async." caption="Affinity Mapping: I analyzed our interviews to create key themes." />
+<Img src="webex-heads-up/group-1316.png" alt="Affinity map grouping interview notes into themes: fatigue, meeting pain points, passive participants, non-verbal information, participants, in-person vs virtual communication, video, and sync vs async." caption="Affinity map" />
+
+</div>
+
+<div>
+
+<Img src="webex-heads-up/group-1319.png" alt="Brainstorm of solution ideas" caption="Brainstorm, guided by the research insights" />
+
+</div>
+
+<div>
+
+<Img src="webex-heads-up/group-1338.png" alt="Effort vs business value matrix of feature ideas, with a callout for the chosen idea: popup radial buttons for common meeting pain points." caption="Effort/value matrix: the pop-up radial tool won." />
 
 </div>
 
 </Grid>
+
+<Img src="webex-heads-up/group-1320.png" alt="Swimlane flowchart showing how an alert travels between the host, the sender and the disruptor until the disruption is resolved." caption="Swimlane flow across the three roles: host, sender and disruptor." />
 
 </Accordion>
 
-We brainstormed ideas onto an Effort/Value matrix and conducted dot voting, and we selected the 'Heads Up' solution, which derived from a sketch I created. We then took our proposed solutions to the Webex product leads to validate our direction. 
+**3. Design.** Working within [Cisco's Momentum design system](https://momentum.design/), Andrew and I wireframed toward three goals: put Heads Up alongside the existing non-verbal tools, show the disruptor a clear "heads up" (plus a notification outside the meeting window if they're distracted), and give hosts visibility so they can step in.
 
-<Accordion title="Brainstorming solutions">
+<Accordion title="Design detail: wireframes">
 
-<Grid cols={2}>
-
-<div>
-
-<Img src="webex-heads-up/group-1319.png" alt="Brainstorming board covered in colour-coded sticky notes with feature ideas for better meetings." caption="Brainstorming ideas: my user research insights guided our brainstorming sessions towards a solution." />
-
-</div>
+<Grid cols={3}>
 
 <div>
 
-<Img src="webex-heads-up/group-1338.png" alt="Effort vs business value matrix of feature ideas, with a callout for the chosen idea: popup radial buttons for common meeting pain points." caption="Effort/Value matrix: we picked my idea of a 'popup radial tool' to quickly alert meeting pain points." />
-
-</div>
-
-</Grid>
-
-</Accordion>
-
-I created the end-to-end user journey, considering all of the user types (host, sender, disruptor) and how they relate with each other in a swimlane user process flow.
-
-<Accordion title="Defining the user flow">
-
-<Img src="webex-heads-up/group-1320.png" alt="Swimlane flowchart showing how an alert travels between the host, the sender and the disruptor until the disruption is resolved." caption="I identified three types of meeting participants via swimlanes: Host, Sender, Disruptor)" />
-
-</Accordion>
-
-### In short, I identified our goals:
-
-<Grid cols={2}>
-
-<div>
-
-<Tag>User Goal:</Tag>
-
-</div>
-
-<div>
-
-...to resolve meeting disruptions in a low-effort and discreet way.
-
-</div>
-
-<div>
-
-<Tag>Webex's Goal:</Tag>
-
-</div>
-
-<div>
-
-...to increase employee productivity by improving real-time meeting engagement.
-
-</div>
-
-</Grid>
-
-</Section>
-
-<Section tone="light">
-
-<Eyebrow>Wireframing</Eyebrow>
-
-## Helping meeting hosts and participants be more productive.
-
-<Rule />
-
-To ensure our wireframes aligned, we thoroughly studied [Cisco's Momentum Design system](https://momentum.design/), branding guidelines, and content guidelines. <br /><br />I then worked with our web developer, Andrew, to wireframe designs and achieve three key goals:
-
-<Accordion title="See the wireframes">
-
-<Grid cols={2}>
-
-<div>
-
-<Img src="webex-heads-up/frame-1538.png" alt="Wireframes of the meeting alerts drawer: issue icons in a popup next to the other non-verbal tools, and the same popup placed in the participants panel." caption="Keep it intuitive in its function and findability." />
-
-</div>
-
-<div>
-
-### Find the disruptor and alert, all in one drawer.
-
-**Non-verbal tool:** I grouped the Heads Up tool with other non-verbal tools to leverage current mental models of silent and non-verbal tools that offer high engagement with minimal effort**<br /><br />Flag key meeting disruptions:** Disruptions are a key contributor to meeting fatigue, so I added common meeting disruptions and added them as alerts. 
-
-</div>
-
-</Grid>
-
-<Grid cols={2} reveal="right">
-
-<div>
-
-### "Heads Up!"
-
-**Minimize distress in urgent situations:** I worked with our content designer to highlight concise and informative content, and present clear call-to-action resolutions.**<br /><br />Account for those who are distracted:** I designed a secondary 'Toast' notification to display outside of the meeting window to ensure they see a notification
+<Img src="webex-heads-up/frame-1538.png" alt="Wireframes of the meeting alerts drawer: issue icons in a popup next to the other non-verbal tools, and the same popup placed in the participants panel." caption="Find the disruptor and alert, all in one drawer." />
 
 </div>
 
@@ -446,21 +189,76 @@ To ensure our wireframes aligned, we thoroughly studied [Cisco's Momentum Design
 
 </div>
 
+<div>
+
+<Img src="webex-heads-up/frame-1540.png" alt="Wireframes of host-only notifications ('Heads up: People can hear Alex', with a Mute Alex button) and the meeting options panel with a new 'Send meeting alerts' setting and onboarding tooltip." caption="Hosts see alerts and can use host controls." />
+
+</div>
+
 </Grid>
 
-<Grid cols={2}>
+</Accordion>
+
+**4. Test and iterate.** I turned design-review feedback into a prioritized list, then led an **A/B usability test with 8 participants**. Two changes came out of it:
+
+- **Anonymity matters.** Sending alerts under your name, and seeing an alert counter, made people anxious. We removed both.
+- **Fewer choices.** The alert and participant screens overwhelmed people. We grouped alerts and filtered the participant list based on the alert chosen.
+
+<Grid cols={2} reveal="left">
 
 <div>
 
-<Img src="webex-heads-up/frame-1540.png" alt="Wireframes of host-only notifications ('Heads up: People can hear Alex', with a Mute Alex button) and the meeting options panel with a new 'Send meeting alerts' setting and onboarding tooltip." caption="Create a need for Hosts to activate 'Heads Up'." />
+<Img src="webex-heads-up/usability-1.png" alt="Before: alert drawer with eight issue icons and an 'Alert anonymously' toggle." caption="Before: alerts identified the sender." />
 
 </div>
 
 <div>
 
-### Empower meeting hosts.
+<Img src="webex-heads-up/usability-1b.png" alt="After: a simpler drawer split into 'Alert a participant' and 'Alert the host', with a note that alerts are anonymous." caption="After: alerts are anonymous." />
 
-**Host privileges are more powerful:** Hosts receive notifications about disruption alerts, and can utilize their Host privileges (ex: Mute) to maintain meeting control.**<br /><br />Intuitive to understand and activate:** I prioritized concise tooltips to clarify its functionality. It's seamlessly activated in the Meeting Options window.
+</div>
+
+<div>
+
+<Img src="webex-heads-up/usability-3.png" alt="Before: a grid of eight alert icons, including unmuted, muted, camera on, camera off, ask to record and share screen issues." caption="Before: too many alert options." />
+
+</div>
+
+<div>
+
+<Img src="webex-heads-up/usability-3b.png" alt="After: five alerts grouped under 'Alert a participant' (mic, camera, screen share) and 'Alert the host'." caption="After: alerts grouped, with fewer choices per step." />
+
+</div>
+
+</Grid>
+
+<Accordion title="Testing detail: test plan and the other two before/after pairs">
+
+<Button href="https://docs.google.com/document/d/1sbC--JgDRM3piZ2Kdx_80BIrbXXy_HBaPUkboj9mFNY/edit?usp=sharing">A/B usability test plan</Button>
+
+<Grid cols={2}>
+
+<div>
+
+<Img src="webex-heads-up/usability-2.png" alt="Before: notification reading 'Heads up: Zoe and 3 others can hear you.'" caption="Before: an alert counter added stress." />
+
+</div>
+
+<div>
+
+<Img src="webex-heads-up/usability-2b.png" alt="After: notification reading 'Heads up: People can hear you.' with Mute myself and Dismiss buttons." caption="After: counter removed." />
+
+</div>
+
+<div>
+
+<Img src="webex-heads-up/usability-4.png" alt="Before: a paged grid of every participant's avatar to choose who to alert." caption="Before: every participant listed." />
+
+</div>
+
+<div>
+
+<Img src="webex-heads-up/usability-4b.png" alt="After: a short 'Send to' list showing only the three participants whose mics are on." caption="After: list filtered by the selected alert." />
 
 </div>
 
@@ -470,165 +268,85 @@ To ensure our wireframes aligned, we thoroughly studied [Cisco's Momentum Design
 
 </Section>
 
-<Section tone="dark">
+<Section tone="light">
 
-<Eyebrow>Usability Testing</Eyebrow>
+<Spacer id="Solution" />
 
-## Iterate. Iterate. Iterate.
+<Eyebrow>Solution</Eyebrow>
 
-<Rule />
-
-<Button href="https://docs.google.com/document/d/1sbC--JgDRM3piZ2Kdx_80BIrbXXy_HBaPUkboj9mFNY/edit?usp=sharing">VIEW a/b uSABILITY TEST PLAN</Button>
-
-Throughout our wireframing process, I documented feedback from design review meetings, and prioritized them into actionable feedback. <br /><br />I then used this feedback to iterate our designs, and to lead our A/B usability test plan to validate our Figma prototypes. As a team, we conducted usability testing interviews for 8 participants who used video meetings for work.
-
-### Listening to the users led to 2 key improvement themes:
-
-<Accordion title="Before and after: the 2 key improvements">
-
-### 01. <br />Anonymity is essential. <br />Identified is more stressful than helpful.
-
-I learned users were apprehensive about sending alerts as identified, and seeing an alerts counter added more distress than urgency.
-
-<Grid cols={2} reveal="left">
-
-<div>
-
-<Grid cols={2}>
-
-<div>
-
-<Img src="webex-heads-up/usability-1.png" alt="Before: alert drawer with eight issue icons and an 'Alert anonymously' toggle." caption="❌ Stressful" />
-
-</div>
-
-<div>
-
-<Img src="webex-heads-up/usability-1b.png" alt="After: a simpler drawer split into 'Alert a participant' and 'Alert the host', with a note that alerts are anonymous." caption="✅ Remove anonymity switch" />
-
-</div>
-
-</Grid>
-
-</div>
-
-<div>
-
-<Grid cols={2}>
-
-<div>
-
-<Img src="webex-heads-up/usability-2.png" alt="Before: notification reading 'Heads up: Zoe and 3 others can hear you.'" caption="❌ Stressful" />
-
-</div>
-
-<div>
-
-<Img src="webex-heads-up/usability-2b.png" alt="After: notification reading 'Heads up: People can hear you.' with Mute myself and Dismiss buttons." caption="✅ Remove alerts counter" />
-
-</div>
-
-</Grid>
-
-</div>
-
-</Grid>
-
-### 02. <br />Our screens were overwhelming.
-
-The alerts and participant selection screens displayed too many options and overwhelmed users on their tasks. <br /><br />We iterated new designs and found success in decreased time-on-task and higher success rates.
-
-<Grid cols={2} reveal="right">
-
-<div>
-
-<Grid cols={2}>
-
-<div>
-
-<Img src="webex-heads-up/usability-3.png" alt="Before: a grid of eight alert icons, including unmuted, muted, camera on, camera off, ask to record and share screen issues." caption="❌ Overwhelming" />
-
-</div>
-
-<div>
-
-<Img src="webex-heads-up/usability-3b.png" alt="After: five alerts grouped under 'Alert a participant' (mic, camera, screen share) and 'Alert the host'." caption="✅ Group meeting alerts: To reduce cognitive work, I reduced the number of choices displayed. Grouping also increases the scalability of adding more alerts for a specific group in the future." />
-
-</div>
-
-</Grid>
-
-</div>
-
-<div>
-
-<Grid cols={2}>
-
-<div>
-
-<Img src="webex-heads-up/usability-4.png" alt="Before: a paged grid of every participant's avatar to choose who to alert." caption="❌ Overwhelming" />
-
-</div>
-
-<div>
-
-<Img src="webex-heads-up/usability-4b.png" alt="After: a short 'Send to' list showing only the three participants whose mics are on." caption="✅ Context-specific filtering: I minimized navigational effort by implementing 'context-specific' filtering views that intelligently filter users based on the selected alert." />
-
-</div>
-
-</Grid>
-
-</div>
-
-</Grid>
-
-</Accordion>
+## Heads Up: nudge a disruptor in four clicks
 
 </Section>
 
 <Banner src="webex-heads-up/frame-4x5.png" alt="Collage of the final Heads Up interface components: alert drawers, 'Send to' lists, banner and toast notifications, and meeting options." />
 
-<Section tone="dark">
+<Section tone="light">
 
-<Eyebrow>Solution</Eyebrow>
+<Grid cols={2} reveal="right">
 
-## Resolve disruptions quietly.
+<div>
 
-<Rule />
+### Alert anyone, anonymously
+
+Open the non-verbal tools, choose the disruption and pick the person.
+
+</div>
+
+<div>
+
+<Tabs labels={["Hot mic", "Wrong screen", "Camera off"]}>
+
+<div>
+
+<Img src="webex-heads-up/sender1.gif" alt="Animation of a Webex meeting: the user opens Heads Up, picks the mic alert and sends it to Marise." caption="Alerting Marise about a hot mic." />
+
+</div>
+
+<div>
+
+<Img src="webex-heads-up/wrong-screen.gif" alt="Animation of the user alerting the presenter, Marise, that she is sharing an Airbnb page instead of her slides." caption="Alerting the presenter that they're sharing the wrong screen." />
+
+</div>
+
+<div>
+
+<Img src="webex-heads-up/camera-off.gif" alt="Animation of the user alerting Marise, from the participants panel, that her video is off." caption="Alerting Marise that their video is off." />
+
+</div>
+
+</Tabs>
+
+</div>
+
+</Grid>
 
 <Grid cols={2} reveal="left">
 
 <div>
 
-## Find and alert disruptors in a jiffy.
+<Tabs labels={["In the meeting", "Outside the window"]}>
 
-Nudge a disruptor within four clicks.
+<div>
+
+<Img src="webex-heads-up/disruptor1.gif" alt="Animation from Marise's view: a 'Heads up: People can hear you' banner appears while her room is noisy, and she mutes herself." caption="Marise sees the alert and mutes." />
 
 </div>
 
 <div>
 
-<Tabs labels={["Audio alert", "Share screen alert", "Video alert"]}>
-
-<div>
-
-<Img src="webex-heads-up/sender1.gif" alt="Animation of a Webex meeting: the user opens Heads Up, picks the mic alert and sends it to Marise." caption="Finding and alerting Marise about their 'hot mic'." />
-
-</div>
-
-<div>
-
-<Img src="webex-heads-up/wrong-screen.gif" alt="Animation of the user alerting the presenter, Marise, that she is sharing an Airbnb page instead of her slides." caption="Finding and alerting the presenter, Marise, that they are sharing the wrong screen." />
-
-</div>
-
-<div>
-
-<Img src="webex-heads-up/camera-off.gif" alt="Animation of the user alerting Marise, from the participants panel, that her video is off." caption="Finding and alerting Marise that their video is off." />
+<Img src="webex-heads-up/outside-notification.gif" alt="Animation of a toast notification appearing over a browser window to tell a distracted participant their mic is on." caption="A distracted participant still gets the alert." />
 
 </div>
 
 </Tabs>
+
+</div>
+
+<div>
+
+### Fix it fast, wherever you are
+
+A short, clear notification tells the disruptor exactly what to do, even if they've switched to another window.
 
 </div>
 
@@ -638,89 +356,33 @@ Nudge a disruptor within four clicks.
 
 <div>
 
-<Tabs labels={["In-window notification", "Out of window notification"]}>
+### Hosts get an extra set of eyes
 
-<div>
-
-<Img src="webex-heads-up/disruptor1.gif" alt="Animation from Marise's view: a 'Heads up: People can hear you' banner appears while her room is noisy, and she mutes herself." caption="Marise is notified about their 'hot mic', and quickly mutes themselves." />
+Hosts see alerts and can use host controls (like mute) to keep things on track.
 
 </div>
 
 <div>
 
-<Img src="webex-heads-up/outside-notification.gif" alt="Animation of a toast notification appearing over a browser window to tell a distracted participant their mic is on." caption="Distracted disruptor is notified about their 'hot mic'." />
-
-</div>
-
-</Tabs>
-
-</div>
-
-<div>
-
-## Act on disruptions, quickly.
-
-Similar to dodging a flying football, a Heads Up notification concisely guides you to take corrective action.
+<Img src="webex-heads-up/host1.gif" alt="Animation from the host's view: a notification says people can hear Marise, and the host mutes her." caption="The host is notified and mutes the hot mic." />
 
 </div>
 
 </Grid>
 
-<Grid cols={2} reveal="left">
-
-<div>
-
-## Gain an extra set of eyes.
-
-Meeting hosts get 'visibility notifications' for disruptor alerts and can swiftly use their host privileges (ex: mute) to keep the meeting on track.
-
-</div>
-
-<div>
-
-<Img src="webex-heads-up/host1.gif" alt="Animation from the host's view: a notification says people can hear Marise, and the host mutes her." caption="Host is notified about Marise's 'hot mic', and mutes them." />
-
-</div>
-
-</Grid>
-
-</Section>
-
-<Section tone="dark">
-
-<Accordion title="Extra creature comforts">
+<Accordion title="Small details: activating Heads Up and unsending an alert">
 
 <Grid cols={2}>
 
 <div>
 
-<Img src="webex-heads-up/activation1.gif" alt="Animation of the host turning on Heads Up for a meeting, the same way they would turn on emoji reactions." caption="Activate Heads Up for your meeting just like how you would activate Emoji reactions." />
+<Img src="webex-heads-up/activation1.gif" alt="Animation of the host turning on Heads Up for a meeting, the same way they would turn on emoji reactions." caption="Turn it on in meeting options, like emoji reactions." />
 
 </div>
 
 <div>
 
-## Easy and intuitive to activate
-
-Similar to activating 'reactions' or 'chat', Heads Up intuitively aligns with the user's mental model through easy activation in the meeting options window.
-
-</div>
-
-</Grid>
-
-<Grid cols={2}>
-
-<div>
-
-## Wrong person? <br />No sweat.
-
-Easily unsend an alert, which will disappear on the recipient's end.
-
-</div>
-
-<div>
-
-<Img src="webex-heads-up/undo-composite.gif" alt="Side-by-side animation: the sender unsends an alert to Marise, and Marise sees a 'Heads up unsent: You're good to go!' banner." caption="Left: Unsending an alert to Marise.Right: Marise seeing an 'unsent' banner notification." />
+<Img src="webex-heads-up/undo-composite.gif" alt="Side-by-side animation: the sender unsends an alert to Marise, and Marise sees a 'Heads up unsent: You're good to go!' banner." caption="Sent it to the wrong person? Unsend it." />
 
 </div>
 
@@ -730,32 +392,22 @@ Easily unsend an alert, which will disappear on the recipient's end.
 
 </Section>
 
-<Testimonial img="webex-heads-up/cheryl-couris.jpeg" by="Cheryl Couris" role="Director of Design, Cisco Webex">
-
-“**Phenomenal job**. <br />I gave [you all] tons of feedback…and you nailed almost every point. I love to see this kind of fast iteration. I could tell you guys are working as a unit.”
-
-</Testimonial>
-
 <Testimonial img="webex-heads-up/1644001287834.jpeg" by="Keri Brady" role="Senior Product Designer, Cisco Webex">
 
-“It was so apparent how well you understood the Webex product and principles for our design org. <u>Seriously great work</u>.”
+"I want this in our product right now. It's something I would absolutely use."
 
 </Testimonial>
 
 <Section tone="light">
 
-<Eyebrow>Reflections</Eyebrow>
+<Eyebrow>What I learned</Eyebrow>
 
-<Rule />
+## Small ideas can deliver the most value
 
-I was blown away by the positive feedback.**<br /><br />We exceeded Webex's expectations in understanding the problem to deliver a solution they wanted, being agile and iterating to feedback, and creating a minimum viable product that fits within the Webex ecosystem.**<br /><br />10-weeks of testing, refining, and iterating has taught me a lot:
+A broad problem like meeting fatigue invites big ideas. Heads Up wasn't the flashiest option, but it solved both the user's problem and Webex's with the most value and feasibility.
 
-## 💎 Small ideas can deliver the most value.
+## Keep poking holes
 
-Tackling the broad problem of meeting fatigue naturally encouraged us to imagine wild ideas like ‘_AI_’ this, and ‘_giant feature_’ that, but I learned that great solutions are those that benefit both the user and the company. <br /><br />While the ‘Heads Up’ idea I proposed was not the flashiest solution, I found it solved the user and business problems with the most value and feasibility.
-
-## 🚀 Poke holes. Be Agile.
-
-If you’re still in the discovery and define phase and think you’re narrowing in and have your idea figured out, don’t get comfortable with it. <br /><br />Welcome yourself and your team to keep throwing things against the wall and poking holes and putting up sticky notes.
+Even once the idea felt settled, our biggest improvements, anonymity and fewer choices, came from putting it in front of real users again.
 
 </Section>
