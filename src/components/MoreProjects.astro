@@ -4,7 +4,7 @@ import ProjectList from './ProjectList.astro';
 interface Props { current: string }
 const { current } = Astro.props;
 ---
-<section class="more" aria-labelledby="more-title">
+<section class="more section--dark" aria-labelledby="more-title">
   <div class="more__inner">
     <h2 class="more__title" id="more-title">More work</h2>
     <ProjectList exclude={current} headingLevel={3} />

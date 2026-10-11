@@ -4,9 +4,9 @@
 
 export const site = {
   name: 'Clem Mooc',
-  title: 'Clem Mooc | Research Program Manager',
+  title: 'Clem Mooc · Research & Technical Program Manager',
   description:
-    'Research program manager in Seattle. I help teams understand people, and act on what they learn.',
+    'Research program manager with a background in quantitative UX research and design. Case studies from Cisco Webex, Yext and more.',
   location: 'Seattle, WA',
   email: 'clementmooc@gmail.com',
 
@@ -32,12 +32,5 @@ export const site = {
   },
 
   // Project tabs on the home page, in display order.
-  // `key` matches the `category` field in each case study's frontmatter.
-  categories: [
-    { key: 'ux', label: 'UX Design & Research' },
-    { key: 'graphic', label: 'Graphic Design' },
-    { key: 'community', label: 'Community' },
-  ],
 } as const;
 
-export type CategoryKey = (typeof site.categories)[number]['key'];

@@ -34,12 +34,12 @@ const H = `h${headingLevel}` as 'h2' | 'h3';
 <style>
   .projects-grid { display: grid; gap: 28px; }
   .projects-grid--featured { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .projects-grid--other { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .projects-grid--other { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  :global(.section--dark) .projects-sub { color: var(--on-ink-muted); }
   .projects-sub {
     font-family: var(--font-display); font-size: 14px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--muted); margin: 56px 0 20px;
+    color: var(--text-muted); margin: 56px 0 20px;
   }
-  @media (max-width: 900px) { .projects-grid--other { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 767px) {
     .projects-grid--featured, .projects-grid--other { grid-template-columns: 1fr; }
   }
