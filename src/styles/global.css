@@ -93,8 +93,9 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 600; lin
 /* Section labels (option C): a label that introduces a section heading is centered, with a short
    orange bar above it, and the heading below is centered too. Body text stays left-aligned.
    (The small label above a case study's main title is left alone.) */
-.eyebrow:has(+ h2) { text-align: center; margin-top: 1em; }
-.eyebrow:has(+ h2)::before {
+/* Every section label is centered; only the small label above a page's main title (h1) stays left */
+.eyebrow:not(:has(+ h1)):not(.eyebrow--statement) { text-align: center; margin-top: 1em; }
+.eyebrow:not(:has(+ h1)):not(.eyebrow--statement)::before {
   content: ''; display: block; width: 28px; height: 2px; margin: 0 auto 12px;
   background: currentColor;
 }

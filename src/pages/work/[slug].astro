@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Img from '../../components/Img.astro';
-import MoreProjects from '../../components/MoreProjects.astro';
+import NextProject from '../../components/NextProject.astro';
 import { mdxComponents } from '../../components/mdx';
 
 export async function getStaticPaths() {
@@ -23,11 +23,12 @@ const d = entry.data;
   <article class="prose case">
     <Content components={mdxComponents} />
   </article>
-  <MoreProjects current={entry.id} />
+  <NextProject current={entry.id} />
 </Base>
 
 <style>
   .hero-banner { margin-top: calc(var(--nav-h) * -1); }
   .hero-banner :global(.img) { margin: 0; }
-  .hero-banner :global(img) { border-radius: 0; }
+  /* Full-bleed banner under the see-through nav, never taller than 520px */
+  .hero-banner :global(img) { border-radius: 0; width: 100%; max-height: 520px; object-fit: cover; }
 </style>
