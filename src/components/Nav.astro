@@ -34,10 +34,10 @@ const items = [
     height: var(--nav-h); padding: 0 var(--gutter);
     /* See-through at the top so the wave reads as part of the nav; a soft dark fade keeps links legible */
     background: linear-gradient(rgb(20 18 17 / .85), rgb(20 18 17 / .35) 70%, rgb(20 18 17 / 0));
-    border-bottom: 1px solid transparent;
-    transition: transform .4s ease-in-out, background-color .3s, border-color .3s;
+    transition: transform .4s ease-in-out, background-color .3s, box-shadow .3s;
   }
-  .nav.nav--scrolled { background: var(--ink); border-bottom-color: var(--line-dark); }
+  /* (hairline drawn with a shadow, not a border, so no stray line shows over the wave) */
+  .nav.nav--scrolled { background: var(--ink); box-shadow: 0 1px 0 var(--line-dark); }
   .nav__logo { position: relative; display: block; width: 80px; flex-shrink: 0; }
   .nav__logo img { width: 80px; height: auto; transition: opacity .2s; }
   .nav__logo-hover { position: absolute; inset: 0; opacity: 0; }

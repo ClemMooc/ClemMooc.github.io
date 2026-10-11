@@ -53,6 +53,8 @@
     transition: opacity .6s cubic-bezier(.25, 1, .5, 1), transform .6s cubic-bezier(.25, 1, .5, 1);
   }
   .motion [data-reveal]:not(.is-in) { opacity: 0; }
+  /* Optional stagger: style="--i:N" delays item N by N × 90ms (used for the project cards) */
+  .motion [data-reveal][style*='--i'] { transition-delay: calc(var(--i) * 90ms); }
   .motion [data-reveal='left']:not(.is-in) { transform: translateX(-50px); }
   .motion [data-reveal='right']:not(.is-in) { transform: translateX(50px); }
   .motion [data-reveal='top']:not(.is-in) { transform: translateY(-50px); }

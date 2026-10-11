@@ -1,10 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Lottie from '../components/Lottie.astro';
-import Button from '../components/Button.astro';
 import ProjectList from '../components/ProjectList.astro';
-import { site } from '../site.config';
-import { media } from '../lib/media';
 ---
 <Base>
   <div class="intro">
@@ -15,18 +12,12 @@ import { media } from '../lib/media';
       I help teams understand people, and <span class="hero__accent">act on what they learn</span>.
     </h1>
     <p class="hero__intro">
-      I'm Clem, a research program manager in Seattle. I've spent my career between users and the teams building for them: quantitative UX research at Redfin, client delivery at Yext, and most recently biometric research programs at Meta Reality Labs.
+      I'm Clem, a research program manager in Seattle. I've spent my career between users and the teams building for them: quantitative UX research at Redfin, client delivery at a cloud software company, and most recently biometric research programs at Meta Reality Labs.
     </p>
-    <div class="hero__buttons">
-      <Button href={media(site.resume)}>Resume</Button>
-      <Button href={site.links.linkedin} variant="ghost">LinkedIn</Button>
-      <a class="button button--ghost" href={`mailto:${site.email}`}>Email</a>
-    </div>
-    <a href="#projects" class="hero__scroll" aria-label="Scroll to projects"><Lottie name="scroll-down" /></a>
   </section>
   </div>
 
-  <section class="block section--light" id="projects" aria-labelledby="work-title">
+  <section class="block section--dark" id="projects" aria-labelledby="work-title">
     <div class="block__inner">
       <p class="eyebrow">Selected work</p>
       <h2 class="block__title" id="work-title">Projects</h2>
@@ -37,21 +28,18 @@ import { media } from '../lib/media';
 </Base>
 
 <style>
-  /* The intro starts under the see-through nav so the wave sits behind the nav links */
+  /* The intro starts under the see-through nav, so the wave sits behind the nav links */
   .intro { position: relative; isolation: isolate; overflow: hidden; margin-top: calc(var(--nav-h) * -1); padding-top: var(--nav-h); }
   .intro :global(.wave) { top: 0; z-index: 0; } /* same starting spot as About: top of the page, behind the nav */
   .intro > .hero { position: relative; z-index: 1; }
-  .hero { max-width: var(--max); margin: 0 auto; padding: clamp(40px, 7vw, 88px) var(--gutter) 56px; }
+  .hero { max-width: var(--max); margin: 0 auto; padding: clamp(40px, 7vw, 88px) var(--gutter) 24px; }
   .hero__title { font-size: clamp(2.2rem, 5.2vw, 4rem); line-height: 1.1; letter-spacing: -.025em; font-weight: 600; max-width: 18ch; margin: 0 0 1.5rem; }
   .hero__accent { color: var(--orange); }
   .hero__intro { font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--muted); max-width: 46ch; margin: 0 0 2rem; }
-  .hero__buttons { display: flex; flex-wrap: wrap; }
-  .hero__scroll { display: block; width: 56px; margin: 48px auto 0; transition: transform .2s; }
-  .hero__scroll:hover { transform: translateY(4px); }
 
-  .block { padding: 72px 0 88px; }
+  .block { padding: 32px 0 88px; }
   .block__inner { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
-  .block__title { font-size: clamp(1.6rem, 3vw, 2.1rem); margin: .2em auto 48px; }
+  .block__title { font-size: clamp(1.6rem, 3vw, 2.1rem); margin: .2em auto 32px; }
 
-  @media (max-width: 767px) { .hero { padding-bottom: 48px; } }
+  @media (max-width: 767px) { .hero { padding-bottom: 16px; } }
 </style>

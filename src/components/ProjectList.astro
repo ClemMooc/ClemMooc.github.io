@@ -15,8 +15,8 @@ const H = `h${headingLevel}` as 'h2' | 'h3';
 ---
 {featured.length > 0 && (
   <div class="projects-grid projects-grid--featured">
-    {featured.map((w) => (
-      <ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} />
+    {featured.map((w, i) => (
+      <div data-reveal="bottom" style={`--i:${i}`}><ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} /></div>
     ))}
   </div>
 )}
@@ -24,8 +24,8 @@ const H = `h${headingLevel}` as 'h2' | 'h3';
   <>
     <H class="projects-sub">Other work</H>
     <div class="projects-grid projects-grid--other">
-      {other.map((w) => (
-        <ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} size="small" />
+      {other.map((w, i) => (
+        <div data-reveal="bottom" style={`--i:${i + featured.length}`}><ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} size="small" /></div>
       ))}
     </div>
   </>

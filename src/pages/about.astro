@@ -5,44 +5,49 @@ import Button from '../components/Button.astro';
 import Img from '../components/Img.astro';
 import { site } from '../site.config';
 import { media } from '../lib/media';
-// Experience & education live in src/data/experience.ts (shared with the home page).
+// Experience & education live in src/data/experience.ts.
 import { experience, education } from '../data/experience';
 ---
 
-<Base title="About" description="Clem Mooc: research program manager, and an interpreter at heart.">
+<Base title="About Clem" description="Clem Mooc: research program manager, former quantitative UX researcher, and an interpreter at heart.">
   <Lottie name="background" class="wave" />
+
+  <!-- Story (dark, under the wave) -->
   <div class="about">
     <div class="about__intro">
       <div class="about__photo"><Img src="about/portfolio-images.png" alt="Portrait of Clem" eager zoom={false} /></div>
       <div class="about__story">
         <h1 class="about__title">An interpreter at heart.</h1>
-        <p>My parents came to America as Vietnam War refugees. Our household spoke five languages, and English was the weakest of them, so from a young age I was the family's interpreter.</p>
-        <p>That role followed me into my career. After a business degree at the University of Washington, I kept translating complicated human problems into something teams could act on: as a quantitative user researcher at Redfin, a UX project manager at Yext, and a product manager intern at a fintech startup.</p>
-        <p><strong>Today I'm a research program manager at Meta Reality Labs.</strong> I help users and product teams understand each other, turn research into decisions, and keep the work moving.</p>
+        <p>I grew up in a household that spoke five languages. English was my third, and my parents' weakest. As the kid of Vietnam War refugees, <strong>I was my family's interpreter</strong> long before I knew it was a skill.</p>
+        <p>I've kept doing that job in every role since: as a quantitative user researcher at Redfin, a product manager at a fintech startup, and a digital project manager at a cloud software company. Most recently I ran research programs at Meta Reality Labs, where the work was still translation: turning what people do and need into clear decisions that engineers, vendors and product teams could act on.</p>
         <div class="about__buttons">
-          <Button href={media(site.resume)}>Resume</Button>
-          <Button href={site.links.linkedin} variant="ghost">LinkedIn</Button>
-          <Button href={site.links.github} variant="ghost">GitHub</Button>
+          <Button href={media(site.resume)} arrow={false}>Resume</Button>
+          <Button href={site.links.linkedin} variant="ghost" arrow={false}>LinkedIn</Button>
+          <Button href={site.links.github} variant="ghost" arrow={false}>GitHub</Button>
           <a class="button button--ghost" href={`mailto:${site.email}`}>Email</a>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="about__cols">
+  <!-- Experience + education -->
+  <section class="section--dark cv" aria-label="Experience and education">
+    <div class="cv__inner">
       <section aria-labelledby="xp-title">
-        <h2 class="about__h2" id="xp-title">Experience</h2>
+        <h2 class="cv__h2" id="xp-title">Experience</h2>
         {/* Just company + role; the details live in the résumé. */}
         {experience.map((e) => (
           <div class="entry">
             <h3>
-              <a href={e.url} target="_blank" rel="noopener">{e.org}<span class="sr-only"> (opens in a new tab)</span></a>
-              <span class="entry__role">{e.role}{e.team && ` · ${e.team}`}</span>
+              {e.url ? <a href={e.url} target="_blank" rel="noopener">{e.org}<span class="sr-only"> (opens in a new tab)</span></a> : <span class="entry__org">{e.org}</span>}
+              <span class="entry__role">{e.role}</span>
             </h3>
+            {e.team && <p class="entry__team">{e.team}</p>}
           </div>
         ))}
       </section>
       <section aria-labelledby="edu-title">
-        <h2 class="about__h2" id="edu-title">Education</h2>
+        <h2 class="cv__h2" id="edu-title">Education</h2>
         {education.map((e) => (
           <div class="entry">
             <h3>{e.title}</h3>
@@ -51,33 +56,36 @@ import { experience, education } from '../data/experience';
         ))}
       </section>
     </div>
-  </div>
+  </section>
+
 </Base>
 
 <style>
   /* Same top spacing as the home intro, so both page titles start at the same height */
-  .about { max-width: var(--max); margin: 0 auto; padding: clamp(40px, 7vw, 88px) var(--gutter) 80px; }
+  .about { max-width: var(--max); margin: 0 auto; padding: clamp(40px, 7vw, 88px) var(--gutter) 88px; }
   .about__intro { display: grid; grid-template-columns: 5fr 7fr; gap: 56px; align-items: start; }
   .about__photo { align-self: center; }
   .about__photo :global(.img) { margin: 0; }
   .about__title { font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.1; letter-spacing: -.025em; margin: 0 0 1.25rem; }
-  .about__story p { font-size: 1.1rem; color: var(--muted); max-width: 56ch; }
-  .about__story strong { color: var(--cream); font-weight: 600; }
+  .about__story p { font-size: 1.1rem; color: var(--on-ink-muted); max-width: 56ch; }
+  .about__story strong { color: var(--on-ink); font-weight: 600; }
   .about__buttons { margin-top: 1.75rem; display: flex; flex-wrap: wrap; }
 
-  .about__cols { display: grid; grid-template-columns: 7fr 5fr; gap: 56px; margin-top: 80px; padding-top: 56px; border-top: 1px solid var(--line); }
-  .about__h2 { font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 24px; }
-  .entry { padding: 0 0 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
-  .entry:last-child { border-bottom: 0; }
-  .entry h3 { font-size: 1.15rem; margin: 0; display: flex; flex-wrap: wrap; gap: 0 .6em; align-items: baseline; }
-  .entry h3 a { text-decoration: none; }
-  .entry h3 a:hover { color: var(--orange); text-decoration: underline; text-underline-offset: 4px; }
-  .entry__role { font-family: var(--font-body); font-weight: 400; font-size: 1rem; color: var(--muted); }
-  .entry__school { color: var(--muted); font-size: 16px; margin: .3em 0 0; }
+  .cv { background: var(--ink); color: var(--on-ink); }
+  .cv__inner { max-width: var(--max); margin: 0 auto; padding: 24px var(--gutter) 88px; display: grid; grid-template-columns: 7fr 5fr; gap: 56px; }
+  .cv__h2 { font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0 0 20px; }
+  .entry { margin-bottom: 18px; }
+  .entry h3 { font-size: 1.1rem; margin: 0; display: flex; flex-wrap: wrap; gap: 0 .6em; align-items: baseline; }
+  .entry h3 a, .entry__org { color: var(--accent); text-decoration: none; }
+  .entry h3 a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .entry__role { font-family: var(--font-body); font-weight: 400; font-size: 1rem; color: var(--on-ink); }
+  .entry__school, .entry__team { color: var(--on-ink-muted); font-size: 16px; margin: .3em 0 0; }
+
 
   @media (max-width: 767px) {
-    .about__intro, .about__cols { grid-template-columns: 1fr; gap: 32px; }
+    .about { padding-bottom: 56px; }
+    .about__intro, .cv__inner { grid-template-columns: 1fr; gap: 32px; }
     .about__photo { max-width: 320px; order: 2; } /* title first on phones, like the home page */
-    .about__cols { margin-top: 56px; padding-top: 40px; }
+    .cv__inner { padding-block: 48px; }
   }
 </style>

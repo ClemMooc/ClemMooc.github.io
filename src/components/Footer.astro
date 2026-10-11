@@ -3,18 +3,22 @@ import { site } from '../site.config';
 import { media } from '../lib/media';
 import BackToTop from './BackToTop.astro';
 const year = new Date().getFullYear();
-const NEW_TAB = '<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in a new tab)</span>';
+const NEW_TAB = '<span class="sr-only"> (opens in a new tab)</span>';
 ---
 <footer class="footer">
   <div class="footer__inner">
     <a class="footer__logo" href="/" aria-label="Clem Mooc, home"><img src="/brand/logo.png" alt="" width="104" height="70" /></a>
     <p class="footer__place"><span aria-hidden="true">📍 </span>{site.location}</p>
     <nav class="footer__links" aria-label="Footer">
-      <a href="/#projects">Work</a>
-      <a href="/about">About</a>
-      <a href={media(site.resume)} target="_blank" rel="noopener">Resume<Fragment set:html={NEW_TAB} /></a>
-      <a href={site.links.linkedin} target="_blank" rel="noopener">LinkedIn<Fragment set:html={NEW_TAB} /></a>
-      <a href={`mailto:${site.email}`}>Email</a>
+      <div class="footer__row">
+        <a href="/#projects">Work</a>
+        <a href="/about">About Clem</a>
+      </div>
+      <div class="footer__row">
+        <a href={media(site.resume)} target="_blank" rel="noopener">Resume<Fragment set:html={NEW_TAB} /></a>
+        <a href={site.links.linkedin} target="_blank" rel="noopener">LinkedIn<Fragment set:html={NEW_TAB} /></a>
+        <a href={`mailto:${site.email}`}>Email</a>
+      </div>
     </nav>
     <p class="footer__copy">© {year} {site.name}</p>
   </div>
@@ -29,11 +33,12 @@ const NEW_TAB = '<span aria-hidden="true"> ↗</span><span class="sr-only"> (ope
   }
   .footer__logo img { width: 64px; height: auto; }
   .footer__place, .footer__copy { margin: 0; font-size: 14px; }
-  .footer__links { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-left: auto; }
+  .footer__links { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; margin-left: auto; }
+  .footer__row { display: flex; flex-wrap: wrap; gap: 4px 20px; }
   .footer__links a { display: inline-block; padding: 6px 0; font-size: 15px; font-weight: 600; color: var(--on-ink); text-decoration: none; }
   .footer__links a:hover { color: var(--accent); }
   @media (max-width: 767px) {
     .footer__inner { flex-direction: column; align-items: flex-start; }
-    .footer__links { margin-left: 0; }
+    .footer__links { margin-left: 0; align-items: flex-start; }
   }
 </style>

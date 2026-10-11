@@ -3,10 +3,10 @@
 // mailto:, or an R2 key like "shared/clem-mooc-resume-2024.pdf".
 // External links open in a new tab and get a ↗.
 import { media } from '../lib/media';
-interface Props { href: string; variant?: 'solid' | 'ghost' }
-const { href, variant = 'solid' } = Astro.props;
+interface Props { href: string; variant?: 'solid' | 'ghost'; arrow?: boolean } // arrow={false} hides the ↗ (screen readers still hear "opens in a new tab")
+const { href, variant = 'solid', arrow = true } = Astro.props;
 const isKey = !/^(https?:|mailto:|tel:|\/|#)/.test(href);
 const url = isKey ? media(href) : href;
 const external = isKey || /^https?:\/\//.test(href);
 ---
-<a class:list={['button', { 'button--ghost': variant === 'ghost' }]} href={url} {...(external ? { target: '_blank', rel: 'noopener' } : {})}><slot />{external && <Fragment set:html={`<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in a new tab)</span>`} />}</a>
+<a class:list={['button', { 'button--ghost': variant === 'ghost' }]} href={url} {...(external ? { target: '_blank', rel: 'noopener' } : {})}><slot />{external && <Fragment set:html={`${arrow ? '<span aria-hidden="true"> ↗</span>' : ''}<span class="sr-only"> (opens in a new tab)</span>`} />}</a>
