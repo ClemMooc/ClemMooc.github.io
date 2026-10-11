@@ -19,9 +19,10 @@ export const site = {
   // Google Analytics 4 measurement ID. Set to '' to disable.
   gaId: 'G-0M6FGQRXWJ',
 
-  // R2 key of the resume PDF (see media/shared/).
-  // TODO(Clem): replace with the Google Docs link to the current resume (sharing: "Anyone with the link can view").
-  resume: 'shared/clem-mooc-resume-2024.pdf',
+  // Resume link. Empty = the Resume button and footer link are hidden.
+  // TODO(Clem): add the Google Docs link to the current resume (sharing: "Anyone with the link can view").
+  // The old PDF is still in R2 at 'shared/clem-mooc-resume-2024.pdf'.
+  resume: '',
 
   links: {
     github: 'https://github.com/ClemMooc',

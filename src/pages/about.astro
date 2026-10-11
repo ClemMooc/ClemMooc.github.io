@@ -30,8 +30,8 @@ const languages = [
         <p>I grew up in a household that spoke <span class="langs"><button type="button" class="langs__trigger" aria-describedby="langs-list">five languages</button><span class="langs__list" id="langs-list" role="tooltip">{languages.map((l, i) => <span class="langs__item"><span class="langs__flag" aria-hidden="true" set:html={l.flag} />{l.name}{i < languages.length - 1 && <span class="sr-only">,</span>}</span>)}</span></span>. English was my third, and my parents' weakest. As the kid of Vietnam War refugees, <strong>I was my family's interpreter</strong> long before I knew it was a skill.</p>
         <p>I've kept doing that job in every role since: as a quantitative user researcher at Redfin, a product manager at a fintech startup, and a digital project manager at a cloud software company. Most recently I ran research programs at Meta Reality Labs, where the work was still translation: turning what people do and need into clear decisions that engineers, vendors and product teams could act on.</p>
         <div class="about__buttons">
-          <Button href={media(site.resume)} arrow={false}>Resume</Button>
-          <Button href={site.links.linkedin} variant="ghost" arrow={false}>LinkedIn</Button>
+          {site.resume && <Button href={media(site.resume)} arrow={false}>Resume</Button>}
+          <Button href={site.links.linkedin} variant={site.resume ? 'ghost' : undefined} arrow={false}>LinkedIn</Button>
           <Button href={site.links.github} variant="ghost" arrow={false}>GitHub</Button>
           <button type="button" class="button button--ghost copy-email" data-email={site.email}>
             <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>

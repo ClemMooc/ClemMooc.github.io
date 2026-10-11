@@ -1,9 +1,7 @@
 ---
 import { site } from '../site.config';
-import { media } from '../lib/media';
 import BackToTop from './BackToTop.astro';
 const year = new Date().getFullYear();
-const NEW_TAB = '<span class="sr-only"> (opens in a new tab)</span>';
 ---
 <footer class="footer">
   <div class="footer__inner">
@@ -13,11 +11,6 @@ const NEW_TAB = '<span class="sr-only"> (opens in a new tab)</span>';
       <div class="footer__row">
         <a href="/#projects">Projects</a>
         <a href="/about">About Clem</a>
-      </div>
-      <div class="footer__row">
-        <a href={media(site.resume)} target="_blank" rel="noopener">Resume<Fragment set:html={NEW_TAB} /></a>
-        <a href={site.links.linkedin} target="_blank" rel="noopener">LinkedIn<Fragment set:html={NEW_TAB} /></a>
-        <a href={`mailto:${site.email}`}>Email</a>
       </div>
     </nav>
     <p class="footer__copy">© {year} {site.name}</p>
