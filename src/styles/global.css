@@ -255,6 +255,16 @@ main { position: relative; }
 
 .anchor { display: block; position: relative; top: calc(var(--nav-h) * -1); visibility: hidden; }
 
+/* ── Page transitions (delight #1) ─────────────────────────── */
+/* Moving between pages cross-fades, and a project card's image grows into its case-study banner
+   (they share a view-transition-name). Unsupported browsers just load the page normally. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-group(*) { animation-duration: .45s; animation-timing-function: cubic-bezier(.25, 1, .5, 1); }
+}
+.nav { view-transition-name: site-nav; }
+.footer { view-transition-name: site-footer; }
+
 /* ── Accessibility ────────────────────────────────────────── */
 /* Text read by screen readers but not shown on screen */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

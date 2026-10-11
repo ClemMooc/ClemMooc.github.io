@@ -1,0 +1,24 @@
+---
+// Thin orange line at the very top of a case study that fills as you read (delight #4).
+// Decorative, so screen readers skip it.
+---
+<div class="progress" aria-hidden="true"><div class="progress__bar"></div></div>
+
+<script>
+  const bar = document.querySelector<HTMLElement>('.progress__bar')!;
+  const article = document.querySelector<HTMLElement>('.case') ?? document.body;
+  const update = () => {
+    const start = article.offsetTop;
+    const end = start + article.offsetHeight - innerHeight;
+    const p = Math.min(Math.max((scrollY - start) / Math.max(end - start, 1), 0), 1);
+    bar.style.transform = `scaleX(${p})`;
+  };
+  update();
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+</script>
+
+<style>
+  .progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 60; pointer-events: none; }
+  .progress__bar { height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; }
+</style>

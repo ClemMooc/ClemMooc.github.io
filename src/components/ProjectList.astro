@@ -1,5 +1,5 @@
 ---
-// Featured projects (big cards) followed by an "Other work" row (small cards).
+// Featured projects (big cards) followed by an "Other projects" row (small cards).
 // Which project goes where is set by `featured: true` in each case study's frontmatter.
 // `exclude` hides one project (used at the bottom of a case study to skip the current one).
 import { getCollection } from 'astro:content';
@@ -22,7 +22,7 @@ const H = `h${headingLevel}` as 'h2' | 'h3';
 )}
 {other.length > 0 && (
   <>
-    <H class="projects-sub">Other work</H>
+    <H class="projects-sub">Other projects</H>
     <div class="projects-grid projects-grid--other">
       {other.map((w, i) => (
         <div data-reveal="bottom" style={`--i:${i + featured.length}`}><ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} size="small" /></div>

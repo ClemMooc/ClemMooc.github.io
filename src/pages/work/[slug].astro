@@ -3,6 +3,8 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Img from '../../components/Img.astro';
 import NextProject from '../../components/NextProject.astro';
+import OnThisPage from '../../components/OnThisPage.astro';
+import ReadingProgress from '../../components/ReadingProgress.astro';
 import { mdxComponents } from '../../components/mdx';
 
 export async function getStaticPaths() {
@@ -16,19 +18,25 @@ const d = entry.data;
 ---
 <Base title={d.seoTitle ?? d.title} description={d.description} image={d.hero ?? d.cover}>
   {d.hero && (
-    <div class="hero-banner">
+    <div class:list={['hero-banner', { 'hero-banner--backdrop': d.heroBg }]}
+      style={`view-transition-name: project-${entry.id};${d.heroBg ? ` --hero-bg: ${d.heroBg};` : ''}`}>
       <Img src={d.hero} alt={d.title} eager zoom={false} class="hero-banner__img" />
     </div>
   )}
   <article class="prose case">
     <Content components={mdxComponents} />
   </article>
+  <ReadingProgress />
+  <OnThisPage />
   <NextProject current={entry.id} />
 </Base>
 
 <style>
   .hero-banner { margin-top: calc(var(--nav-h) * -1); }
+  /* Transparent banner images get a backdrop color that starts just below the see-through nav,
+     so the nav links stay readable over the dark band */
+  .hero-banner--backdrop { padding-top: var(--nav-h); background: linear-gradient(var(--ink) var(--nav-h), var(--hero-bg) var(--nav-h)); }
   .hero-banner :global(.img) { margin: 0; }
-  /* Full-bleed banner under the see-through nav, never taller than 520px */
-  .hero-banner :global(img) { border-radius: 0; width: 100%; max-height: 520px; object-fit: cover; }
+  /* Full-bleed banner under the see-through nav, shown whole (never cropped) */
+  .hero-banner :global(img) { border-radius: 0; width: 100%; height: auto; }
 </style>

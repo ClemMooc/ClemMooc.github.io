@@ -3,7 +3,7 @@
 // solid once you scroll (so page text never shows through behind the links).
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const items = [
-  { href: '/#projects', label: 'Work', current: path === '/' || path.startsWith('/work') },
+  { href: '/#projects', label: 'Projects', current: path === '/' || path.startsWith('/work') },
   { href: '/about', label: 'About Clem', current: path === '/about', page: true },
 ];
 ---
@@ -22,6 +22,9 @@ const items = [
 
 <script>
   const nav = document.querySelector<HTMLElement>('.nav')!;
+  // Hovering (or focusing) the logo replays the wave behind the nav
+  const logo = nav.querySelector('.nav__logo')!;
+  ['mouseenter', 'focus'].forEach((ev) => logo.addEventListener(ev, () => document.dispatchEvent(new Event('wave:replay'))));
   const onScroll = () => nav.classList.toggle('nav--scrolled', scrollY > 8);
   onScroll();
   addEventListener('scroll', onScroll, { passive: true });

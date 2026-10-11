@@ -1,0 +1,37 @@
+---
+// A number that counts up once when it scrolls into view (delight #6).
+// <Count to={70} /> — the real number is in the page from the start (for search, screen readers
+// and no-JavaScript visitors); only the visible digits animate. Off for reduced-motion visitors.
+interface Props { to: number }
+const { to } = Astro.props;
+---
+<span class="count"><span class="sr-only">{to}</span><span class="count__num" aria-hidden="true" data-count-to={to}>{to}</span></span>
+
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const nums = [...document.querySelectorAll<HTMLElement>('[data-count-to]')];
+  if (!reduce && 'IntersectionObserver' in window) {
+    const run = (el: HTMLElement) => {
+      const to = Number(el.dataset.countTo);
+      const t0 = performance.now(), dur = 1200;
+      const tick = (now: number) => {
+        const p = Math.min((now - t0) / dur, 1);
+        el.textContent = String(Math.round(to * (1 - (1 - p) ** 3))); // ease-out
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) { run(e.target as HTMLElement); io.unobserve(e.target); }
+    }, { threshold: 0.6 });
+    for (const el of nums) {
+      // Start from 0 only if it hasn't been seen yet (avoids a flash for numbers already on screen)
+      if (el.getBoundingClientRect().top > innerHeight) el.textContent = '0';
+      io.observe(el);
+    }
+  }
+</script>
+
+<style>
+  .count__num { font-variant-numeric: tabular-nums; }
+</style>

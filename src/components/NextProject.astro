@@ -19,7 +19,7 @@ const next = featured.find((w) => me && w.data.order > me.data.order) ?? feature
       <div class="next__card">
         <ProjectCard href={`/work/${next.id}/`} cover={next.data.cover} title={next.data.cardTitle} role={next.data.role} />
       </div>
-      <a class="next__all" href="/#projects">← Back to all work</a>
+      <a class="next__all" href="/#projects">← Back to all projects</a>
     </div>
   </section>
 )}

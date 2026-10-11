@@ -1,5 +1,5 @@
 ---
-// Project card. size="large" for featured work, "small" for the compact "Other work" list.
+// Project card. size="large" for featured work, "small" for the compact "Other projects" list.
 // Shows the cover image, title and (if set in the case study) role.
 // Light cards on linen by default; adapts when placed in a dark section.
 import { Image } from 'astro:assets';
@@ -10,10 +10,12 @@ interface Props {
 }
 const { href, cover, title, role, size = 'large', external = false } = Astro.props;
 const name = title.replace(' / ', ' ').replace(/:\s*$/, '');
+// Shared with the case-study banner so the image grows into it on click (see global.css)
+const vt = href.match(/^\/work\/([^/]+)/)?.[1];
 ---
 <a class:list={['card', `card--${size}`]} href={href} {...(external ? { target: '_blank', rel: 'noopener' } : {})}>
   <div class="card__media">
-    <Image src={media(cover)} alt="" inferSize widths={size === 'large' ? [480, 800, 1200] : [192, 288]}
+    <Image style={vt ? `view-transition-name: project-${vt}` : undefined} src={media(cover)} alt="" inferSize widths={size === 'large' ? [480, 800, 1200] : [192, 288]}
       sizes={size === 'large' ? '(max-width: 767px) 92vw, 46vw' : '96px'} class="card__img" />
   </div>
   <div class="card__body">

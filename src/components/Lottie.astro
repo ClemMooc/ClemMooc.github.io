@@ -25,21 +25,27 @@ const { name, class: className, loop = true, label } = Astro.props;
     // Plays normally for 2 seconds, then glides to a stop over the next 3 (still at rest by 5 s).
     // Speed follows a cosine curve: it starts slowing imperceptibly and settles softly, with no jolt at either end.
     const EASE_START = 2000, EASE_LENGTH = 3000;
-    if (el.dataset.loop === 'true' && !reduce) {
-      anim.setSubframe(true); // smooth in-between frames at very low speeds
-      anim.addEventListener('DOMLoaded', () => {
-        setTimeout(() => {
-          const t0 = performance.now();
-          const slow = (now: number) => {
-            const p = Math.min((now - t0) / EASE_LENGTH, 1);
-            const speed = (1 + Math.cos(Math.PI * p)) / 2;
-            if (p >= 1) { anim.pause(); return; }
-            anim.setSpeed(speed);
-            requestAnimationFrame(slow);
-          };
-          requestAnimationFrame(slow);
-        }, EASE_START);
-      });
-    }
+    if (el.dataset.loop !== 'true' || reduce) return;
+    anim.setSubframe(true); // smooth in-between frames at very low speeds
+    let timer = 0, frame = 0;
+    // `boost` > 1 plays faster (used when hovering the logo); it then eases from that speed to rest.
+    const playThenSettle = (boost = 1, hold = EASE_START) => {
+      clearTimeout(timer); cancelAnimationFrame(frame);
+      anim.setSpeed(boost); anim.play();
+      timer = window.setTimeout(() => {
+        const t0 = performance.now();
+        const slow = (now: number) => {
+          const p = Math.min((now - t0) / EASE_LENGTH, 1);
+          if (p >= 1) { anim.pause(); return; }
+          anim.setSpeed(boost * (1 + Math.cos(Math.PI * p)) / 2);
+          frame = requestAnimationFrame(slow);
+        };
+        frame = requestAnimationFrame(slow);
+      }, hold);
+    };
+    anim.addEventListener('DOMLoaded', () => playThenSettle());
+    // Delight #7: hovering the logo speeds the wave up (2.5×) for a moment, then it glides to rest again
+    // (1 s at speed + 3 s easing: still under 5 seconds of motion).
+    if (el.classList.contains('wave')) document.addEventListener('wave:replay', () => playThenSettle(2.5, 1000));
   });
 </script>
