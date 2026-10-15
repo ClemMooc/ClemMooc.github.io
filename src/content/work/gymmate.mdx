@@ -5,27 +5,28 @@ seoTitle: "GymMate · Case study"
 category: "ux"
 order: 6
 cover: "gymmate/cover.png"
-hero: "gymmate/hero.png"
-description: "A workout tracker and 5x5 warmup calculator I specced, built with an AI app builder and use every gym session."
-eyebrow: "PERSONAL PROJECT · AI-BUILT APP"
-role: "Solo product owner · built with Lovable · May–Oct 2026"
+hero: "gymmate/banner.png"
+description: "A workout tracker, warmup calculator and rest timer I planned, tested and shipped to replace three tools I used every gym session."
+eyebrow: "PERSONAL PROJECT · WORKOUT APP"
+role: "Product owner & designer · May–Oct 2026"
+result: "Replaced a spreadsheet, a warmup calculator and a timer with one app I use every session."
 featured: false
 draft: true
 ---
 
 <Section tone="dark">
 
-<Eyebrow>Personal project · AI-built app</Eyebrow>
+<Eyebrow>Personal project · Workout app</Eyebrow>
 
-# GymMate: one app for the whole workout
+# GymMate: three gym tools in one app
 
-GymMate is a workout tracker and warmup calculator I built for myself, without writing code, and now use every gym session. [Try the demo](https://warm-up-and-lift.lovable.app/demo), no account needed.
+GymMate is a workout tracker, warmup calculator and rest timer I planned, tested and shipped for my own training. I use it every session, and so do two lifting friends. [Try the demo](https://warm-up-and-lift.lovable.app/demo), no account needed.
 
 <Meta items={[
-  {"label":"Problem","values":["Logging sets, tracking progress and working out warmup plates meant juggling three apps between sets."]},
-  {"label":"My role","values":["Solo product owner: wrote the specs, tested every build at the gym, and prioritized about 40 rounds of fixes."]},
-  {"label":"Built with","values":["Lovable (AI app builder), no hand-written code"]},
-  {"label":"Timeline","values":["May–Oct 2026"]}
+  {"label":"Problem","values":["Every set meant switching between a spreadsheet, a warmup calculator and a timer."]},
+  {"label":"My role","values":["Product owner and designer: wrote the spec, ran the testing and prioritized every round of fixes."]},
+  {"label":"Testers","values":["Me, plus two friends who lift"]},
+  {"label":"Timeline","values":["May–Oct 2026, about 40 iterations"]}
 ]} />
 
 </Section>
@@ -34,17 +35,21 @@ GymMate is a workout tracker and warmup calculator I built for myself, without w
 
 <Eyebrow>Why I built it</Eyebrow>
 
-## Every app switch broke my focus
+## Three touchpoints for every set
 
 <Grid cols={2}>
 
 <div>
 
-Mid-workout, I was bouncing between a notes app to log sets, a spreadsheet to track progress and a calculator to figure out warmup plates. Every switch broke my focus between sets.
+I've lifted for several years, built around 5x5 training and progressive overload: add a little weight each session and keep the streak going. That only works if you know exactly what you lifted last time.
 
-I wanted one app that remembers what I lifted last time, tells me exactly what to load for warmups, and gets out of the way.
+My setup had three touchpoints:
 
-*TODO (Clem): one line about your own training (5x5, how long you've lifted).*
+1. **A Google Sheets log.** I built each workout by hand, copying and pasting rows of sets and reps every session.
+2. **A warmup calculator website** to work out which plates to load for each warmup set.
+3. **A rest timer** on my phone or Apple Watch.
+
+Every switch cost focus between sets. I wanted one place that remembers my last session, plans my warmups and times my rest.
 
 </div>
 
@@ -62,11 +67,26 @@ I wanted one app that remembers what I lifted last time, tells me exactly what t
 
 <Eyebrow>How I built it</Eyebrow>
 
-## Managed like a product, with AI as the engineering team
+## Plan first, then test it under the bar
 
-1. **Wrote a spec first.** A "prompt wizard": purpose, look and feel, required screens, user flows. I ran it through other AI tools to tighten it before building.
-2. **Built, then used it at the gym.** Each workout surfaced something that broke or felt slow.
-3. **Turned that into the next spec.** About 40 short iterations from May to October 2026, each one a focused list of fixes.
+**1. A detailed spec before any code.** I used an AI app builder, and I knew the first prompt sets the app's foundation. A vague start means endless fix-and-break loops later. Think of building a house: asking for "a single-story house with a basement" up front beats adding the basement after the house is built. So my first prompt asked only for a code design plan, and explicitly ruled out writing code until the plan was solid.
+
+<Accordion title="What went into the spec">
+
+I wrote the spec with a structured "prompt wizard," then ran it past other AI tools to find gaps before building:
+
+- **Purpose:** what the app is for and who it serves. The most important part, since every later decision traces back to it.
+- **Look and feel:** visual direction, starting from a Figma Make mockup.
+- **Known UI elements:** the screens, tabs, buttons and fields it needs.
+- **User flows:** the full path through a workout, including what every button does.
+- **Inputs and actions:** for each thing a user enters, what happens to it.
+- **Mock data:** a small, realistic set (20–50 records) so the prototype stays fast.
+
+</Accordion>
+
+**2. Dogfooding, mine and two friends'.** I used every build in real workouts, and two friends who lift used it in theirs. Mid-set is the harshest test there is: anything slow, confusing or wrong shows up immediately.
+
+**3. Small, focused fix lists.** Each session's notes became a short, specific list of changes. About 40 rounds from May to October 2026.
 
 </Section>
 
@@ -74,7 +94,7 @@ I wanted one app that remembers what I lifted last time, tells me exactly what t
 
 <Eyebrow>What it does</Eyebrow>
 
-## Remembers, calculates, gets out of the way
+## Remembers, calculates, times, then gets out of the way
 
 <Grid cols={2} reveal="right">
 
@@ -82,8 +102,10 @@ I wanted one app that remembers what I lifted last time, tells me exactly what t
 
 - **Remembers your last session.** Add an exercise and it fills in last time's weight, sets and reps.
 - **Calculates warmups.** Pick bench, squat or deadlift, enter your working weight, and it lays out each warmup set with the plates to load per side.
+- **Times your rest** between sets, no second device needed.
 - **Routines and history.** Load a saved routine in one tap; check any exercise's history before you lift.
-- **Works anywhere.** Syncs across phone and laptop, installs to your home screen, exports to a spreadsheet.
+- **Saves your progress.** Sign in with SSO and it syncs across phone and laptop; it also installs to your home screen.
+- **Settings that matter.** Accessibility options, plus a spreadsheet export laid out like my original Google Sheets log.
 
 </div>
 
@@ -115,31 +137,33 @@ I wanted one app that remembers what I lifted last time, tells me exactly what t
 
 <Eyebrow>What I learned</Eyebrow>
 
-*TODO (Clem): two or three short lessons. Ideas: small, specific specs beat big ones; using it daily found bugs no review would; cutting Google Sheets sign-in kept it shippable.*
+### Plan before you build
+
+The time I spent on the spec paid off every week after. A thorough foundation meant fixes stayed small instead of turning into rebuilds.
+
+### Daily use finds what reviews miss
+
+Using it mid-workout, with tired hands and 90 seconds of rest, surfaced problems no desk review would have.
+
+### Small, specific changes win
+
+Short, focused fix lists shipped cleanly. Big batches of changes were where things broke.
 
 </Section>
 
-<Section tone="light">
+<Section tone="dark">
 
-<Eyebrow>Under the hood</Eyebrow>
+<Eyebrow>Spec sheet</Eyebrow>
 
-| | |
-|---|---|
-| Built with | Lovable (AI app builder), no hand-written code |
-| Timeline | May 26 – Oct 2026, ~40 iterations |
-| Front end | React, TanStack Start, Tailwind, shadcn/ui |
-| Back end | Lovable Cloud (Supabase): email login, Postgres |
-| Hosting | Lovable, on Cloudflare Workers |
-
-<Accordion title="Notable details">
-
-- Defaults come from history: the most recent logged weight and set count override saved routine values.
-- Warmup math is lift-specific: bench, squat and deadlift each use their own percentage ladder, rounded to loadable plates.
-- Every input saves to the cloud within a second or two, with an offline queue.
-- Demo mode runs entirely in the browser on sample data and never touches the database.
-- Spreadsheet export is formatted by week and day, matching my old workout template.
-- Accessibility pass against WCAG 2.2 AA.
-
-</Accordion>
+<Meta items={[
+  {"label":"Front end","values":["React + TanStack Start","Tailwind, shadcn/ui components"]},
+  {"label":"Back end","values":["Supabase: SSO sign-in, Postgres"]},
+  {"label":"Hosting","values":["Cloudflare Workers"]},
+  {"label":"Built with","values":["Lovable (AI app builder), from my spec"]},
+  {"label":"Data","values":["Autosaves within 1–2 seconds","Offline queue, syncs on reconnect"]},
+  {"label":"Logic","values":["Defaults come from your latest session","Lift-specific warmup ladders, rounded to loadable plates"]},
+  {"label":"Demo mode","values":["Runs in the browser on sample data","Never touches the database"]},
+  {"label":"Accessibility","values":["Checked against WCAG 2.2 AA"]}
+]} />
 
 </Section>
