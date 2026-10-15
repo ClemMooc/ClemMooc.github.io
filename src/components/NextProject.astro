@@ -1,34 +1,123 @@
 ---
-// Bottom of each case study: one "Next project" card (the next featured project by `order`,
-// wrapping around to the first) plus a link back to all work.
+// Bottom of each case study: a "Keep reading" 3D carousel of every other project, starting with
+// the next one by `order` (wrapping around). The middle card is live; the cards either side are
+// turned and shaded, and clicking one brings it to the middle. Plus a link back to all work.
 import { getCollection } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
 
 interface Props { current: string }
 const { current } = Astro.props;
 const all = (await getCollection('work', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
-const me = all.find((w) => w.id === current);
-const featured = all.filter((w) => w.data.featured && w.id !== current);
-const next = featured.find((w) => me && w.data.order > me.data.order) ?? featured[0];
+const at = all.findIndex((w) => w.id === current);
+// rotate so the project after this one comes first; drop the current one
+const others = [...all.slice(at + 1), ...all.slice(0, Math.max(at, 0))].filter((w) => w.id !== current);
 ---
-{next && (
-  <section class="next section--dark" aria-label="Next project">
+{others.length > 0 && (
+  <section class="next section--dark" aria-roledescription="carousel" aria-label="More projects">
     <div class="next__inner">
       <p class="eyebrow">Keep reading</p>
-      <div class="next__card">
-        <ProjectCard href={`/work/${next.id}/`} cover={next.data.cover} title={next.data.cardTitle} role={next.data.role} />
+      <div class="next__row">
+        <button class="next__btn" type="button" data-dir="-1" aria-label="Previous project">←</button>
+        <ul class="next__stage" tabindex="0" aria-label="Projects">
+          {others.map((w, i) => (
+            <li class="next__slide" data-pos="off"
+              aria-roledescription="slide" aria-label={`${i + 1} of ${others.length}`}>
+              <ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} />
+            </li>
+          ))}
+        </ul>
+        <button class="next__btn" type="button" data-dir="1" aria-label="Next project">→</button>
       </div>
       <a class="next__all" href="/#projects">← Back to all projects</a>
     </div>
   </section>
 )}
 
+<script>
+  document.querySelectorAll<HTMLElement>('.next').forEach((root) => {
+    const stage = root.querySelector<HTMLElement>('.next__stage')!;
+    const slides = [...stage.querySelectorAll<HTMLElement>('.next__slide')];
+    const n = slides.length;
+    let cur = 0;
+
+    const show = (i: number) => {
+      cur = (i + n) % n;
+      slides.forEach((s, k) => {
+        let d = (k - cur + n) % n;          // distance to the right of the middle card
+        if (d > n / 2) d -= n;              // ...or to the left, whichever is shorter
+        const pos = Math.abs(d) <= 2 ? String(d) : 'off'; // ±2 wait just off-screen on their side
+        s.dataset.pos = pos;
+        // only the middle card is reachable by keyboard and screen readers
+        s.setAttribute('aria-hidden', String(pos !== '0'));
+        s.querySelectorAll('a').forEach((a) => (a.tabIndex = pos === '0' ? 0 : -1));
+      });
+    };
+
+    root.querySelectorAll<HTMLButtonElement>('.next__btn').forEach((b) =>
+      b.addEventListener('click', () => show(cur + Number(b.dataset.dir))));
+    // clicking a side card brings it to the middle instead of opening it
+    slides.forEach((s, k) => s.addEventListener('click', (e) => {
+      if (s.dataset.pos !== '0') { e.preventDefault(); show(k); }
+    }));
+    stage.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); show(cur + (e.key === 'ArrowRight' ? 1 : -1)); }
+    });
+    // swipe on touch screens
+    let x0: number | null = null;
+    stage.addEventListener('pointerdown', (e) => { x0 = e.clientX; });
+    stage.addEventListener('pointerup', (e) => {
+      if (x0 !== null && Math.abs(e.clientX - x0) > 40) show(cur + (e.clientX < x0 ? 1 : -1));
+      x0 = null;
+    });
+    show(0);
+  });
+</script>
+
 <style>
-  .next { background: var(--ink); border-top: 1px solid var(--line-dark); }
+  .next { background: var(--ink); border-top: 1px solid var(--line-dark); overflow-x: clip; }
   .next__inner { max-width: var(--max); margin: 0 auto; padding: 72px var(--gutter) 88px; text-align: center; }
   .next__inner > .eyebrow { margin-bottom: 32px; }
-  .next__card { max-width: 560px; margin: 0 auto 28px; text-align: left; }
+  .next__row { display: flex; align-items: center; justify-content: center; gap: 16px; }
+
+  /* every slide sits in the same grid cell; transforms move them left and right */
+  .next__stage {
+    display: grid; width: min(520px, 100%); margin: 0; padding: 0; list-style: none; text-align: left;
+    perspective: 1400px; touch-action: pan-y;
+  }
+  .next__stage:focus-visible { outline: 3px solid var(--blue); outline-offset: 8px; border-radius: 12px; }
+  .next__slide {
+    grid-area: 1 / 1;
+    transition: transform .45s cubic-bezier(.25, 1.08, .4, 1), filter .35s ease, opacity .35s ease;
+  }
+  .next__slide[data-pos='0']  { transform: none; z-index: 3; }
+  .next__slide[data-pos='1']  { transform: translateX(78%) rotateY(-32deg) scale(.82); filter: brightness(.4); z-index: 2; cursor: pointer; }
+  .next__slide[data-pos='-1'] { transform: translateX(-78%) rotateY(32deg) scale(.82); filter: brightness(.4); z-index: 2; cursor: pointer; }
+  .next__slide[data-pos='2']  { transform: translateX(150%) rotateY(-45deg) scale(.6); opacity: 0; pointer-events: none; z-index: 1; }
+  .next__slide[data-pos='-2'] { transform: translateX(-150%) rotateY(45deg) scale(.6); opacity: 0; pointer-events: none; z-index: 1; }
+  .next__slide[data-pos='off'] { transform: scale(.6); opacity: 0; pointer-events: none; z-index: 0; transition: none; }
+  .next__slide:not([data-pos='0']) :global(.card) { pointer-events: none; }
+  .next__slide[data-pos='1']:hover, .next__slide[data-pos='-1']:hover { filter: brightness(.6); }
+
+  .next__btn {
+    position: relative; z-index: 4; flex: none; width: 48px; height: 48px; border-radius: 50%; cursor: pointer;
+    background: var(--ink); color: var(--on-ink); border: 1px solid var(--line-dark); font-size: 20px;
+  }
+  .next__btn:hover { border-color: var(--accent); color: var(--accent); }
+  .next__btn:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+
+  .next__row + .next__all { margin-top: 28px; }
   .next__all { display: inline-flex; align-items: center; min-height: 44px; font-family: var(--font-display); font-weight: 600; color: var(--on-ink); text-decoration: none; }
   .next__all:hover { color: var(--accent); }
-  @media (max-width: 767px) { .next__inner { padding-block: 48px 64px; } }
+
+  @media (prefers-reduced-motion: reduce) { .next__slide { transition: none; } }
+  @media (max-width: 767px) {
+    .next__inner { padding-block: 48px 64px; }
+    .next__row { gap: 0; }
+    .next__btn { position: absolute; width: 40px; height: 40px; }
+    .next__btn[data-dir='-1'] { left: 8px; }
+    .next__btn[data-dir='1'] { right: 8px; }
+    .next__row { position: relative; }
+    .next__stage { width: 78%; }
+  }
 </style>
