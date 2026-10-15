@@ -3,12 +3,12 @@ title: "GymMate: workout tracker & warmup calculator"
 cardTitle: "GymMate / Workout tracker"
 seoTitle: "GymMate · Case study"
 category: "ux"
-order: 6
-cover: "gymmate/cover.png"
+order: 2.5
+cover: "gymmate/tile.png"
 hero: "gymmate/banner.png"
-description: "A workout tracker, warmup calculator and rest timer I planned, tested and shipped to replace three tools I used every gym session."
+description: "A workout tracker, warmup calculator and rest timer in one app, designed so the phone stays out of the way."
 eyebrow: "PERSONAL PROJECT · WORKOUT APP"
-role: "Product owner & designer · May–Oct 2026"
+role: "Web app · Solo"
 result: "Replaced a spreadsheet, a warmup calculator and a timer with one app I use every session."
 featured: false
 draft: true
@@ -20,13 +20,14 @@ draft: true
 
 # GymMate: three gym tools in one app
 
-GymMate is a workout tracker, warmup calculator and rest timer I planned, tested and shipped for my own training. I use it every session, and so do two lifting friends. [Try the demo](https://warm-up-and-lift.lovable.app/demo), no account needed.
+A workout tracker, warmup calculator and rest timer in one place. I use it every session, and so do two friends who lift.
+
+<Button href="https://warm-up-and-lift.lovable.app/demo">Try the demo</Button>
 
 <Meta items={[
-  {"label":"Problem","values":["Every set meant switching between a spreadsheet, a warmup calculator and a timer."]},
-  {"label":"My role","values":["Product owner and designer: wrote the spec, ran the testing and prioritized every round of fixes."]},
-  {"label":"Testers","values":["Me, plus two friends who lift"]},
-  {"label":"Timeline","values":["May–Oct 2026, about 40 iterations"]}
+  {"label":"Problem","values":["Every set meant switching between three apps."]},
+  {"label":"My role","values":["Product owner, designer and researcher. Solo project."]},
+  {"label":"Timeline","values":["May–Oct 2026, about 40 versions"]}
 ]} />
 
 </Section>
@@ -35,27 +36,27 @@ GymMate is a workout tracker, warmup calculator and rest timer I planned, tested
 
 <Eyebrow>Why I built it</Eyebrow>
 
-## Three touchpoints for every set
+## Too much phone, not enough lifting
 
 <Grid cols={2}>
 
 <div>
 
-I've lifted for several years, built around 5x5 training and progressive overload: add a little weight each session and keep the streak going. That only works if you know exactly what you lifted last time.
-
-My setup had three touchpoints:
-
-1. **A Google Sheets log.** I built each workout by hand, copying and pasting rows of sets and reps every session.
-2. **A warmup calculator website** to work out which plates to load for each warmup set.
-3. **A rest timer** on my phone or Apple Watch.
-
-Every switch cost focus between sets. I wanted one place that remembers my last session, plans my warmups and times my rest.
+<Img src="gymmate/three-tools.png" alt="Diagram: three separate tools, a spreadsheet log, a warmup calculator and a rest timer, with arrows merging into one GymMate app." caption="Three tools, one app." />
 
 </div>
 
 <div>
 
-<Img class="phone" src="gymmate/lofi-tracker.jpg" alt="GymMate's Tracker screen: a Barbell Squat entry with a Warmup button, a working weight of 215 lbs, RPE 9, and five sets of 5 reps with completed sets checked off." caption="The tracker: today's lifts, with last session's numbers filled in." />
+I've lifted for several years on a 5x5 program, which means five sets of five reps at one working weight.
+
+The idea behind it is progressive overload. You add a little weight each session, usually 5 lb, and your body adapts. It only works if you know exactly what you lifted last time.
+
+Before each heavy lift, you warm up. A few lighter sets prepare your muscles and joints without tiring them. Each of those sets has its own weight, and the weights change every time your working weight goes up.
+
+So my workouts had three parts. A Google Sheets log, which I rebuilt by hand each day by copying the last routine. A warmup calculator in Chrome, whose numbers I copied back into the sheet. And a timer on my phone or Apple Watch for rest.
+
+I go to the gym to get away from my phone. This made me spend more time on it.
 
 </div>
 
@@ -69,24 +70,54 @@ Every switch cost focus between sets. I wanted one place that remembers my last 
 
 ## Plan first, then test it under the bar
 
-**1. A detailed spec before any code.** I used an AI app builder, and I knew the first prompt sets the app's foundation. A vague start means endless fix-and-break loops later. Think of building a house: asking for "a single-story house with a basement" up front beats adding the basement after the house is built. So my first prompt asked only for a code design plan, and explicitly ruled out writing code until the plan was solid.
+<Grid cols={2} reveal="left">
+
+<div>
+
+### A careful plan
+
+I built GymMate with an AI app builder. The first instructions shape everything that follows, so I wrote a complete spec before any code existed. The first step was a design plan only, with code ruled out until the plan held up.
+
+It's like building a house. A basement is easy to include in the plans and hard to add later.
+
+### The warmup math
+
+Warmup calculators cover many programs, each with its own formula. I only use 5x5, so I took that one ladder and built it in:
+
+1. Two sets of 5 with the empty 45 lb bar
+2. One set of 5 at about half your working weight
+3. One set of 3 at about 70%
+4. One set of 2 at about 90%
+5. Then your five working sets
+
+Every step rounds to plates you can load, listed per side.
+
+</div>
+
+<div>
+
+<Img class="phone" src="gymmate/lofi-warmup.jpg" alt="GymMate's Warmup Calculator for Bench Press at 185 lbs, listing five sets from the empty 45 lb bar up to 185 lbs, with the plates to load per side for each." caption="The warmup ladder for a 185 lb bench press." />
+
+</div>
+
+</Grid>
 
 <Accordion title="What went into the spec">
 
-I wrote the spec with a structured "prompt wizard," then ran it past other AI tools to find gaps before building:
+I wrote the spec with a structured template I call my prompt wizard, then had other AI tools review it for gaps.
 
-- **Purpose:** what the app is for and who it serves. The most important part, since every later decision traces back to it.
-- **Look and feel:** visual direction, starting from a Figma Make mockup.
-- **Known UI elements:** the screens, tabs, buttons and fields it needs.
-- **User flows:** the full path through a workout, including what every button does.
-- **Inputs and actions:** for each thing a user enters, what happens to it.
-- **Mock data:** a small, realistic set (20–50 records) so the prototype stays fast.
+- Title and purpose. What the app is for and who it serves. Everything else follows from this.
+- Look and feel, starting from a Figma Make mockup.
+- The screens, tabs, buttons and fields it needs.
+- User flows through a whole workout, including what each button does.
+- Every input, and what happens to it.
+- A small set of sample data, 20 to 50 records, so the prototype stays quick.
 
 </Accordion>
 
-**2. Dogfooding, mine and two friends'.** I used every build in real workouts, and two friends who lift used it in theirs. Mid-set is the harshest test there is: anything slow, confusing or wrong shows up immediately.
+### Tested in real workouts
 
-**3. Small, focused fix lists.** Each session's notes became a short, specific list of changes. About 40 rounds from May to October 2026.
+I used every version at the gym, and ran usability tests with two friends who lift. Problems show up quickly when you're tired and resting for 90 seconds. Each session ended with a short list of fixes for the next version.
 
 </Section>
 
@@ -94,38 +125,46 @@ I wrote the spec with a structured "prompt wizard," then ran it past other AI to
 
 <Eyebrow>What it does</Eyebrow>
 
-## Remembers, calculates, times, then gets out of the way
+## Everything for the workout, in one place
 
 <Grid cols={2} reveal="right">
 
 <div>
 
-- **Remembers your last session.** Add an exercise and it fills in last time's weight, sets and reps.
-- **Calculates warmups.** Pick bench, squat or deadlift, enter your working weight, and it lays out each warmup set with the plates to load per side.
-- **Times your rest** between sets, no second device needed.
-- **Routines and history.** Load a saved routine in one tap; check any exercise's history before you lift.
-- **Saves your progress.** Sign in with SSO and it syncs across phone and laptop; it also installs to your home screen.
-- **Settings that matter.** Accessibility options, plus a spreadsheet export laid out like my original Google Sheets log.
+<Tabs labels={["Tracker", "Routines"]}>
+
+<div>
+
+<Img class="phone" src="gymmate/lofi-tracker.jpg" alt="GymMate's Tracker screen: a Barbell Squat entry with a Warmup button, a working weight of 215 lbs, RPE 9, and five sets of 5 reps with completed sets checked off." caption="Today's lifts, filled in from last session." />
 
 </div>
 
 <div>
 
-<Tabs labels={["Warmup", "Routines"]}>
-
-<div>
-
-<Img class="phone" src="gymmate/lofi-warmup.jpg" alt="GymMate's Warmup Calculator for Bench Press at 185 lbs, listing five sets from the empty 45 lb bar up to 185 lbs, with the plates to load per side for each." caption="Warmup sets, with the plates to load per side." />
-
-</div>
-
-<div>
-
-<Img class="phone" src="gymmate/lofi-routines.jpg" alt="GymMate's Routines screen showing two saved routines, Chest 1 and Chest 2, each listing four exercises with sets and weights." caption="Saved routines load in one tap." />
+<Img class="phone" src="gymmate/lofi-routines.jpg" alt="GymMate's Routines screen showing two saved routines, Chest 1 and Chest 2, each listing four exercises with sets and weights." caption="Saved routines." />
 
 </div>
 
 </Tabs>
+
+</div>
+
+<div>
+
+It remembers your last session. Add an exercise, and last time's weight, sets and reps are already there.
+
+It saves as you type. Your screen locks many times during a workout, so every entry is kept the moment you make it. It works offline too, and syncs when you reconnect.
+
+It also has:
+
+- Warmup sets for each lift, with plates per side
+- A rest timer
+- Saved routines, or your own program
+- Notes on any set, with a full history for each exercise
+- Sync between phone and desktop
+- Export to Google Sheets, in the layout of my original log
+- Accessibility settings
+- A demo mode with sample data, so anyone can try it without an account
 
 </div>
 
@@ -139,15 +178,15 @@ I wrote the spec with a structured "prompt wizard," then ran it past other AI to
 
 ### Plan before you build
 
-The time I spent on the spec paid off every week after. A thorough foundation meant fixes stayed small instead of turning into rebuilds.
+Time spent on the spec saved time every week after. Fixes stayed small.
 
-### Daily use finds what reviews miss
+### Use it where it's used
 
-Using it mid-workout, with tired hands and 90 seconds of rest, surfaced problems no desk review would have.
+The gym found problems a desk review never would.
 
-### Small, specific changes win
+### Change a little at a time
 
-Short, focused fix lists shipped cleanly. Big batches of changes were where things broke.
+Small, specific fixes worked. Large batches of changes broke things.
 
 </Section>
 
@@ -156,14 +195,9 @@ Short, focused fix lists shipped cleanly. Big batches of changes were where thin
 <Eyebrow>Spec sheet</Eyebrow>
 
 <Meta items={[
-  {"label":"Front end","values":["React + TanStack Start","Tailwind, shadcn/ui components"]},
+  {"label":"Front end","values":["React + TanStack Start","Tailwind, shadcn/ui components","Built with Lovable, from my spec"]},
   {"label":"Back end","values":["Supabase: SSO sign-in, Postgres"]},
-  {"label":"Hosting","values":["Cloudflare Workers"]},
-  {"label":"Built with","values":["Lovable (AI app builder), from my spec"]},
-  {"label":"Data","values":["Autosaves within 1–2 seconds","Offline queue, syncs on reconnect"]},
-  {"label":"Logic","values":["Defaults come from your latest session","Lift-specific warmup ladders, rounded to loadable plates"]},
-  {"label":"Demo mode","values":["Runs in the browser on sample data","Never touches the database"]},
-  {"label":"Accessibility","values":["Checked against WCAG 2.2 AA"]}
+  {"label":"Hosting","values":["Cloudflare Workers"]}
 ]} />
 
 </Section>
