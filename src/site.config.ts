@@ -6,7 +6,7 @@ export const site = {
   name: 'Clem Mooc',
   title: 'Clem Mooc · Research & Technical Program Manager',
   description:
-    'Research program manager with a background in quantitative UX research and design. Case studies from Cisco Webex, healthcare and more.',
+    'Research program manager with a background in quantitative UX research and design. Case studies from Cisco Webex, healthcare, and more.',
   location: 'Seattle, WA',
   email: 'clementmooc@gmail.com',
 
