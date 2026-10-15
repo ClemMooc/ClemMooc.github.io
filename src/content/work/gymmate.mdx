@@ -5,7 +5,7 @@ seoTitle: "GymMate · Case study"
 category: "ux"
 order: 1.5
 cover: "gymmate/tile-v2.png"
-hero: "gymmate/banner-v2.png"
+hero: "gymmate/banner-v3.png"
 description: "A workout tracker, warmup calculator, and rest timer in one app, designed so the phone stays out of the way."
 eyebrow: "PERSONAL PROJECT · WORKOUT APP"
 role: "Web app · Solo"
@@ -19,7 +19,7 @@ featured: false
 
 # GymMate: super-setting my gym tools into one app
 
-A workout tracker, warmup calculator, and rest timer in one place. I use it every session, and so do two friends who lift.
+A workout tracker, warmup calculator, and rest timer in one place. Fewer taps, more reps.
 
 <Button href="https://warm-up-and-lift.lovable.app/demo">Try the demo</Button>
 
@@ -36,7 +36,7 @@ A workout tracker, warmup calculator, and rest timer in one place. I use it ever
 
 <Eyebrow>Why I built it</Eyebrow>
 
-## Too much phone, not enough lifting
+## The best gym app is the one you barely touch
 
 <Grid cols={2}>
 
@@ -48,15 +48,13 @@ A workout tracker, warmup calculator, and rest timer in one place. I use it ever
 
 <div>
 
-I've lifted for several years on a 5x5 program, which means five sets of five reps at one working weight.
+**Getting stronger runs on numbers, and mine were scattered across three apps I juggled between every set.**
 
-The idea behind it is progressive overload. You add a little weight each session, usually 5 lb, and your body adapts. It only works if you know exactly what you lifted last time.
+I've trained on a 5x5 program for years: five sets of five reps at one weight, adding a little each session. That's progressive overload, and it only works if you have three things during a 90-second rest: last session's numbers, a warmup ladder for today's weight, and a timer.
 
-Before each heavy lift, you warm up. A few lighter sets prepare your muscles and joints without tiring them. Each of those sets has its own weight, and the weights change every time your working weight goes up.
+That took three tools. A Google Sheets log I rebuilt by hand every day, a warmup calculator in Chrome, and a rest timer on my phone or Apple Watch.
 
-So my workouts had three parts. A Google Sheets log, which I rebuilt by hand each day by copying the last routine. A warmup calculator in Chrome, whose numbers I copied back into the sheet. And a timer on my phone or Apple Watch for rest.
-
-I go to the gym to get away from my phone. This made me spend more time on it.
+**I spent my rest switching apps instead of resting. GymMate puts everything on one screen.**
 
 </div>
 
@@ -68,11 +66,11 @@ I go to the gym to get away from my phone. This made me spend more time on it.
 
 <Eyebrow>How I built it</Eyebrow>
 
-## Plan first, then test it under the bar
+## Spec it, build it, test it at the gym
 
 ### A careful plan
 
-I built GymMate with an AI app builder. The first instructions shape everything that follows, so I wrote a complete spec before any code existed. The first step was a design plan only, with code ruled out until the plan held up.
+I built GymMate with Lovable, an AI app builder, mainly because it includes a built-in backend (Supabase) for user accounts and saved data. With a builder like this, the first instructions shape everything that follows, so I wrote a complete spec before any code existed. Step one was a design plan only. No code until the plan held up.
 
 It's like building a house. A basement is easy to include in the plans and hard to add later.
 

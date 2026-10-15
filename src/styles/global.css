@@ -136,8 +136,14 @@ main { position: relative; }
 .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 72px var(--gutter); }
 @media (max-width: 767px) { .container { padding-block: 48px; } }
 .container--narrow { max-width: 900px; }
+/* Two sections in a row with the same background share one gap instead of doubling it */
+.section--light + .section--light > .container,
+.section--dark + .section--dark > .container { padding-top: 0; }
+/* Half the space between a case study's banner and its title */
+.hero-banner + .case > .section:first-child > .container { padding-top: 36px; }
+@media (max-width: 767px) { .hero-banner + .case > .section:first-child > .container { padding-top: 24px; } }
 
-.section { position: relative; }
+.section { position: relative; display: flow-root; } /* flow-root keeps child margins inside, so no gaps show between sections */
 .section--dark { background: var(--bg); color: var(--cream); }
 .section--light { background: var(--paper); color: var(--text); }
 .section--light figcaption, .section--light .img figcaption { color: var(--ink-muted); }
