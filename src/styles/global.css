@@ -274,3 +274,6 @@ main { position: relative; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* Phone screenshots in case studies: <Img class="phone" ... /> keeps them from filling a whole column */
+.img.phone { max-width: 320px; margin-inline: auto; }

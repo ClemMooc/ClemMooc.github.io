@@ -1,0 +1,145 @@
+---
+title: "GymMate: workout tracker & warmup calculator"
+cardTitle: "GymMate / Workout tracker"
+seoTitle: "GymMate · Case study"
+category: "ux"
+order: 6
+cover: "gymmate/cover.png"
+hero: "gymmate/hero.png"
+description: "A workout tracker and 5x5 warmup calculator I specced, built with an AI app builder and use every gym session."
+eyebrow: "PERSONAL PROJECT · AI-BUILT APP"
+role: "Solo product owner · built with Lovable · May–Oct 2026"
+featured: false
+draft: true
+---
+
+<Section tone="dark">
+
+<Eyebrow>Personal project · AI-built app</Eyebrow>
+
+# GymMate: one app for the whole workout
+
+GymMate is a workout tracker and warmup calculator I built for myself, without writing code, and now use every gym session. [Try the demo](https://warm-up-and-lift.lovable.app/demo), no account needed.
+
+<Meta items={[
+  {"label":"Problem","values":["Logging sets, tracking progress and working out warmup plates meant juggling three apps between sets."]},
+  {"label":"My role","values":["Solo product owner: wrote the specs, tested every build at the gym, and prioritized about 40 rounds of fixes."]},
+  {"label":"Built with","values":["Lovable (AI app builder), no hand-written code"]},
+  {"label":"Timeline","values":["May–Oct 2026"]}
+]} />
+
+</Section>
+
+<Section tone="light">
+
+<Eyebrow>Why I built it</Eyebrow>
+
+## Every app switch broke my focus
+
+<Grid cols={2}>
+
+<div>
+
+Mid-workout, I was bouncing between a notes app to log sets, a spreadsheet to track progress and a calculator to figure out warmup plates. Every switch broke my focus between sets.
+
+I wanted one app that remembers what I lifted last time, tells me exactly what to load for warmups, and gets out of the way.
+
+*TODO (Clem): one line about your own training (5x5, how long you've lifted).*
+
+</div>
+
+<div>
+
+<Img class="phone" src="gymmate/lofi-tracker.jpg" alt="GymMate's Tracker screen: a Barbell Squat entry with a Warmup button, a working weight of 215 lbs, RPE 9, and five sets of 5 reps with completed sets checked off." caption="The tracker: today's lifts, with last session's numbers filled in." />
+
+</div>
+
+</Grid>
+
+</Section>
+
+<Section tone="light">
+
+<Eyebrow>How I built it</Eyebrow>
+
+## Managed like a product, with AI as the engineering team
+
+1. **Wrote a spec first.** A "prompt wizard": purpose, look and feel, required screens, user flows. I ran it through other AI tools to tighten it before building.
+2. **Built, then used it at the gym.** Each workout surfaced something that broke or felt slow.
+3. **Turned that into the next spec.** About 40 short iterations from May to October 2026, each one a focused list of fixes.
+
+</Section>
+
+<Section tone="light">
+
+<Eyebrow>What it does</Eyebrow>
+
+## Remembers, calculates, gets out of the way
+
+<Grid cols={2} reveal="right">
+
+<div>
+
+- **Remembers your last session.** Add an exercise and it fills in last time's weight, sets and reps.
+- **Calculates warmups.** Pick bench, squat or deadlift, enter your working weight, and it lays out each warmup set with the plates to load per side.
+- **Routines and history.** Load a saved routine in one tap; check any exercise's history before you lift.
+- **Works anywhere.** Syncs across phone and laptop, installs to your home screen, exports to a spreadsheet.
+
+</div>
+
+<div>
+
+<Tabs labels={["Warmup", "Routines"]}>
+
+<div>
+
+<Img class="phone" src="gymmate/lofi-warmup.jpg" alt="GymMate's Warmup Calculator for Bench Press at 185 lbs, listing five sets from the empty 45 lb bar up to 185 lbs, with the plates to load per side for each." caption="Warmup sets, with the plates to load per side." />
+
+</div>
+
+<div>
+
+<Img class="phone" src="gymmate/lofi-routines.jpg" alt="GymMate's Routines screen showing two saved routines, Chest 1 and Chest 2, each listing four exercises with sets and weights." caption="Saved routines load in one tap." />
+
+</div>
+
+</Tabs>
+
+</div>
+
+</Grid>
+
+</Section>
+
+<Section tone="light">
+
+<Eyebrow>What I learned</Eyebrow>
+
+*TODO (Clem): two or three short lessons. Ideas: small, specific specs beat big ones; using it daily found bugs no review would; cutting Google Sheets sign-in kept it shippable.*
+
+</Section>
+
+<Section tone="light">
+
+<Eyebrow>Under the hood</Eyebrow>
+
+| | |
+|---|---|
+| Built with | Lovable (AI app builder), no hand-written code |
+| Timeline | May 26 – Oct 2026, ~40 iterations |
+| Front end | React, TanStack Start, Tailwind, shadcn/ui |
+| Back end | Lovable Cloud (Supabase): email login, Postgres |
+| Hosting | Lovable, on Cloudflare Workers |
+
+<Accordion title="Notable details">
+
+- Defaults come from history: the most recent logged weight and set count override saved routine values.
+- Warmup math is lift-specific: bench, squat and deadlift each use their own percentage ladder, rounded to loadable plates.
+- Every input saves to the cloud within a second or two, with an offline queue.
+- Demo mode runs entirely in the browser on sample data and never touches the database.
+- Spreadsheet export is formatted by week and day, matching my old workout template.
+- Accessibility pass against WCAG 2.2 AA.
+
+</Accordion>
+
+</Section>
