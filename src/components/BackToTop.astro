@@ -1,6 +1,54 @@
 <a href="#top" class="back-to-top" aria-label="Back to top">
   <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </a>
+
+<script>
+  // On case studies (full-width banner), the button starts centered on the banner's bottom edge
+  // pointing down, as a "scroll for more" cue. As you scroll through the banner it glides to the
+  // bottom right and the arrow turns to point up, so it reads as the same button.
+  const btn = document.querySelector<HTMLAnchorElement>('.back-to-top');
+  const banner = document.querySelector<HTMLElement>('.hero-banner');
+  if (btn && banner) {
+    btn.classList.add('back-to-top--cue');
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const y = window.scrollY;
+      const span = Math.max(200, banner.offsetHeight * 0.6);   // scroll distance for the full move
+      const p = Math.min(1, y / span);                          // 0 = on the banner, 1 = bottom right
+      const home = btn.offsetWidth / 2 + parseFloat(getComputedStyle(btn).right); // its centre, from the right edge
+      const dx = (window.innerWidth / 2 - home) * (1 - p);
+      // if the banner is shorter than the screen, start on the banner's bottom edge
+      const bannerBottom = banner.getBoundingClientRect().bottom + y;
+      const lift = Math.max(0, window.innerHeight - bannerBottom) * (1 - p);
+      btn.style.transform = `translate(${-dx}px, ${-lift}px)`;
+      btn.style.setProperty('--turn', `${180 * (1 - p)}deg`);
+      const down = p < 0.5;
+      btn.classList.toggle('back-to-top--down', down);
+      btn.setAttribute('aria-label', down ? 'Scroll to the case study' : 'Back to top');
+    };
+    const request = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    btn.addEventListener('click', (e) => {
+      if (!btn.classList.contains('back-to-top--down')) return;
+      e.preventDefault();
+      const nav = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64;
+      const from = window.scrollY, to = banner.getBoundingClientRect().bottom + from - nav;
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) { window.scrollTo({ top: to, behavior: 'instant' }); return; }
+      // quick eased scroll (~0.5 s): fast start, soft landing
+      const t0 = performance.now(), dur = 500;
+      const step = (t: number) => {
+        const k = Math.min(1, (t - t0) / dur);
+        window.scrollTo({ top: from + (to - from) * (1 - Math.pow(1 - k, 3)), behavior: 'instant' });
+        if (k < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
+    update();
+  }
+</script>
+
 <style>
   .back-to-top {
     position: fixed; right: 24px; bottom: 24px; z-index: 40;
@@ -10,5 +58,10 @@
     box-shadow: 0 4px 16px #0005;
   }
   .back-to-top:hover { color: var(--accent); border-color: var(--accent); }
+  /* case-study cue: position and arrow angle follow the scroll (set in the script above) */
+  .back-to-top--cue svg { transform: rotate(var(--turn, 0deg)); }
+  .back-to-top--down svg { animation: cue-bob 1.8s ease-in-out 1s 2; } /* stops within 5 s */
+  @keyframes cue-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 4px; } }
   @media (max-width: 767px) { .back-to-top { right: 12px; bottom: 12px; width: 44px; height: 44px; } }
+  @media (prefers-reduced-motion: reduce) { .back-to-top--down svg { animation: none; } }
 </style>

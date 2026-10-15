@@ -40,7 +40,8 @@
     const onScroll = () => {
       const y = scrollY;
       if (nav) nav.classList.toggle('nav--hidden', y > lastY && y > 150 && !nav.classList.contains('nav--open'));
-      if (toTop) toTop.classList.toggle('is-visible', y > innerHeight);
+      // case studies keep it visible: it's a scroll-down cue on the banner, then back-to-top
+      if (toTop) toTop.classList.toggle('is-visible', y > innerHeight || !!document.querySelector('.hero-banner'));
       lastY = y;
     };
     onScroll();
