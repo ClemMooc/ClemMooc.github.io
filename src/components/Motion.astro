@@ -30,7 +30,7 @@
         e.target.classList.add('is-in');
         io.unobserve(e.target);
       }
-    }, { rootMargin: '0px 0px -8% 0px' });
+    }, { rootMargin: '0px' });
     document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
 
     // Nav: hide on scroll down, show on scroll up.
@@ -53,7 +53,7 @@
     transition: opacity .6s cubic-bezier(.25, 1, .5, 1), transform .6s cubic-bezier(.25, 1, .5, 1);
   }
   .motion [data-reveal]:not(.is-in) { opacity: 0; }
-  /* Optional stagger: style="--i:N" delays item N by N × 90ms (used for the project cards) */
+  /* Optional stagger: style="--i:N" delays item N by N × 90ms (project cards restart it on each row) */
   .motion [data-reveal][style*='--i'] { transition-delay: calc(var(--i) * 90ms); }
   .motion [data-reveal='left']:not(.is-in) { transform: translateX(-50px); }
   .motion [data-reveal='right']:not(.is-in) { transform: translateX(50px); }
