@@ -1,0 +1,203 @@
+---
+title: "GymMate: workout tracker & warmup calculator"
+cardTitle: "GymMate / Workout tracker"
+seoTitle: "GymMate · Case study"
+category: "ux"
+order: 2.5
+cover: "gymmate/tile.png"
+hero: "gymmate/banner.png"
+description: "A workout tracker, warmup calculator and rest timer in one app, designed so the phone stays out of the way."
+eyebrow: "PERSONAL PROJECT · WORKOUT APP"
+role: "Web app · Solo"
+result: "Replaced a spreadsheet, a warmup calculator and a timer with one app I use every session."
+featured: false
+draft: true
+---
+
+<Section tone="dark">
+
+<Eyebrow>Personal project · Workout app</Eyebrow>
+
+# GymMate: three gym tools in one app
+
+A workout tracker, warmup calculator and rest timer in one place. I use it every session, and so do two friends who lift.
+
+<Button href="https://warm-up-and-lift.lovable.app/demo">Try the demo</Button>
+
+<Meta items={[
+  {"label":"Problem","values":["Every set meant switching between three apps."]},
+  {"label":"My role","values":["Product owner, designer and researcher. Solo project."]},
+  {"label":"Timeline","values":["May–Oct 2026, about 40 versions"]}
+]} />
+
+</Section>
+
+<Section tone="light">
+
+<Eyebrow>Why I built it</Eyebrow>
+
+## Too much phone, not enough lifting
+
+<Grid cols={2}>
+
+<div>
+
+<Img src="gymmate/three-tools.png" alt="Diagram: three separate tools, a spreadsheet log, a warmup calculator and a rest timer, with arrows merging into one GymMate app." caption="Three tools, one app." />
+
+</div>
+
+<div>
+
+I've lifted for several years on a 5x5 program, which means five sets of five reps at one working weight.
+
+The idea behind it is progressive overload. You add a little weight each session, usually 5 lb, and your body adapts. It only works if you know exactly what you lifted last time.
+
+Before each heavy lift, you warm up. A few lighter sets prepare your muscles and joints without tiring them. Each of those sets has its own weight, and the weights change every time your working weight goes up.
+
+So my workouts had three parts. A Google Sheets log, which I rebuilt by hand each day by copying the last routine. A warmup calculator in Chrome, whose numbers I copied back into the sheet. And a timer on my phone or Apple Watch for rest.
+
+I go to the gym to get away from my phone. This made me spend more time on it.
+
+</div>
+
+</Grid>
+
+</Section>
+
+<Section tone="light">
+
+<Eyebrow>How I built it</Eyebrow>
+
+## Plan first, then test it under the bar
+
+<Grid cols={2} reveal="left">
+
+<div>
+
+### A careful plan
+
+I built GymMate with an AI app builder. The first instructions shape everything that follows, so I wrote a complete spec before any code existed. The first step was a design plan only, with code ruled out until the plan held up.
+
+It's like building a house. A basement is easy to include in the plans and hard to add later.
+
+### The warmup math
+
+Warmup calculators cover many programs, each with its own formula. I only use 5x5, so I took that one ladder and built it in:
+
+1. Two sets of 5 with the empty 45 lb bar
+2. One set of 5 at about half your working weight
+3. One set of 3 at about 70%
+4. One set of 2 at about 90%
+5. Then your five working sets
+
+Every step rounds to plates you can load, listed per side.
+
+</div>
+
+<div>
+
+<Img class="phone" src="gymmate/lofi-warmup.jpg" alt="GymMate's Warmup Calculator for Bench Press at 185 lbs, listing five sets from the empty 45 lb bar up to 185 lbs, with the plates to load per side for each." caption="The warmup ladder for a 185 lb bench press." />
+
+</div>
+
+</Grid>
+
+<Accordion title="What went into the spec">
+
+I wrote the spec with a structured template I call my prompt wizard, then had other AI tools review it for gaps.
+
+- Title and purpose. What the app is for and who it serves. Everything else follows from this.
+- Look and feel, starting from a Figma Make mockup.
+- The screens, tabs, buttons and fields it needs.
+- User flows through a whole workout, including what each button does.
+- Every input, and what happens to it.
+- A small set of sample data, 20 to 50 records, so the prototype stays quick.
+
+</Accordion>
+
+### Tested in real workouts
+
+I used every version at the gym, and ran usability tests with two friends who lift. Problems show up quickly when you're tired and resting for 90 seconds. Each session ended with a short list of fixes for the next version.
+
+</Section>
+
+<Section tone="light">
+
+<Eyebrow>What it does</Eyebrow>
+
+## Everything for the workout, in one place
+
+<Grid cols={2} reveal="right">
+
+<div>
+
+<Tabs labels={["Tracker", "Routines"]}>
+
+<div>
+
+<Img class="phone" src="gymmate/lofi-tracker.jpg" alt="GymMate's Tracker screen: a Barbell Squat entry with a Warmup button, a working weight of 215 lbs, RPE 9, and five sets of 5 reps with completed sets checked off." caption="Today's lifts, filled in from last session." />
+
+</div>
+
+<div>
+
+<Img class="phone" src="gymmate/lofi-routines.jpg" alt="GymMate's Routines screen showing two saved routines, Chest 1 and Chest 2, each listing four exercises with sets and weights." caption="Saved routines." />
+
+</div>
+
+</Tabs>
+
+</div>
+
+<div>
+
+It remembers your last session. Add an exercise, and last time's weight, sets and reps are already there.
+
+It saves as you type. Your screen locks many times during a workout, so every entry is kept the moment you make it. It works offline too, and syncs when you reconnect.
+
+It also has:
+
+- Warmup sets for each lift, with plates per side
+- A rest timer
+- Saved routines, or your own program
+- Notes on any set, with a full history for each exercise
+- Sync between phone and desktop
+- Export to Google Sheets, in the layout of my original log
+- Accessibility settings
+- A demo mode with sample data, so anyone can try it without an account
+
+</div>
+
+</Grid>
+
+</Section>
+
+<Section tone="light">
+
+<Eyebrow>What I learned</Eyebrow>
+
+### Plan before you build
+
+Time spent on the spec saved time every week after. Fixes stayed small.
+
+### Use it where it's used
+
+The gym found problems a desk review never would.
+
+### Change a little at a time
+
+Small, specific fixes worked. Large batches of changes broke things.
+
+</Section>
+
+<Section tone="dark">
+
+<Eyebrow>Spec sheet</Eyebrow>
+
+<Meta items={[
+  {"label":"Front end","values":["React + TanStack Start","Tailwind, shadcn/ui components","Built with Lovable, from my spec"]},
+  {"label":"Back end","values":["Supabase: SSO sign-in, Postgres"]},
+  {"label":"Hosting","values":["Cloudflare Workers"]}
+]} />
+
+</Section>

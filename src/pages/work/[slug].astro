@@ -8,7 +8,7 @@ import ReadingProgress from '../../components/ReadingProgress.astro';
 import { mdxComponents } from '../../components/mdx';
 
 export async function getStaticPaths() {
-  const work = await getCollection('work', ({ data }) => !data.draft);
+  const work = await getCollection('work', ({ data }) => !data.draft || import.meta.env.DEV);
   return work.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }
 

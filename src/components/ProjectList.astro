@@ -7,7 +7,7 @@ import ProjectCard from './ProjectCard.astro';
 
 interface Props { exclude?: string; headingLevel?: 2 | 3 }
 const { exclude, headingLevel = 2 } = Astro.props;
-const work = (await getCollection('work', ({ data, id }) => !data.draft && id !== exclude))
+const work = (await getCollection('work', ({ data, id }) => (!data.draft || import.meta.env.DEV) && id !== exclude))
   .sort((a, b) => a.data.order - b.data.order);
 const featured = work.filter((w) => w.data.featured);
 const other = work.filter((w) => !w.data.featured);

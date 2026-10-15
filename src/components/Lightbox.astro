@@ -48,7 +48,8 @@
     fig.tabIndex = 0;
     fig.setAttribute('role', 'button');
     fig.setAttribute('aria-label', 'Enlarge image');
-    fig.addEventListener('click', () => open(fig));
+    // clicks on the caption are for selecting text, not enlarging
+    fig.addEventListener('click', (e) => { if (!(e.target as HTMLElement).closest('figcaption')) open(fig); });
     fig.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(fig); }
     });
@@ -58,6 +59,7 @@
 <style is:global>
   /* Hover: gentle zoom on the image */
   .img--zoom { cursor: zoom-in; }
+  .img--zoom figcaption { cursor: text; user-select: text; }
   .img--zoom img { transition: transform .35s ease, box-shadow .35s ease; }
   .img--zoom:hover img,
   .img--zoom:focus-visible img { transform: scale(1.03); box-shadow: 0 12px 32px rgba(0, 0, 0, .35); }
