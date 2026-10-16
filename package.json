@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Clem Mooc's portfolio site — Astro, hosted on GitHub Pages, media on Cloudflare R2.",
+  "description": "Clem Mooc's portfolio site \u2014 Astro, hosted on GitHub Pages, media on Cloudflare R2.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "check:media": "node scripts/check-media.mjs",
-    "media:upload": "node scripts/upload-media.mjs"
+    "media:upload": "node scripts/upload-media.mjs",
+    "capture:gymmate": "node scripts/capture-gymmate.mjs"
   },
   "engines": {
     "node": ">=22"
@@ -25,6 +26,7 @@
     "sharp": "^0.35.5"
   },
   "devDependencies": {
-    "wrangler": "^4.149.0"
+    "wrangler": "^4.149.0",
+    "playwright": "^1.48.0"
   }
 }
