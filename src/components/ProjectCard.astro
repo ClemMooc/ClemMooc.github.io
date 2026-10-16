@@ -16,7 +16,7 @@ const vt = href.match(/^\/work\/([^/]+)/)?.[1];
 <a class:list={['card', `card--${size}`]} href={href} {...(external ? { target: '_blank', rel: 'noopener' } : {})}>
   <div class="card__media">
     <Image style={vt ? `view-transition-name: project-${vt}` : undefined} src={media(cover)} alt="" inferSize widths={size === 'large' ? [480, 800, 1200] : [192, 288]}
-      sizes={size === 'large' ? '(max-width: 767px) 92vw, 46vw' : '96px'} class="card__img" />
+      sizes={size === 'large' ? '(max-width: 767px) 92vw, 46vw' : '144px'} class="card__img" />
   </div>
   <div class="card__body">
     <h3 class="card__title">{name}{external && <><span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in a new tab)</span></>}</h3>
@@ -47,7 +47,7 @@ const vt = href.match(/^\/work\/([^/]+)/)?.[1];
   /* Compact row: 96px square thumbnail, title and role side by side */
   .card--small { flex-direction: row; align-items: center; border-radius: 14px; }
   .card--small .card__media { padding: 10px; flex-shrink: 0; }
-  .card--small .card__img { width: 96px; height: 96px; aspect-ratio: 1; border-radius: 10px; }
+  .card--small .card__img { width: 144px; height: 96px; aspect-ratio: 3 / 2; border-radius: 10px; } /* wide enough to show the titles inside cover images */
   .card--small .card__body { padding: 10px 18px 10px 4px; justify-content: center; }
   .card--small .card__title { font-size: 1.05rem; }
   .card--small .card__role { font-size: 14px; }
