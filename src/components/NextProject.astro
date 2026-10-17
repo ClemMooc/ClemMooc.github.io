@@ -4,9 +4,10 @@
 // turned and shaded, and clicking one brings it to the middle. Plus a link back to all work.
 import { getCollection } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
+import { readingTime } from '../lib/readingTime';
 
-interface Props { current: string }
-const { current } = Astro.props;
+interface Props { current?: string; label?: string; backLink?: boolean } // the 404 page uses a different label and no back link
+const { current = '', label = 'Keep reading', backLink = true } = Astro.props;
 const all = (await getCollection('work', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
 const at = all.findIndex((w) => w.id === current);
 // rotate so the project after this one comes first; drop the current one
@@ -15,20 +16,20 @@ const others = [...all.slice(at + 1), ...all.slice(0, Math.max(at, 0))].filter((
 {others.length > 0 && (
   <section class="next section--dark" aria-roledescription="carousel" aria-label="More projects">
     <div class="next__inner">
-      <p class="eyebrow">Keep reading</p>
+      <p class="eyebrow">{label}</p>
       <div class="next__row">
         <button class="next__btn" type="button" data-dir="-1" aria-label="Previous project">←</button>
         <ul class="next__stage" tabindex="0" aria-label="Projects">
           {others.map((w, i) => (
             <li class="next__slide" data-pos="off"
               aria-roledescription="slide" aria-label={`${i + 1} of ${others.length}`}>
-              <ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} />
+              <ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} minutes={readingTime(w.body)} />
             </li>
           ))}
         </ul>
         <button class="next__btn" type="button" data-dir="1" aria-label="Next project">→</button>
       </div>
-      <a class="next__all" href="/#projects">← Back to all projects</a>
+      {backLink && <a class="next__all" href="/#projects">← Back to all projects</a>}
     </div>
   </section>
 )}

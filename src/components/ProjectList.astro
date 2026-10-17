@@ -4,6 +4,7 @@
 // `exclude` hides one project (used at the bottom of a case study to skip the current one).
 import { getCollection } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
+import { readingTime } from '../lib/readingTime';
 
 interface Props { exclude?: string; headingLevel?: 2 | 3 }
 const { exclude, headingLevel = 2 } = Astro.props;
@@ -16,7 +17,7 @@ const H = `h${headingLevel}` as 'h2' | 'h3';
 {featured.length > 0 && (
   <div class="projects-grid projects-grid--featured">
     {featured.map((w, i) => (
-      <div data-reveal="bottom" style={`--i:${i % 2}`}><ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} /></div>
+      <div data-reveal="bottom" style={`--i:${i % 2}`}><ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} minutes={readingTime(w.body)} /></div>
     ))}
   </div>
 )}
@@ -25,7 +26,7 @@ const H = `h${headingLevel}` as 'h2' | 'h3';
     <H class="projects-sub">Other projects</H>
     <div class="projects-grid projects-grid--other">
       {other.map((w, i) => (
-        <div data-reveal="bottom" style={`--i:${i % 2}`}><ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} size="small" /></div>
+        <div data-reveal="bottom" style={`--i:${i % 2}`}><ProjectCard href={`/work/${w.id}/`} cover={w.data.cover} title={w.data.cardTitle} role={w.data.role} minutes={readingTime(w.body)} size="small" /></div>
       ))}
     </div>
   </>

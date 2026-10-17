@@ -6,6 +6,7 @@ import NextProject from '../../components/NextProject.astro';
 import OnThisPage from '../../components/OnThisPage.astro';
 import ReadingProgress from '../../components/ReadingProgress.astro';
 import { mdxComponents } from '../../components/mdx';
+import { readingTime } from '../../lib/readingTime';
 
 export async function getStaticPaths() {
   const work = await getCollection('work', ({ data }) => !data.draft || import.meta.env.DEV);
@@ -15,9 +16,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
-// Reading time: words in the case study (tags and code stripped), at about 220 words a minute
-const words = (entry.body ?? '').replace(/<[^>]*>|\{[^}]*\}|[#*_`>|-]/g, ' ').split(/\s+/).filter(Boolean).length;
-const minutes = Math.max(1, Math.round(words / 220));
+const minutes = readingTime(entry.body);
 ---
 <Base title={d.seoTitle ?? d.title} description={d.description} image={d.hero ?? d.cover}>
   {d.hero && (
