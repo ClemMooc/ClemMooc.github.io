@@ -1,11 +1,18 @@
 ---
+// Shown for any address that doesn't exist (GitHub Pages serves this file as 404.html).
 import Base from '../layouts/Base.astro';
+import NextProject from '../components/NextProject.astro';
 ---
 <Base title="Page not found">
-  <div class="container nf">
-    <p class="eyebrow">404</p>
-    <h1>That page wandered off.</h1>
-    <p><a class="button" href="/">Back home</a> <a class="button" href="/#projects">See projects</a></p>
-  </div>
+  <section class="section section--dark">
+    <div class="container nf">
+      <p class="eyebrow">404</p>
+      <h1>That page wandered off.</h1>
+      <a class="button" href="/">Back home</a>
+    </div>
+  </section>
+  <NextProject label="Or try one of these" backLink={false} />
 </Base>
-<style>.nf { min-height: 50vh; } .nf h1 { font-size: clamp(2rem, 5vw, 3.5rem); }</style>
+<style>
+  .nf h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: .6em; }
+</style>

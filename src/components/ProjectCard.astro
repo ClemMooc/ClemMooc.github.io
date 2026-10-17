@@ -6,9 +6,9 @@ import { Image } from 'astro:assets';
 import { media } from '../lib/media';
 interface Props {
   href: string; cover: string; title: string;
-  role?: string; size?: 'large' | 'small'; external?: boolean;
+  role?: string; minutes?: number; size?: 'large' | 'small'; external?: boolean;
 }
-const { href, cover, title, role, size = 'large', external = false } = Astro.props;
+const { href, cover, title, role, minutes, size = 'large', external = false } = Astro.props;
 const name = title.replace(' / ', ' ').replace(/:\s*$/, '');
 // Shared with the case-study banner so the image grows into it on click (see global.css)
 const vt = href.match(/^\/work\/([^/]+)/)?.[1];
@@ -20,7 +20,7 @@ const vt = href.match(/^\/work\/([^/]+)/)?.[1];
   </div>
   <div class="card__body">
     <h3 class="card__title">{name}{external && <><span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in a new tab)</span></>}</h3>
-    {role && <p class="card__role">{role}</p>}
+    {role && <p class="card__role">{role}{minutes ? ` · ${minutes} min` : ''}</p>}
   </div>
 </a>
 

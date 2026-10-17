@@ -9,11 +9,9 @@ import ProjectList from '../components/ProjectList.astro';
 
   <section class="hero" aria-labelledby="hero-title">
     <h1 class="hero__title" id="hero-title">
-      I help teams understand people, and <span class="hero__accent">act on what they learn</span>.
+      Turning research into <span class="hero__accent">decisions</span>.
     </h1>
-    <p class="hero__intro">
-      I'm Clem, a research program manager in Seattle. I've spent my career between users and the teams building for them: quantitative UX research at Redfin, client delivery at a cloud software company, and most recently biometric research programs at Meta Reality Labs.
-    </p>
+    <a class="button hero__cta" href="/about">Let's talk</a>
   </section>
   </div>
 
@@ -33,11 +31,11 @@ import ProjectList from '../components/ProjectList.astro';
   .intro :global(.wave) { top: 0; z-index: 0; } /* same starting spot as About: top of the page, behind the nav */
   .intro > .hero { position: relative; z-index: 1; }
   .hero { max-width: var(--max); margin: 0 auto; padding: clamp(40px, 7vw, 88px) var(--gutter) 24px; }
-  .hero__title { font-size: clamp(2.2rem, 5.2vw, 4rem); line-height: 1.1; letter-spacing: -.025em; font-weight: 600; max-width: 18ch; margin: 0 0 1.5rem; }
+  .hero__title { font-size: clamp(2.2rem, 5.2vw, 4rem); line-height: 1.1; letter-spacing: -.025em; font-weight: 600; max-width: 18ch; margin: 0; }
   .hero__accent { color: var(--orange); }
-  .hero__intro { font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--muted); max-width: 46ch; margin: 0 0 2rem; }
 
-  .block { padding: 32px 0 88px; }
+  .hero__cta { margin-top: 24px; }
+  .block { padding: 16px 0 88px; }
   .block__inner { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
   .block__title { font-size: clamp(1.6rem, 3vw, 2.1rem); margin: .2em auto 32px; }
 
