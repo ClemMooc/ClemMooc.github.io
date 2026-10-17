@@ -10,11 +10,14 @@
   const banner = document.querySelector<HTMLElement>('.hero-banner');
   if (btn && banner) {
     btn.classList.add('back-to-top--cue');
+    const navH = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64;
     let ticking = false;
     const update = () => {
       ticking = false;
       const y = window.scrollY;
-      const span = Math.max(200, banner.offsetHeight * 0.6);   // scroll distance for the full move
+      // scroll distance for the full move; never more than the down button scrolls, so short (phone) banners finish too
+      const target = banner.getBoundingClientRect().bottom + y - navH();
+      const span = Math.max(40, Math.min(banner.offsetHeight * 0.6, target));
       const p = Math.min(1, y / span);                          // 0 = on the banner, 1 = bottom right
       const home = btn.offsetWidth / 2 + parseFloat(getComputedStyle(btn).right); // its centre, from the right edge
       const dx = (window.innerWidth / 2 - home) * (1 - p);
@@ -31,8 +34,7 @@
     btn.addEventListener('click', (e) => {
       if (!btn.classList.contains('back-to-top--down')) return;
       e.preventDefault();
-      const nav = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64;
-      const from = window.scrollY, to = banner.getBoundingClientRect().bottom + from - nav;
+      const from = window.scrollY, to = banner.getBoundingClientRect().bottom + from - navH();
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) { window.scrollTo({ top: to, behavior: 'instant' }); return; }
       // quick eased scroll (~0.5 s): fast start, soft landing
       const t0 = performance.now(), dur = 500;

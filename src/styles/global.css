@@ -139,6 +139,8 @@ main { position: relative; }
 /* Two sections in a row with the same background share one gap instead of doubling it */
 .section--light + .section--light > .container,
 .section--dark + .section--dark > .container { padding-top: 0; }
+/* Reading time, added to the end of the first label on a case study (set in pages/work/[slug].astro) */
+.case > .section:first-child .eyebrow:first-of-type::after { content: var(--read-time, ''); }
 /* Half the space between a case study's banner and its title */
 .hero-banner + .case > .section:first-child > .container { padding-top: 36px; }
 @media (max-width: 767px) { .hero-banner + .case > .section:first-child > .container { padding-top: 24px; } }

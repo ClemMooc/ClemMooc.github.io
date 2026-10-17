@@ -15,6 +15,9 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
+// Reading time: words in the case study (tags and code stripped), at about 220 words a minute
+const words = (entry.body ?? '').replace(/<[^>]*>|\{[^}]*\}|[#*_`>|-]/g, ' ').split(/\s+/).filter(Boolean).length;
+const minutes = Math.max(1, Math.round(words / 220));
 ---
 <Base title={d.seoTitle ?? d.title} description={d.description} image={d.hero ?? d.cover}>
   {d.hero && (
@@ -23,7 +26,7 @@ const d = entry.data;
       <Img src={d.hero} alt={d.title} eager zoom={false} class="hero-banner__img" />
     </div>
   )}
-  <article class="prose case">
+  <article class="prose case" style={`--read-time: ' · ${minutes} min read'`}>
     <Content components={mdxComponents} />
   </article>
   <ReadingProgress />
