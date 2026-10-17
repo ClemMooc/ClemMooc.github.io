@@ -1,5 +1,7 @@
 ---
 // Google Analytics 4. Only loads on the live (production) build.
+// Also records a few named click events (see the list below) so you can see what visitors do, not just what they view.
+// In GA: Reports → Engagement → Events.
 import { site } from '../site.config';
 const id = site.gaId;
 const enabled = Boolean(id) && import.meta.env.PROD;
@@ -9,9 +11,28 @@ const enabled = Boolean(id) && import.meta.env.PROD;
     <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${id}`}></script>
     <script is:inline define:vars={{ id }}>
       window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
+      window.gtag = function () { dataLayer.push(arguments); };
       gtag('js', new Date());
       gtag('config', id);
+
+      // Named click events: [event name, which clicks count]
+      const events = [
+        ['try_demo', (a) => /lovable\.app/.test(a.href)],
+        ['open_linkedin', (a) => /linkedin\.com/.test(a.href)],
+        ['open_github', (a) => /github\.com/.test(a.href)],
+        ['email_click', (a) => a.href.startsWith('mailto:')],
+        ['resume_click', (a) => /resume/i.test(a.textContent)],
+        ['lets_talk', (a) => a.classList.contains('hero__cta')],
+      ];
+      document.addEventListener('click', (e) => {
+        const el = e.target.closest('a, button');
+        if (!el) return;
+        if (el.matches('.copy-email')) return gtag('event', 'copy_email');
+        if (el.matches('.next__btn')) return gtag('event', 'browse_projects');
+        if (el.tagName !== 'A') return;
+        const hit = events.find(([, test]) => test(el));
+        if (hit) gtag('event', hit[0], { link_url: el.href });
+      });
     </script>
   </>
 )}
