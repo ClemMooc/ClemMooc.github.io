@@ -28,7 +28,7 @@ const languages = [
       <div class="about__story">
         <h1 class="about__title">An interpreter at heart.</h1>
         <p>I grew up in a household that spoke <span class="langs"><button type="button" class="langs__trigger" aria-describedby="langs-list">five languages</button><span class="langs__list" id="langs-list" role="tooltip">{languages.map((l, i) => <span class="langs__item"><span class="langs__flag" aria-hidden="true" set:html={l.flag} />{l.name}{i < languages.length - 1 && <span class="sr-only">,</span>}</span>)}</span></span>. English was my third, and my parents' weakest. As the kid of Vietnam War refugees, <strong>I was my family's interpreter</strong> long before I knew it was a skill.</p>
-        <p>I've kept doing that job in every role since: as a quantitative user researcher at Redfin, a product manager at a fintech startup, and a digital project manager at a cloud software company. Most recently I ran research programs at Meta Reality Labs, where the work was still translation: turning what people do and need into clear decisions that engineers, vendors, and product teams could act on.</p>
+        <p>I've done that job in every role since: user researcher at a real estate tech company, product manager at a fintech startup, project manager at a cloud software company. Most recently, I ran research programs at Meta Reality Labs, turning what people need into decisions that engineers, vendors, and product teams could act on.</p>
         <div class="about__buttons">
           {site.resume && <Button href={media(site.resume)} arrow={false}>Resume</Button>}
           {/* Logo-only links; the hidden text and title keep them readable for screen readers and web scrapers */}
@@ -71,7 +71,7 @@ const languages = [
         {education.map((e) => (
           <div class="entry">
             <h3>{e.title}</h3>
-            <p class="entry__school">{e.school}</p>
+            <p class="entry__school">{e.campus && `${e.campus}, `}<a href={e.url} target="_blank" rel="noopener">{e.school}<span class="sr-only"> (opens in a new tab)</span></a></p>
           </div>
         ))}
       </section>
@@ -158,6 +158,8 @@ const languages = [
   .entry h3 a, .entry__org { color: var(--accent); text-decoration: none; }
   .entry h3 a:hover { text-decoration: underline; text-underline-offset: 4px; }
   .entry__role { font-family: var(--font-body); font-weight: 400; font-size: 1rem; color: var(--on-ink); }
+  .entry__school a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+  .entry__school a:hover { color: var(--accent); }
   .entry__school, .entry__team { color: var(--on-ink-muted); font-size: 16px; margin: .3em 0 0; }
 
 

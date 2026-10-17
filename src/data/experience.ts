@@ -44,7 +44,7 @@ export const experience: Role[] = [
 ];
 
 export const education = [
-  { title: 'B.A. Business Administration (Information Systems, Marketing Analytics)', school: 'University of Washington, Foster School of Business' },
-  { title: 'Minor, Informatics (UX/UI)', school: 'University of Washington, Information School' },
-  { title: 'UX Design Certificate', school: 'School of Visual Concepts' },
+  { title: 'B.A. Business Administration (Information Systems, Marketing Analytics)', campus: 'University of Washington', school: 'Foster School of Business', url: 'https://foster.uw.edu/' },
+  { title: 'Minor, Informatics (UX/UI)', campus: 'University of Washington', school: 'Information School', url: 'https://ischool.uw.edu/' },
+  { title: 'UX Design Certificate', school: 'School of Visual Concepts', url: 'https://www.svcseattle.com/' },
 ];
