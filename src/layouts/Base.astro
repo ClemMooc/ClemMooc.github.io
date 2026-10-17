@@ -35,6 +35,13 @@ const ogImage = image ? media(image) : new URL('/og-image.jpg', Astro.site).href
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <!-- Page-to-page transitions: if one is cut short (e.g. the window resizes), skip it quietly instead of logging an error -->
+    <script is:inline>
+      for (const type of ['pageswap', 'pagereveal']) addEventListener(type, (e) => {
+        const t = e.viewTransition; if (!t) return;
+        for (const p of [t.ready, t.finished, t.updateCallbackDone]) p?.catch(() => {});
+      });
+    </script>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
