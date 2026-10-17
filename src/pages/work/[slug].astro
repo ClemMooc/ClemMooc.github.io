@@ -1,5 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { getImage } from 'astro:assets';
+import { media } from '../../lib/media';
 import Base from '../../layouts/Base.astro';
 import Img from '../../components/Img.astro';
 import NextProject from '../../components/NextProject.astro';
@@ -17,8 +19,11 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
 const minutes = readingTime(entry.body);
+// Link preview (LinkedIn, Slack, iMessage): a light 1200x630 JPG cropped from the banner, made at build time
+const og = await getImage({ src: media(d.hero ?? d.cover), inferSize: true, width: 1200, height: 630, fit: 'cover', format: 'jpeg', quality: 80 });
+const ogImage = new URL(og.src, Astro.site).href;
 ---
-<Base title={d.seoTitle ?? d.title} description={d.description} image={d.hero ?? d.cover}>
+<Base title={d.seoTitle ?? d.title} description={d.description} image={ogImage}>
   {d.hero && (
     <div class:list={['hero-banner', { 'hero-banner--backdrop': d.heroBg }]}
       style={`view-transition-name: project-${entry.id};${d.heroBg ? ` --hero-bg: ${d.heroBg};` : ''}`}>
