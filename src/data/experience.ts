@@ -48,3 +48,14 @@ export const education = [
   { title: 'Minor, Informatics (UX/UI)', campus: 'University of Washington', school: 'Information School', url: 'https://ischool.uw.edu/' },
   { title: 'UX Design Certificate', school: 'School of Visual Concepts', url: 'https://www.svcseattle.com/' },
 ];
+
+// Certifications (About page). Each link opens the official credential.
+// issuer is plain text; set it to '' when the link label already names the issuer.
+export const certifications = [
+  { title: 'Professional Scrum Master I (PSM I)', issuer: 'Scrum.org', links: [{ label: 'ID 431559', url: 'https://www.credly.com/badges/9dc465c8-59f2-4b37-a9d9-af4d7f4fef1f' }] },
+  { title: 'UX Design Certificate', issuer: '', links: [{ label: 'School of Visual Concepts', url: 'https://badges.parchment.com/public/assertions/abVyx3hBR9Gc2zgp3X0bOg' }] },
+  { title: 'Wilderness First Aid (WFA)', issuer: 'BASE Medical', links: [
+    { label: 'WFA', url: 'https://base-medical.thinkific.com/certificates/5oyawoly5f' },
+    { label: 'Wilderness Medicine', url: 'https://base-medical.thinkific.com/certificates/nyhhzykltw' },
+  ] },
+];

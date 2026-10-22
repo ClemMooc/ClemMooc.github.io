@@ -6,7 +6,7 @@ import Img from '../components/Img.astro';
 import { site } from '../site.config';
 import { media } from '../lib/media';
 // Experience & education live in src/data/experience.ts.
-import { experience, education } from '../data/experience';
+import { experience, education, certifications } from '../data/experience';
 // Flag images (SVG, so they look the same on every computer — emoji flags show as letters on Windows)
 import { CN, HK, VN, FR, US } from 'country-flag-icons/string/3x2';
 const languages = [
@@ -67,6 +67,7 @@ const languages = [
           </div>
         ))}
       </section>
+      <div class="cv__side">
       <section aria-labelledby="edu-title">
         <h2 class="cv__h2" id="edu-title">Education</h2>
         {education.map((e) => (
@@ -76,6 +77,19 @@ const languages = [
           </div>
         ))}
       </section>
+      <section aria-labelledby="cert-title">
+        <h2 class="cv__h2" id="cert-title">Certifications</h2>
+        {certifications.map((c) => (
+          <div class="entry">
+            <h3>{c.title}</h3>
+            <p class="entry__school">
+              {c.issuer}
+              {c.links.map((l, i) => <>{(c.issuer || i > 0) && ' · '}<a href={l.url} target="_blank" rel="noopener">{l.label}<span class="sr-only">: {c.title} (opens in a new tab)</span></a></>)}
+            </p>
+          </div>
+        ))}
+      </section>
+      </div>
     </div>
   </section>
 
@@ -153,6 +167,7 @@ const languages = [
 
   .cv { background: var(--ink); color: var(--on-ink); }
   .cv__inner { max-width: var(--max); margin: 0 auto; padding: 24px var(--gutter) 88px; display: grid; grid-template-columns: 7fr 5fr; gap: 56px; }
+  .cv__side { display: grid; gap: 48px; align-content: start; }
   .cv__h2 { font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0 0 20px; }
   .entry { margin-bottom: 18px; }
   .entry h3 { font-size: 1.1rem; margin: 0; display: flex; flex-wrap: wrap; gap: 0 .6em; align-items: baseline; }
